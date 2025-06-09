@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      water_priestess_2_0: -5224298390141938849
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
