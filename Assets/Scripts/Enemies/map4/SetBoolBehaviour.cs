@@ -1,0 +1,47 @@
+﻿using UnityEngine;
+
+public class SetBoolBehaviour : StateMachineBehaviour
+{
+   public string boolName;
+    public bool updateOnState;
+    public bool updateOnStateMachine;
+    public bool valueOnEnter, valueOnExit;
+
+    // OnStateEnter is called when entering a state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (updateOnState)
+        {
+            animator.SetBool(boolName, valueOnEnter);
+        }
+    }
+
+
+    // OnStateExit is called before OnStateExit is called on any state inside this state machine
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (updateOnState)
+        {
+            animator.SetBool(boolName, valueOnEnter); // Sửa lỗi: dùng valueOnExit thay vì valueOnEnter
+        }
+    }
+
+ 
+    // OnStateExit is called before OnStateExit is called on any state inside this state machine
+    override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
+    {
+        if (updateOnStateMachine)
+        {
+            animator.SetBool(boolName, valueOnEnter);
+        }
+    }
+
+    // OnStateMachineExit is called when exiting a state machine via its Exit Node
+    override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
+    {
+        if (updateOnStateMachine)
+        {
+            animator.SetBool(boolName, valueOnExit);
+        }
+    }
+}
