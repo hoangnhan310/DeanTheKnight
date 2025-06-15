@@ -44,26 +44,32 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 2
-    uniqueID: 1141282191
+  - name: Layer1_Tree
+    uniqueID: 3537648819
     locked: 0
-  - name: New Layer 3
-    uniqueID: 3535688895
+  - name: Layer2
+    uniqueID: 475833113
     locked: 0
-  - name: New Layer 4
-    uniqueID: 1083091771
+  - name: Ground
+    uniqueID: 3358874687
     locked: 0
-  - name: New Layer 5
-    uniqueID: 2596757937
+  - name: Layer3_MediumTree
+    uniqueID: 2511856771
     locked: 0
-  - name: New Layer 6
-    uniqueID: 4147801475
+  - name: Layer4_SmallTree
+    uniqueID: 475355493
     locked: 0
-  - name: New Layer 7
-    uniqueID: 4171994927
+  - name: Layer5_Rock
+    uniqueID: 2468747607
     locked: 0
-  - name: New Layer 8
-    uniqueID: 4015455603
+  - name: Layer6_Grass
+    uniqueID: 480804827
+    locked: 0
+  - name: Layer7_SmallGrassAndFlower
+    uniqueID: 3206600145
+    locked: 0
+  - name: Layer8_Player
+    uniqueID: 1790034661
     locked: 0
   m_RenderingLayers:
   - Default
