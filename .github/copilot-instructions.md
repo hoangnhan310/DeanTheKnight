@@ -4,5 +4,5 @@
 - Active game object:
   - Name: yellowNinja - idle_0
   - Tag: Untagged
-  - Layer: Default
+  - Layer: emnemyHitBox
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

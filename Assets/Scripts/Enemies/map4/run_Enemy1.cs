@@ -117,15 +117,20 @@ public class run_Enemy1 : MonoBehaviour
         // Tính khoảng cách di chuyển từ patrolStartPosition
         float distanceTraveled = Vector2.Distance(transform.position, patrolStartPosition);
 
+        // Đặt vận tốc tuần tra
+        rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+
+        // Kiểm tra nếu nhân vật di chuyển không đúng hướng hoặc vận tốc không như mong đợi
+        if (Mathf.Abs(rb.linearVelocity.x) < 0.1f)
+        {
+            Debug.LogWarning("Patrol movement issue detected: Character is not moving as expected.");
+            rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y); // Reset velocity
+        }
+
         // Chuyển hướng khi đạt patrolDistance
         if (distanceTraveled >= patrolDistance)
         {
             FlipDirection();
-        }
-
-        if (CanMove)
-        {
-            rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
         }
     }
 

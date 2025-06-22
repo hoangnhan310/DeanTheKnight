@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
@@ -10,7 +9,6 @@ public class HeroKnight : MonoBehaviour
 	[SerializeField] private float moveSpeed = 4.0f;
 	[SerializeField] private float wallSlideSpeed = 1.0f;
 	[SerializeField] private float jumpForce = 7.5f;
-	[SerializeField] private float rollForce = 6.0f;
 
 	[Header("Visual Effects")]
 	[SerializeField] private bool noBlood = false;
@@ -23,21 +21,12 @@ public class HeroKnight : MonoBehaviour
 	private Sensor_HeroKnight groundSensor;
 	private Sensor_HeroKnight wallSensorR1;
 	private Sensor_HeroKnight wallSensorR2;
+	private PlayerState playerState;
 	#endregion
 
 	#region State Variables
-	private bool isWallSliding = false;
-	private bool isGrounded = false;
-	private bool isRolling = false;
-	private bool canDoubleJump = false;
-
-	private int facingDirection = 1;
-	private int currentAttack = 0;
-
-	private float timeSinceAttack = 0.0f;
 	private float delayToIdle = 0.0f;
-	private readonly float rollDuration = 8.0f / 14.0f;
-	private float rollCurrentTime;
+
 	private float inputX;
 	#endregion
 
@@ -49,12 +38,11 @@ public class HeroKnight : MonoBehaviour
 		groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
 		wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
 		wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
+		playerState = GetComponent<PlayerState>();
 	}
 
 	private void Update()
 	{
-		ProcessAttack();
-		ProcessRoll();
 		ProcessGroundCheck();
 		ProcessMove();
 		ProcessAnimations();
@@ -65,7 +53,7 @@ public class HeroKnight : MonoBehaviour
 	#region Movement Processing
 	private void ProcessMove()
 	{
-		if (!isRolling)
+		if (!playerState.IsRolling)
 		{
 			body2d.linearVelocity = new Vector2(inputX * moveSpeed, body2d.linearVelocityY);
 		}
@@ -74,27 +62,27 @@ public class HeroKnight : MonoBehaviour
 	private void ProcessGroundCheck()
 	{
 		// Check if character just landed on the ground
-		if (!isGrounded && groundSensor.State())
+		if (!playerState.IsGrounded && groundSensor.State())
 		{
-			isGrounded = true;
-			animator.SetBool("Grounded", isGrounded);
-			canDoubleJump = true; // Reset double jump when landing
+			playerState.IsGrounded = true;
+			animator.SetBool("Grounded", playerState.IsGrounded);
+			playerState.CanDoubleJump = true; // Reset double jump when landing
 		}
 
 		// Check if character just started falling
-		if (isGrounded && !groundSensor.State())
+		if (playerState.IsGrounded && !groundSensor.State())
 		{
-			isGrounded = false;
-			animator.SetBool("Grounded", isGrounded);
+			playerState.IsGrounded = false;
+			animator.SetBool("Grounded", playerState.IsGrounded);
 		}
 	}
 
 	private void ProcessWallSlide()
 	{
-		isWallSliding = wallSensorR1.State() && wallSensorR2.State();
-		animator.SetBool("WallSlide", isWallSliding);
+		playerState.IsWallSliding = wallSensorR1.State() && wallSensorR2.State();
+		animator.SetBool("WallSlide", playerState.IsWallSliding);
 
-		if (isWallSliding && !isGrounded && body2d.linearVelocityY < 0f)
+		if (playerState.IsWallSliding && !playerState.IsGrounded && body2d.linearVelocityY < 0f)
 		{
 			body2d.linearVelocityY = Mathf.Max(body2d.linearVelocityY, -wallSlideSpeed);
 		}
@@ -106,36 +94,12 @@ public class HeroKnight : MonoBehaviour
 		if (inputX > 0)
 		{
 			transform.rotation = Quaternion.identity; // Reset rotation
-			facingDirection = 1;
+			playerState.FacingDirection = 1;
 		}
 		else if (inputX < 0)
 		{
 			transform.rotation = Quaternion.Euler(0f, 180f, 0f); // Flip sprite
-			facingDirection = -1;
-		}
-	}
-	#endregion
-
-	#region Combat Processing
-	private void ProcessAttack()
-	{
-		// Increase timer that controls attack combo
-		timeSinceAttack += Time.deltaTime;
-	}
-
-	private void ProcessRoll()
-	{
-		// Increase timer that checks roll duration
-		if (isRolling)
-		{
-			rollCurrentTime += Time.deltaTime;
-		}
-
-		// Disable rolling if timer extends duration
-		if (rollCurrentTime > rollDuration)
-		{
-			isRolling = false;
-			rollCurrentTime = 0.0f;
+			playerState.FacingDirection = -1;
 		}
 	}
 	#endregion
@@ -175,13 +139,13 @@ public class HeroKnight : MonoBehaviour
 
 	public void OnJump(InputAction.CallbackContext context)
 	{
-		if (context.performed && !isRolling)
+		if (context.performed && !playerState.IsRolling)
 		{
-			if (isGrounded)
+			if (playerState.IsGrounded)
 			{
 				PerformJump();
 			}
-			else if (canDoubleJump)
+			else if (playerState.CanDoubleJump)
 			{
 				PerformDoubleJump();
 			}
@@ -191,63 +155,18 @@ public class HeroKnight : MonoBehaviour
 	private void PerformJump()
 	{
 		animator.SetTrigger("Jump");
-		isGrounded = false;
-		animator.SetBool("Grounded", isGrounded);
+		playerState.IsGrounded = false;
+		animator.SetBool("Grounded", playerState.IsGrounded);
 		body2d.linearVelocity = new Vector2(body2d.linearVelocityX, jumpForce);
 		groundSensor.Disable(0.2f);
-		canDoubleJump = true;
+		playerState.CanDoubleJump = true;
 	}
 
 	private void PerformDoubleJump()
 	{
 		animator.SetTrigger("Roll");
 		body2d.linearVelocity = new Vector2(body2d.linearVelocityX, jumpForce);
-		canDoubleJump = false;
-	}
-
-	public void OnAttack(InputAction.CallbackContext context)
-	{
-		if (context.performed && timeSinceAttack > 0.25f && !isRolling)
-		{
-			currentAttack++;
-
-			// Loop back to one after third attack
-			if (currentAttack > 3)
-				currentAttack = 1;
-
-			// Reset Attack combo if time since last attack is too large
-			if (timeSinceAttack > 1.0f)
-				currentAttack = 1;
-
-			// Call one of three attack animations "Attack1", "Attack2", "Attack3"
-			animator.SetTrigger($"Attack{currentAttack}");
-
-			// Reset timer
-			timeSinceAttack = 0.0f;
-		}
-	}
-
-	public void OnBlock(InputAction.CallbackContext context)
-	{
-		if (context.performed && !isRolling)
-		{
-			animator.SetTrigger("Block");
-			animator.SetBool("IdleBlock", true);
-		}
-		else if (context.canceled)
-		{
-			animator.SetBool("IdleBlock", false);
-		}
-	}
-
-	public void OnRoll(InputAction.CallbackContext context)
-	{
-		if (context.performed && !isRolling && !isWallSliding)
-		{
-			isRolling = true;
-			animator.SetTrigger("Roll");
-			body2d.linearVelocity = new Vector2(facingDirection * rollForce, body2d.linearVelocityY);
-		}
+		playerState.CanDoubleJump = false;
 	}
 	#endregion
 
@@ -263,7 +182,7 @@ public class HeroKnight : MonoBehaviour
 		// Set correct dust spawn position
 		GameObject dust = Instantiate(slideDust, spawnPosition, Quaternion.identity);
 		// Turn dust in correct direction
-		dust.transform.localScale = new Vector3(facingDirection, 1, 1);
+		dust.transform.localScale = new Vector3(playerState.FacingDirection, 1, 1);
 	}
 	#endregion
 }

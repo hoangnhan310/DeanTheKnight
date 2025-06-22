@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+guid: c6bf4aab5ca324f44aa7ccfbfbbcefb6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6591508812237560957
+    second: DirtFix_0
+  - first:
+      213: -7311431897347231578
+    second: DirtFix_1
+  - first:
+      213: 6891127884847452907
+    second: DirtFix_2
+  - first:
+      213: -6633752837899434009
+    second: DirtFix_3
+  - first:
+      213: 4197257389148343686
+    second: DirtFix_4
+  - first:
+      213: -5890481562850310638
+    second: DirtFix_5
+  - first:
+      213: -778700806223912930
+    second: DirtFix_6
+  - first:
+      213: 2276293727275866660
+    second: DirtFix_7
+  - first:
+      213: -4618854276783174344
+    second: DirtFix_8
+  - first:
+      213: -7997272283527336811
+    second: DirtFix_9
+  - first:
+      213: -422850098834887023
+    second: DirtFix_10
+  - first:
+      213: -4871339793892709127
+    second: DirtFix_11
+  - first:
+      213: 4480788733322688999
+    second: DirtFix_12
+  - first:
+      213: -7443721796796809193
+    second: DirtFix_13
+  - first:
+      213: -4263999749186699629
+    second: DirtFix_14
+  - first:
+      213: -1790912312849240735
+    second: DirtFix_15
+  - first:
+      213: -2635994727264955517
+    second: DirtFix_16
+  - first:
+      213: -5632864967439649471
+    second: DirtFix_17
+  - first:
+      213: 1553055847864603239
+    second: DirtFix_18
+  - first:
+      213: -6107174778702794268
+    second: DirtFix_19
+  - first:
+      213: 1156881303673511221
+    second: DirtFix_20
+  - first:
+      213: 8107976541124394164
+    second: DirtFix_21
+  - first:
+      213: -6007946312036954627
+    second: DirtFix_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 24
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DirtFix_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38329b898a14684a0800000000000000
+      internalID: -6591508812237560957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DirtFix_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 31
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a0782f4d63988a90800000000000000
+      internalID: -7311431897347231578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DirtFix_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be21f1eec4432af50800000000000000
+      internalID: 6891127884847452907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DirtFix_3
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 7
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e7c349e0fc20f3a0800000000000000
+      internalID: -6633752837899434009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ce65edb04f97fcf4a96ae415e60f986e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DirtFix_0: -6591508812237560957
+      DirtFix_1: -7311431897347231578
+      DirtFix_2: 6891127884847452907
+      DirtFix_3: -6633752837899434009
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
