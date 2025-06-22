@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 528136349622723573}
   - component: {fileID: 6245512587375295700}
   - component: {fileID: 1136056460418448146}
-  - component: {fileID: 5367012800266447686}
   - component: {fileID: 8734158960768008144}
   m_Layer: 0
   m_Name: FlyingEye
@@ -30,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.11, y: 6.78, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,79 +111,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!60 &5367012800266447686
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8841297727198228052}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
-    newSize: {x: 1.5, y: 1.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.23886523, y: 0.07673444}
-      - {x: 0.24024087, y: 0.12373509}
-      - {x: 0.21506064, y: 0.15240969}
-      - {x: 0.17999999, y: 0.14698806}
-      - {x: 0.15699992, y: 0.115620136}
-      - {x: 0.11758035, y: 0.10023088}
-      - {x: 0.06748994, y: 0.07572898}
-      - {x: -0.006023867, y: 0.07481941}
-      - {x: -0.044337314, y: 0.12506047}
-      - {x: -0.13132536, y: 0.13722911}
-      - {x: -0.1772293, y: 0.1124097}
-      - {x: -0.1848194, y: -0.008915672}
-      - {x: -0.14132537, y: -0.058313444}
-      - {x: -0.11120445, y: -0.016265616}
-      - {x: -0.06422013, y: -0.015148848}
-      - {x: -0.04598435, y: -0.07846025}
-      - {x: -0.027082143, y: -0.12269252}
-      - {x: -0.011566617, y: -0.17373508}
-      - {x: 0.042256467, y: -0.1723245}
-      - {x: 0.08072334, y: -0.124940336}
-      - {x: 0.12614478, y: -0.13530152}
-      - {x: 0.1453015, y: -0.112168655}
-      - {x: 0.14922631, y: -0.07064736}
-      - {x: 0.12120506, y: -0.050602134}
-      - {x: 0.17030825, y: 0.03637465}
-      - {x: 0.22397612, y: 0.042409703}
-  m_UseDelaunayMesh: 0
 --- !u!114 &8734158960768008144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 3
-  yOffset: 0.5
-  detectDistance: 5
-  stopDistance: 0.5
+  speed: 2
+  yOffset: 1
+  detectDistance: 7
+  stopDistance: 1
