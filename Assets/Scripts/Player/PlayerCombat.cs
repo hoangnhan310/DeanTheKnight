@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
@@ -7,6 +7,10 @@ public class PlayerCombat : MonoBehaviour
     [Header("Combat Settings")]
     [SerializeField] private float rollForce = 6.0f;
     [SerializeField] private float attackRate = 0.25f;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private int attackDamage = 20;
     #endregion
 
     private Animator animator;
@@ -103,4 +107,29 @@ public class PlayerCombat : MonoBehaviour
     }
     #endregion
 
+    // Trigger attack in the animation event
+    private void TriggerAttack()
+    {
+        // Detect enemies in attack range
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        //Attach hitEnemies
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            EnemyBehaviour enemyScript = enemy.GetComponentInParent<EnemyBehaviour>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(attackDamage);
+                Debug.Log($"Hit {enemy.name} with attack {currentAttack}");
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        //Draw attack range in editor 
+        if (attackPoint == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
 }
