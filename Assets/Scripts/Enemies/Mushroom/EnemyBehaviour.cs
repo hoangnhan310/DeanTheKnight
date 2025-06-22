@@ -1,73 +1,65 @@
+﻿using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     #region Public Variables
-    public Transform rayCast;
-    public LayerMask rayCastMask;
-    public float rayCastLength;
     public float attackDistance; //Minimum distance to attack the player
     public float moveSpeed;
     public float timer; //Time for cooldown between attacks
+    public Transform leftLimit; //Left limit for the enemy to move
+    public Transform rightLimit; //Right limit for the enemy to move
+    [HideInInspector] public Transform target;
+    [HideInInspector] public bool inRange; //Check if the player is in range
+    public GameObject hotZone;
+    public GameObject triggerArea;
+    public int maxHealth = 100; //Maximum health of the enemy
+
     #endregion
 
     #region Private Variables
-    private RaycastHit2D hit;
-    private GameObject target;
     private Animator animator;
     private float distanceToTarget; //Store the distance b/w enemy and player
     private bool attackMode;
-    private bool inRange; //Check if the player is in range
     private bool cooling; //Check if the enemy is cooling down after an attack
     private float intTimer;
+    private int currentHealth; //Current health of the enemy
     #endregion
 
     private void Awake()
     {
+        
+        SelectTarget(); //Select a target when the enemy is spawned
         intTimer = timer; //Store the initial timer value
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth; //Initialize current health to max health
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (inRange)
+        if (!attackMode) 
         {
-            hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
-            RaycastDebugger();
+            Move();
         }
-        //When Player is detected
-        if (hit.collider != null)
+
+        if (!insideOfLimits() && !inRange  && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) 
+        { 
+            SelectTarget(); //Select a target when the enemy is outside of limits
+        }
+
+
+        if (inRange) 
         {
             EnemyLogic();
-        }
-        else if (hit.collider == null) 
-        { 
-            inRange = false;
-        }
-
-        if (inRange == false) 
-        {
-            animator.SetBool("canRun", false);
-            StopAttack();
-        }
-    }
-
-    public void OnTriggerEnter2D(Collider2D trigger)
-    {
-        if (trigger.gameObject.tag == "Player")
-        {
-            target = trigger.gameObject;
-            inRange = true;
         }
     }
 
     public void EnemyLogic() 
     { 
-        distanceToTarget = Vector2.Distance(transform.position, target.transform.position);
+        distanceToTarget = Vector2.Distance(transform.position, target.position);
         if (distanceToTarget > attackDistance) 
         {
-            Move();
             StopAttack();
         }
         else if (attackDistance >= distanceToTarget && cooling == false)
@@ -85,9 +77,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void Move()
     {
         animator.SetBool("canRun", true); //Set the run animation
+
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))  
         { 
-            Vector2 targetPosition = new Vector2(target.transform.position.x, transform.position.y);
+            Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
@@ -121,20 +114,72 @@ public class EnemyBehaviour : MonoBehaviour
         animator.SetBool("Attack", false); //Stop the attack animation
     }
 
-    public void RaycastDebugger()
-    {
-        if (distanceToTarget > attackDistance)
-        {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.red);
-        }
-        else if (distanceToTarget < attackDistance) 
-        {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.green);
-        }
-    }
-
     public void TriggerCooling() 
     {
         cooling = true;
+    }
+
+    private bool insideOfLimits() 
+    { 
+        return transform.position.x > leftLimit.position.x && transform.position.x < rightLimit.position.x;
+    }
+
+    public void SelectTarget() 
+    {
+        float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
+        float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
+
+        if (distanceToLeft > distanceToRight) 
+        {
+            target = leftLimit;
+        }
+        else
+        {
+            target = rightLimit;
+        }
+
+        Flip();
+    }
+
+    public void Flip() 
+    {
+        Vector3 rotation = transform.eulerAngles;
+        //Flip the enemy if out of limits
+        if (transform.position.x > target.position.x)
+        {
+            rotation.y = 0f;
+        }
+        else 
+        { 
+            rotation.y = 180f;
+        }
+
+        transform.eulerAngles = rotation;
+    }
+
+    public void TakeDamage(int damage) 
+    {
+        currentHealth -= damage; //Reduce the current health by damage
+        animator.SetTrigger("Hit"); //Set the hit animation
+        if (currentHealth <= 0) 
+        {
+            Die(); //Call the Die method if health is 0 or less
+        }
+    }
+
+    public void Die() 
+    {   Debug.Log("Enemy died"); //Log the death of the enemy
+        animator.SetBool("IsDead", true); //Set the die animation
+        StartCoroutine(DeathDelay());
+    }
+
+    private IEnumerator DeathDelay()
+    {
+        yield return new WaitForSeconds(1.5f); // Time for animation die
+        this.hotZone.SetActive(false); //Disable the hot zone
+        this.triggerArea.SetActive(false); //Disable the trigger area
+        animator.enabled = false; //Disable the animator     
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
     }
 }
