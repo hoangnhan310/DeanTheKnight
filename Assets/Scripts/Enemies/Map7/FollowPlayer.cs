@@ -10,9 +10,23 @@ public class FollowPlayer : MonoBehaviour
     public float stopDistance = 0.5f;
 
     private bool facingRight = true;
+    private Animator animator;
+
+    void Start()
+    {
+        // Lấy component Animator
+        animator = GetComponent<Animator>();
+    }
 
     void FixedUpdate()
     {
+        // Không di chuyển nếu đang tấn công
+        if (animator.GetBool("Attacking"))
+        {
+            animator.SetBool("isRunning", false); // Tắt animation chạy nếu đang tấn công
+            return;
+        }
+
         Vector3 targetPosition = player.position + new Vector3(0, yOffset, 0);
         float distanceToPlayer = Vector3.Distance(transform.position, targetPosition);
 
@@ -20,12 +34,21 @@ public class FollowPlayer : MonoBehaviour
         {
             if (distanceToPlayer > stopDistance)
             {
+                animator.SetBool("isRunning", true);
+
                 Vector3 direction = (targetPosition - transform.position).normalized;
                 transform.position += direction * speed * Time.fixedDeltaTime;
 
-                // Gọi hàm flip nếu cần
                 HandleFlip(direction.x);
             }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
