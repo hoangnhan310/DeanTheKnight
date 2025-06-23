@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject hotZone;
     public GameObject triggerArea;
     public int maxHealth = 100; //Maximum health of the enemy
-
+    public bool IsDead => isDead; //Property to check if the enemy is dead
     #endregion
 
     #region Private Variables
@@ -24,12 +25,13 @@ public class EnemyBehaviour : MonoBehaviour
     private bool attackMode;
     private bool cooling; //Check if the enemy is cooling down after an attack
     private float intTimer;
-    private int currentHealth; //Current health of the enemy
+    private float currentHealth; //Current health of the enemy
+    private bool isDead; //Check if the enemy is dead
     #endregion
 
     private void Awake()
     {
-        
+
         SelectTarget(); //Select a target when the enemy is spawned
         intTimer = timer; //Store the initial timer value
         animator = GetComponent<Animator>();
@@ -38,7 +40,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (!attackMode) 
+        if (isDead) return; //If the enemy is dead, do not execute the rest of the code
+        if (!attackMode)
         {
             Move();
         }
@@ -157,7 +160,7 @@ public class EnemyBehaviour : MonoBehaviour
         transform.eulerAngles = rotation;
     }
 
-    public void TakeDamage(int damage) 
+    public void TakeDamage(float damage) 
     {
         currentHealth -= damage; //Reduce the current health by damage
         animator.SetTrigger("Hit"); //Set the hit animation
@@ -169,7 +172,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Die() 
     {   Debug.Log("Enemy died"); //Log the death of the enemy
-        animator.SetBool("IsDead", true); //Set the die animation
+        isDead = true; //Set the enemy as dead
+        animator.SetBool("IsDead", isDead); //Set the die animation
         StartCoroutine(DeathDelay());
     }
 
@@ -178,8 +182,9 @@ public class EnemyBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1.5f); // Time for animation die
         this.hotZone.SetActive(false); //Disable the hot zone
         this.triggerArea.SetActive(false); //Disable the trigger area
-        animator.enabled = false; //Disable the animator     
         GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
+        GetComponentsInChildren<CapsuleCollider2D>().ToList().ForEach(c => c.enabled = false); //Disable all capsule colliders
         this.enabled = false;
     }
 }
