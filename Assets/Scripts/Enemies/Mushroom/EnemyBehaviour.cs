@@ -182,7 +182,6 @@ public class EnemyBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1.5f); // Time for animation die
         this.hotZone.SetActive(false); //Disable the hot zone
         this.triggerArea.SetActive(false); //Disable the trigger area
-        animator.enabled = false; //Disable the animator     
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
         GetComponentsInChildren<CapsuleCollider2D>().ToList().ForEach(c => c.enabled = false); //Disable all capsule colliders
