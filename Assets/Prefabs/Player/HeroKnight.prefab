@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 8942925490989933264}
   - component: {fileID: 9117128348835321587}
   - component: {fileID: 5345602657961884565}
+  - component: {fileID: 396572520965202515}
   m_Layer: 0
   m_Name: HeroKnight
   m_TagString: Player
@@ -409,6 +410,26 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &396572520965202515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fbf66d7cd4a4a944a41bff0fb18b5ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buoyancyForce: 20
+  waterDrag: 3
+  floatHeight: 0.5
+  enableBobbing: 1
+  bobbingForce: 0.5
+  bobbingSpeed: 1
+  splashEffectPrefab: {fileID: 3624051814252919556, guid: d167dc0918be84543b9a360f728f1edf, type: 3}
+  splashVelocityThreshold: -3
 --- !u!1 &7087049454815086010
 GameObject:
   m_ObjectHideFlags: 0
