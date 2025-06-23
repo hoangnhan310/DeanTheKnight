@@ -91,6 +91,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.98, y: 0.1}
   m_EdgeRadius: 0
+--- !u!1 &5989480699692432638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2380170104445066036}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2380170104445066036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989480699692432638}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.58, y: 1.27, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8413529789942519730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6323719953710832613
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,13 +131,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8413529789942519730}
-  - component: {fileID: 9043920546160527475}
   - component: {fileID: 2655505060201611074}
   - component: {fileID: 2954181336601895002}
   - component: {fileID: 8942925490989933264}
   - component: {fileID: 9117128348835321587}
   - component: {fileID: 5345602657961884565}
   - component: {fileID: 396572520965202515}
+  - component: {fileID: 9043920546160527475}
+  - component: {fileID: 7431689474658906066}
+  - component: {fileID: 4741633104139320105}
   m_Layer: 0
   m_Name: HeroKnight
   m_TagString: Player
@@ -130,26 +163,10 @@ Transform:
   - {fileID: 2900218875308588589}
   - {fileID: 4393510860592810054}
   - {fileID: 7646082782773197330}
+  - {fileID: 2326848726253015617}
+  - {fileID: 2380170104445066036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9043920546160527475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6323719953710832613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f5034bc83802944c9bca57c55e08978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  wallSlideSpeed: 1
-  jumpForce: 7.5
-  rollForce: 6
-  noBlood: 0
-  slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
 --- !u!95 &2655505060201611074
 Animator:
   serializedVersion: 7
@@ -213,8 +230,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1783897027
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -359,8 +376,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Jump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9043920546160527475}
-        m_TargetAssemblyTypeName: HeroKnight, Assembly-CSharp
+      - m_Target: {fileID: 4741633104139320105}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -375,8 +392,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9043920546160527475}
-        m_TargetAssemblyTypeName: HeroKnight, Assembly-CSharp
+      - m_Target: {fileID: 4741633104139320105}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
         m_MethodName: OnBlock
         m_Mode: 0
         m_Arguments:
@@ -391,8 +408,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Block[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9043920546160527475}
-        m_TargetAssemblyTypeName: HeroKnight, Assembly-CSharp
+      - m_Target: {fileID: 4741633104139320105}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
         m_MethodName: OnRoll
         m_Mode: 0
         m_Arguments:
@@ -410,7 +427,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &396572520965202515
+--- !u!114 &9043920546160527475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,6 +447,80 @@ MonoBehaviour:
   bobbingSpeed: 1
   splashEffectPrefab: {fileID: 3624051814252919556, guid: d167dc0918be84543b9a360f728f1edf, type: 3}
   splashVelocityThreshold: -3
+  m_Script: {fileID: 11500000, guid: 0f5034bc83802944c9bca57c55e08978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  wallSlideSpeed: 1
+  jumpForce: 7.5
+  noBlood: 0
+  slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
+--- !u!114 &7431689474658906066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f7883b1487e47bd9008d8fe0f3aa3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4741633104139320105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca852c02c45f4e3c81a16e6d4d0a99b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollForce: 6
+  attackRate: 1
+  resetAttackComboTime: 2
+  attack1Damage: 10
+  attack2Damage: 10
+  attack3Damage: 15
+  attackPoint: {fileID: 2326848726253015617}
+  attackRange: 1.2
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!1 &6445332922987006369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2326848726253015617}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2326848726253015617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6445332922987006369}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2, y: 1.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8413529789942519730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7087049454815086010
 GameObject:
   m_ObjectHideFlags: 0

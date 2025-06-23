@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Water_Map3
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -41,36 +40,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 4192534057
-    locked: 0
-  - name: Layer1_Tree
-    uniqueID: 2158659461
-    locked: 0
-  - name: Layer2
-    uniqueID: 3328124651
-    locked: 0
-  - name: Ground
-    uniqueID: 694034137
-    locked: 0
-  - name: Layer3_MediumTree
-    uniqueID: 1476031931
-    locked: 0
-  - name: Layer4_SmallTree
-    uniqueID: 2538422001
-    locked: 0
-  - name: Layer5_Rock
-    uniqueID: 2388896513
-    locked: 0
-  - name: Layer6_Grass
-    uniqueID: 2041612183
-    locked: 0
-  - name: Layer7_SmallGrassAndFlower
-    uniqueID: 736847823
-    locked: 0
-  - name: Layer8_PlayerAndEnemy
-    uniqueID: 3025604077
     locked: 0
   m_RenderingLayers:
   - Default
