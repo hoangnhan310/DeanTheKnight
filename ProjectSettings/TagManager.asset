@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - FlyingUnit
+  - Ground
+  - Background
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -40,6 +44,39 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 725507899
+    locked: 0
+  - name: Layer1_Tree
+    uniqueID: 2432508723
+    locked: 0
+  - name: Layer2
+    uniqueID: 1360124021
+    locked: 0
+  - name: Ground
+    uniqueID: 345850191
+    locked: 0
+  - name: Layer3_MediumTree
+    uniqueID: 2466824441
+    locked: 0
+  - name: Layer4_SmallTree
+    uniqueID: 2670548095
+    locked: 0
+  - name: Layer5_Rock
+    uniqueID: 2511052111
+    locked: 0
+  - name: Layer6_Grass
+    uniqueID: 697446365
+    locked: 0
+  - name: Layer7_SmallGrassAndFlower
+    uniqueID: 1091424447
+    locked: 0
+  - name: Layer8_PlayerAndEnemy
+    uniqueID: 1783897027
+    locked: 0
+  - name: Layer9_Water
+    uniqueID: 2601211639
     locked: 0
   m_RenderingLayers:
   - Default
