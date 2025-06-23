@@ -14,10 +14,12 @@ public class HotZoneCheck : MonoBehaviour
 
     private void Update()
     {
+        if (enemyParent == null || enemyParent.IsDead) return;
+        
         if (inRange && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            enemyParent.Flip(); 
-        }
+            {
+                enemyParent.Flip();
+            }
     }
 
 

@@ -163,6 +163,7 @@ Transform:
   - {fileID: 4393510860592810054}
   - {fileID: 7646082782773197330}
   - {fileID: 2326848726253015617}
+  - {fileID: 2380170104445066036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2655505060201611074
@@ -467,8 +468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollForce: 6
-  attackRate: 0.25
-  restAttackComboTime: 1
+  attackRate: 1
+  resetAttackComboTime: 2
   attack1Damage: 10
   attack2Damage: 10
   attack3Damage: 15
