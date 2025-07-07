@@ -136,10 +136,11 @@ GameObject:
   - component: {fileID: 8942925490989933264}
   - component: {fileID: 9117128348835321587}
   - component: {fileID: 5345602657961884565}
-  - component: {fileID: 396572520965202515}
   - component: {fileID: 9043920546160527475}
   - component: {fileID: 7431689474658906066}
   - component: {fileID: 4741633104139320105}
+  - component: {fileID: 872138244632776689}
+  - component: {fileID: 5964215918936189743}
   m_Layer: 0
   m_Name: HeroKnight
   m_TagString: Player
@@ -344,7 +345,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9043920546160527475}
+      - m_Target: {fileID: 872138244632776689}
         m_TargetAssemblyTypeName: HeroKnight, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -360,7 +361,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9043920546160527475}
+      - m_Target: {fileID: 872138244632776689}
         m_TargetAssemblyTypeName: HeroKnight, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -447,14 +448,6 @@ MonoBehaviour:
   bobbingSpeed: 1
   splashEffectPrefab: {fileID: 3624051814252919556, guid: d167dc0918be84543b9a360f728f1edf, type: 3}
   splashVelocityThreshold: -3
-  m_Script: {fileID: 11500000, guid: 0f5034bc83802944c9bca57c55e08978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  wallSlideSpeed: 1
-  jumpForce: 7.5
-  noBlood: 0
-  slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
 --- !u!114 &7431689474658906066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +482,36 @@ MonoBehaviour:
   attackRange: 1.2
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+--- !u!114 &872138244632776689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5034bc83802944c9bca57c55e08978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  wallSlideSpeed: 1
+  jumpForce: 7.5
+  noBlood: 0
+  slideDust: {fileID: 0}
+--- !u!114 &5964215918936189743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52753f3b24fd0e84d8e6d8c3155daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6445332922987006369
 GameObject:
   m_ObjectHideFlags: 0
