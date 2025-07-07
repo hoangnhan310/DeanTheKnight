@@ -119,12 +119,12 @@ TextureImporter:
       name: Crab_AttackA_FX_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 25
-        width: 11
-        height: 10
+        x: 39
+        y: 26
+        width: 9
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -141,12 +141,12 @@ TextureImporter:
       name: Crab_AttackA_FX_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 22
-        width: 76
-        height: 15
+        x: 101
+        y: 26
+        width: 11
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,11 +159,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Crab_AttackA_FX_2
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 23
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a013d825d88c5488bc2f1bca9a8b42
+      internalID: -1428900213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6df40c2001233df4b982cf256710bf11
     internalID: 0
     vertices: []
     indices: 
@@ -175,6 +197,7 @@ TextureImporter:
     nameFileIdTable:
       Crab_AttackA_FX_0: 1573198192264913389
       Crab_AttackA_FX_1: 4946159382131993100
+      Crab_AttackA_FX_2: -1428900213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

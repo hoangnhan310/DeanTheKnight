@@ -119,12 +119,12 @@ TextureImporter:
       name: Canine_Attack_FX_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 0
-        width: 58
-        height: 9
+        x: 3
+        y: 1
+        width: 10
+        height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -141,12 +141,12 @@ TextureImporter:
       name: Canine_Attack_FX_1
       rect:
         serializedVersion: 2
-        x: 98
+        x: 52
         y: 4
-        width: 61
-        height: 41
+        width: 7
+        height: 4
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,11 +159,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Canine_Attack_FX_2
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 5
+        width: 8
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79159e46147805348ac21b9b62db06be
+      internalID: 2048040036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Canine_Attack_FX_3
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 36
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb1ac8a3c7dac284096f1fc94f399d83
+      internalID: -531813266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2673a7e80b439e94781f5f930af20815
     internalID: 0
     vertices: []
     indices: 
@@ -175,6 +219,8 @@ TextureImporter:
     nameFileIdTable:
       Canine_Attack_FX_0: 7974898811821720588
       Canine_Attack_FX_1: -8003339985506722388
+      Canine_Attack_FX_2: 2048040036
+      Canine_Attack_FX_3: -531813266
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
