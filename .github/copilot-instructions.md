@@ -2,7 +2,7 @@
 - Project name: DeanTheKnight
 - Unity version: Unity 6000.0.49f1
 - Active game object:
-  - Name: Buildings
+  - Name: DetectionZone
   - Tag: Untagged
-  - Layer: Default
+  - Layer: EnemyHitBox
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
