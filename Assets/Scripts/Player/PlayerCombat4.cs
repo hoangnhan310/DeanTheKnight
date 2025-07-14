@@ -73,7 +73,7 @@ public class PlayerCombat4 : MonoBehaviour
             {
                 // TODO: Implement enemy damage handling
                 Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
-                enemy.GetComponentInParent<EnemyBehaviourScript>().TakeDamage(currentAttackDamage);
+                enemy.GetComponentInParent<EnemyBehaviour4>().TakeDamage(currentAttackDamage);
             }
 
             // Reset timer
