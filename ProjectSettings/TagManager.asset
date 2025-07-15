@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - FlyingUnit
+  - Ground
+  - Background
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - EnemyHitBox
   - 
   - 
   - 
@@ -71,6 +74,9 @@ TagManager:
     locked: 0
   - name: Layer8_PlayerAndEnemy
     uniqueID: 1783897027
+    locked: 0
+  - name: Layer9_Water
+    uniqueID: 2601211639
     locked: 0
   m_RenderingLayers:
   - Default

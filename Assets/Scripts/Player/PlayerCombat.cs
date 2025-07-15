@@ -7,10 +7,13 @@ public class PlayerCombat : MonoBehaviour
     [Header("Combat Settings")]
     [SerializeField] private float rollForce = 6.0f;
     [SerializeField] private float attackRate = 0.25f;
+    [SerializeField] private float resetAttackComboTime = 1.0f;
+    [SerializeField] private float attack1Damage = 10.0f;
+    [SerializeField] private float attack2Damage = 10.0f;
+    [SerializeField] private float attack3Damage = 15.0f;
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackRange = 1.2f;
     [SerializeField] private LayerMask enemyLayers;
-    [SerializeField] private int attackDamage = 20;
     #endregion
 
     private Animator animator;
@@ -48,11 +51,30 @@ public class PlayerCombat : MonoBehaviour
                 currentAttack = 1;
 
             // Reset Attack combo if time since last attack is too large
-            if (timeSinceAttack > 1.0f)
+            if (timeSinceAttack > resetAttackComboTime)
                 currentAttack = 1;
 
             // Call one of three attack animations "Attack1", "Attack2", "Attack3"
             animator.SetTrigger($"Attack{currentAttack}");
+
+            // Check for enemies in attack range
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            // Deal damage to each enemy
+            var currentAttackDamage = currentAttack switch
+            {
+                1 => attack1Damage,
+                2 => attack2Damage,
+                3 => attack3Damage,
+                _ => 0.0f
+            };
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                // TODO: Implement enemy damage handling
+                Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
+                enemy.GetComponentInParent<EnemyBehaviour4>().TakeDamage(currentAttackDamage);
+            }
 
             // Reset timer
             timeSinceAttack = 0.0f;
@@ -107,28 +129,11 @@ public class PlayerCombat : MonoBehaviour
     }
     #endregion
 
-    // Trigger attack in the animation event
-    private void TriggerAttack()
+    void OnDrawGizmosSelected()
     {
-        // Detect enemies in attack range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        //Attach hitEnemies
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            EnemyBehaviour enemyScript = enemy.GetComponentInParent<EnemyBehaviour>();
-            if (enemyScript != null)
-            {
-                enemyScript.TakeDamage(attackDamage);
-                Debug.Log($"Hit {enemy.name} with attack {currentAttack}");
-            }
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        //Draw attack range in editor 
-        if (attackPoint == null) return;
+        if (attackPoint == null)
+            return;
+        // Draw attack range in editor
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
