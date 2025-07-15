@@ -146,6 +146,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Flip() 
     {
+        if (isDead == true) return;
         Vector3 rotation = transform.eulerAngles;
         //Flip the enemy if out of limits
         if (transform.position.x > target.position.x)
@@ -173,18 +174,17 @@ public class EnemyBehaviour : MonoBehaviour
     public void Die() 
     {   Debug.Log("Enemy died"); //Log the death of the enemy
         isDead = true; //Set the enemy as dead
-        animator.SetBool("IsDead", isDead); //Set the die animation
+        animator.SetBool("IsDead", isDead); //Set the die animation              
         StartCoroutine(DeathDelay());
     }
 
     private IEnumerator DeathDelay()
     {
-        yield return new WaitForSeconds(1.5f); // Time for animation die
+        yield return new WaitForSeconds(1f); // Time for animation die
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
+        GetComponentsInChildren<CapsuleCollider2D>().ToList().ForEach(c => c.enabled = false); //Disable all capsule colliders   
         this.hotZone.SetActive(false); //Disable the hot zone
         this.triggerArea.SetActive(false); //Disable the trigger area
-        GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
-        GetComponentsInChildren<CapsuleCollider2D>().ToList().ForEach(c => c.enabled = false); //Disable all capsule colliders
         this.enabled = false;
     }
 }
