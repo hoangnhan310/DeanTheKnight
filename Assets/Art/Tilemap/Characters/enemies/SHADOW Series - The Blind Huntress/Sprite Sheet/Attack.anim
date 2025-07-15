@@ -22,24 +22,18 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 4204609365329573830, guid: 8827df95e3c74414fb3b87147694b133, type: 3}
-    - time: 0.11666667
+    - time: 0.23333333
       value: {fileID: -5348402317783229189, guid: fe5798c72db2e874f8b5dc5e1bb18dfd, type: 3}
-    - time: 0.21666667
+    - time: 0.45
       value: {fileID: 2910984905329603414, guid: 5d8d2aae6736b464e9ac2aaac9ff944c, type: 3}
-    - time: 0.33333334
+    - time: 0.7
       value: {fileID: -4469344607157116029, guid: 5fdeb7787ccb3074daccc63e6725ee57, type: 3}
-    - time: 0.43333334
+    - time: 0.8833333
       value: {fileID: -5348402317783229189, guid: fe5798c72db2e874f8b5dc5e1bb18dfd, type: 3}
-    - time: 0.55
+    - time: 1.1333333
       value: {fileID: -3772868458599140213, guid: 4fd75c924407cd941a1a84697782a712, type: 3}
-    - time: 0.65
+    - time: 1.3333334
       value: {fileID: -3772868458599140213, guid: 4fd75c924407cd941a1a84697782a712, type: 3}
-    - time: 0.76666665
-      value: {fileID: -8859071070502595128, guid: ed4c3cde0e5c5824f9c8e2232c1ef9a4, type: 3}
-    - time: 0.8666667
-      value: {fileID: 2990122378051729481, guid: 468e9a24923f42d4bb17bde93a54ffd2, type: 3}
-    - time: 0.98333335
-      value: {fileID: 3974363349240814516, guid: c2573679e1f49514c88435ae3920be82, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -69,15 +63,12 @@ AnimationClip:
     - {fileID: -5348402317783229189, guid: fe5798c72db2e874f8b5dc5e1bb18dfd, type: 3}
     - {fileID: -3772868458599140213, guid: 4fd75c924407cd941a1a84697782a712, type: 3}
     - {fileID: -3772868458599140213, guid: 4fd75c924407cd941a1a84697782a712, type: 3}
-    - {fileID: -8859071070502595128, guid: ed4c3cde0e5c5824f9c8e2232c1ef9a4, type: 3}
-    - {fileID: 2990122378051729481, guid: 468e9a24923f42d4bb17bde93a54ffd2, type: 3}
-    - {fileID: 3974363349240814516, guid: c2573679e1f49514c88435ae3920be82, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 1.35
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -97,7 +88,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6333333
+  - time: 1.1
     functionName: PlaySlashSound
     data: 
     objectReferenceParameter: {fileID: 0}
