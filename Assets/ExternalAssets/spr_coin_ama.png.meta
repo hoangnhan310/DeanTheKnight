@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 15e6351924abc084a910950d43526029
+guid: e90c943f5d46cda4cad21f1e5ee0338f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2358863598823502351
-    second: 8-bit-graphics-pixels-scene-with-castle_0
+      213: -3453464007156309444
+    second: spr_coin_ama_0
+  - first:
+      213: -2495138555343139884
+    second: spr_coin_ama_1
+  - first:
+      213: -5339539681200883088
+    second: spr_coin_ama_2
+  - first:
+      213: -6019872775452219312
+    second: spr_coin_ama_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 15
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 8-bit-graphics-pixels-scene-with-castle_0
+      name: spr_coin_ama_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 4032
-        height: 2688
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fd868efd02a34fd0800000000000000
-      internalID: -2358863598823502351
+      spriteID: c32e9d068c4d210d0800000000000000
+      internalID: -3453464007156309444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_coin_ama_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4db046724bc7f5dd0800000000000000
+      internalID: -2495138555343139884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_coin_ama_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 0
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07a3be533f426e5b0800000000000000
+      internalID: -5339539681200883088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_coin_ama_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 058202afa9d157ca0800000000000000
+      internalID: -6019872775452219312
       vertices: []
       indices: 
       edges: []
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      8-bit-graphics-pixels-scene-with-castle_0: -2358863598823502351
+      spr_coin_ama_0: -3453464007156309444
+      spr_coin_ama_1: -2495138555343139884
+      spr_coin_ama_2: -5339539681200883088
+      spr_coin_ama_3: -6019872775452219312
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
