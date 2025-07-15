@@ -51,7 +51,6 @@ public class EnemyBehaviour : MonoBehaviour
             SelectTarget(); //Select a target when the enemy is outside of limits
         }
 
-
         if (inRange) 
         {
             EnemyLogic();
@@ -95,6 +94,7 @@ public class EnemyBehaviour : MonoBehaviour
         attackMode = true; //To check if Enemy can still attack or not
 
         animator.SetBool("canRun", false); //Stop the run animation
+        Debug.Log("Enemy is attacking"); //Log the attack action
         animator.SetBool("Attack", true); //Set the attack animation
     }
 
@@ -182,7 +182,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // Time for animation die
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
-        GetComponentsInChildren<CapsuleCollider2D>().ToList().ForEach(c => c.enabled = false); //Disable all capsule colliders   
+        GetComponentsInChildren<Collider2D>().ToList().ForEach(c => c.enabled = false); //Disable all box colliders     
+        GetComponent<KnockBack>().enabled = false; //Disable the knockback script
         this.hotZone.SetActive(false); //Disable the hot zone
         this.triggerArea.SetActive(false); //Disable the trigger area
         this.enabled = false;
