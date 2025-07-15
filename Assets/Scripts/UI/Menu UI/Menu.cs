@@ -1,41 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject mainMenuPanel;
+    public Button continueButton;
+
     private void Start()
     {
-        chooseMapPanel.SetActive(false);
+        string lastScene = PlayerPrefs.GetString("LastScene", "");
+        continueButton.interactable = !string.IsNullOrEmpty(lastScene);
     }
+
     public void NewGame()
     {
-        // Xoá toàn bộ dữ liệu đã lưu
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-
-        SceneManager.LoadScene("ScenceLevel2"); 
+        SceneManager.LoadScene("ScenceLevel2"); // ← Đặt lại nếu map đầu có tên khác
     }
 
-    public GameObject chooseMapPanel;
-    public GameObject mainMenuPanel;
-
-    public void OpenMapSelection()
+    public void ContinueGame()
     {
-        chooseMapPanel.SetActive(true);
-        mainMenuPanel.SetActive(false);
+        string lastScene = PlayerPrefs.GetString("LastScene", "");
+        if (!string.IsNullOrEmpty(lastScene))
+        {
+            SceneManager.LoadScene(lastScene);
+        }
     }
-    public void BackToMainMenu()
-    {
-        chooseMapPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
-    }
+
     public void QuitGame()
     {
-        Debug.Log("Quitting game...");
-        Application.Quit(); // Sẽ hoạt động sau khi build
-
+        Application.Quit();
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // Dừng play mode nếu đang chạy trong Editor
+        UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
 }
