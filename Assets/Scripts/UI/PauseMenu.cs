@@ -14,25 +14,32 @@ public class PauseMenu : MonoBehaviour
         comfirmationUI.SetActive(false);
     }
 
+    public GameObject stageClearedCanvas;
+    public GameObject upgradeCanvas;
+
     void Update()
     {
+        // Nếu một trong hai canvas đang bật, vô hiệu phím ESC
+        if ((stageClearedCanvas != null && stageClearedCanvas.activeSelf) ||
+            (upgradeCanvas != null && upgradeCanvas.activeSelf))
+        {
+            return; // 🚫 Chặn ESC
+        }
+
+        // ESC hoạt động bình thường
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (comfirmationUI.activeSelf)
+            if (pauseMenuUI.activeSelf || comfirmationUI.activeSelf)
             {
-                // Nếu đang mở confirmation, ESC sẽ tắt nó
-                comfirmationUI.SetActive(false);
+                // Nếu pause menu hoặc confirmation đang mở → ESC bị vô hiệu
+                return;
             }
-            else
-            {
-                // Nếu không mở confirmation, ESC sẽ bật/tắt pause menu
-                if (isPaused)
-                    Resume();
-                else
-                    Pause();
-            }
+
+            // Nếu chưa mở gì → ESC dùng để mở pause
+            Pause();
         }
     }
+
 
     public void Resume()
     {
@@ -60,7 +67,16 @@ public class PauseMenu : MonoBehaviour
 
     public void Yes()
     {
-        Time.timeScale = 1f; // Đảm bảo trở lại tốc độ bình thường khi đổi scene
+        // Lưu tên scene hiện tại trước khi thoát
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("LastScene", currentSceneName);
+        PlayerPrefs.Save();
+
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
+    }
+    private void OnDestroy()
+    {
+        Time.timeScale = 1f; // reset an toàn khi scene unload
     }
 }
