@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class CoinManager : MonoBehaviour
 {
@@ -7,13 +7,17 @@ public class CoinManager : MonoBehaviour
 
     public int totalCoins = 0;
 
+    public UnityEvent onCoinChanged;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-
             totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+
+            if (onCoinChanged == null)
+                onCoinChanged = new UnityEvent();
         }
         else
         {
@@ -21,17 +25,15 @@ public class CoinManager : MonoBehaviour
         }
     }
 
-
     public void AddCoin(int amount)
     {
         totalCoins += amount;
 
-        // LƯU tổng số xu sau khi thay đổi
         PlayerPrefs.SetInt("TotalCoins", totalCoins);
         PlayerPrefs.Save();
 
-        Debug.Log("Số xu hiện tại (đã lưu): " + totalCoins);
+        Debug.Log("Xu hiện tại: " + totalCoins);
+
+        onCoinChanged.Invoke(); // 🔥 Gọi sự kiện
     }
-
-
 }
