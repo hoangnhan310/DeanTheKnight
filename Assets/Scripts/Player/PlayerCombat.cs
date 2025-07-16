@@ -80,6 +80,8 @@ public class PlayerCombat : MonoBehaviour
                 {
                     enemyAI.TakeDamage(currentAttackDamage);
                 }
+                enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
+                enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
             }
 
             // Reset timer

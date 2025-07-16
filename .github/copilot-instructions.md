@@ -10,5 +10,5 @@
 - Active game object:
   - Name: GoldGolem
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Enemy
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
