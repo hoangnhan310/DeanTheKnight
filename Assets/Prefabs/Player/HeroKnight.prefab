@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 4741633104139320105}
   - component: {fileID: 872138244632776689}
   - component: {fileID: 5964215918936189743}
+  - component: {fileID: 3436220637287069222}
   m_Layer: 0
   m_Name: HeroKnight
   m_TagString: Player
@@ -482,7 +483,7 @@ MonoBehaviour:
   attackRange: 1.2
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
 --- !u!114 &872138244632776689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +513,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52753f3b24fd0e84d8e6d8c3155daed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3436220637287069222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c3a090a0712aa4f81a6b16a07945ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &6445332922987006369
 GameObject:
   m_ObjectHideFlags: 0

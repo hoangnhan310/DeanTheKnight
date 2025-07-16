@@ -73,7 +73,13 @@ public class PlayerCombat : MonoBehaviour
             {
                 // TODO: Implement enemy damage handling
                 Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
-                enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
+                // enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
+
+                MinibossAIMap3 enemyAI = enemy.GetComponentInParent<MinibossAIMap3>();
+                if (enemyAI != null)
+                {
+                    enemyAI.TakeDamage(currentAttackDamage);
+                }
             }
 
             // Reset timer
