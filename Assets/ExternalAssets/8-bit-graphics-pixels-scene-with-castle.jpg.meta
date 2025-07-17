@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      8-bit-graphics-pixels-scene-with-castle_0: -2358863598823502351
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
