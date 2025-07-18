@@ -4,7 +4,7 @@ public class Enemy2 : MonoBehaviour
 {
     public float walkSpeed = 3f;
     [SerializeField] private float chaseSpeed = 4f; // Tốc độ đuổi theo
-    [SerializeField] private float chaseRadius = 8f; // Bán kính phát hiện player
+    [SerializeField] private float chaseRadius = 4f; // Bán kính phát hiện player
     [SerializeField] private LayerMask playerLayer; // Layer của player
     [SerializeField] private float patrolDistance = 5f; // Khoảng cách di chuyển tuần tra
     [SerializeField] private bool showDetectionRadius = true; // Bật/tắt hiển thị vòng tròn
@@ -52,7 +52,10 @@ public class Enemy2 : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.WakeUp();
         animator = GetComponent<Animator>();
+        walkDirectionVector = Vector2.right; // ⚠️ Quan trọng: đảm bảo hướng đi không bị (0,0)
+
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         WalkDirection = WalkableDirection.Right; // Khởi tạo hướng tuần tra
         patrolStartPosition = transform.position; // Lưu vị trí ban đầu
@@ -122,6 +125,7 @@ public class Enemy2 : MonoBehaviour
             FlipDirection();
         }
 
+
         if (CanMove)
         {
             rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
@@ -136,14 +140,10 @@ public class Enemy2 : MonoBehaviour
         Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
         WalkDirection = directionToPlayer.x > 0 ? WalkableDirection.Right : WalkableDirection.Left;
 
-        if (CanMove)
-        {
+       
             rb.linearVelocity = new Vector2(directionToPlayer.x * chaseSpeed, rb.linearVelocity.y);
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        }
+        
+      
     }
 
     private void HandleAttack()

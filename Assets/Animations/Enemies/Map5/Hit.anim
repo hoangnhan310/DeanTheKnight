@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WarriorAttack
+  m_Name: Hit
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 335767149, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
-    - time: 0.15
-      value: {fileID: 1008806276, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
-    - time: 0.35
-      value: {fileID: 406070227, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
+      value: {fileID: -53642792, guid: ae2f2dcc646e7714f8b172091841b32a, type: 3}
+    - time: 0.26666668
+      value: {fileID: 65869252, guid: ae2f2dcc646e7714f8b172091841b32a, type: 3}
     - time: 0.5
-      value: {fileID: 1339113546, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
+      value: {fileID: 308232780, guid: ae2f2dcc646e7714f8b172091841b32a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 335767149, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
-    - {fileID: 1008806276, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
-    - {fileID: 406070227, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
-    - {fileID: 1339113546, guid: 7ed46478d226cb54d80da67dbee71a69, type: 3}
+    - {fileID: -53642792, guid: ae2f2dcc646e7714f8b172091841b32a, type: 3}
+    - {fileID: 65869252, guid: ae2f2dcc646e7714f8b172091841b32a, type: 3}
+    - {fileID: 308232780, guid: ae2f2dcc646e7714f8b172091841b32a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -78,4 +75,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.46666667
+    functionName: OnAnimationFinish
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
