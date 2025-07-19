@@ -4,28 +4,15 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image fillImage;
-    [SerializeField] private float maxHealth = 100f;
 
-    [SerializeField]
+    private float maxHealth = 100f;
     private float currentHealth = 100f;
 
-    private void Start()
+    // Gọi từ PlayerHealth
+    public void SetHealth(float current, float max)
     {
-        currentHealth = maxHealth;
-        UpdateHealthBar();
-    }
-
-    public void TakeDamage(float amount)
-    {
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthBar();
-    }
-
-    public void Heal(float amount)
-    {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(current, 0, max);
+        maxHealth = max;
         UpdateHealthBar();
     }
 
@@ -36,10 +23,10 @@ public class HealthBar : MonoBehaviour
             fillImage.fillAmount = currentHealth / maxHealth;
         }
     }
-    //For testing
+
+    // Editor hỗ trợ cập nhật thanh máu khi chỉnh số
     private void OnValidate()
     {
         UpdateHealthBar();
     }
-
 }
