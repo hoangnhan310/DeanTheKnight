@@ -21,7 +21,7 @@ public class CoinDisplay : MonoBehaviour
         if (coinText != null)
         {
             int coins = CoinManager.instance.totalCoins;
-            coinText.text = coins.ToString() + "g";
+            coinText.text = "Gold: " + coins.ToString() + "g";
         }
     }
 }

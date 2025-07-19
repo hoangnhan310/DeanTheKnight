@@ -137,10 +137,9 @@ GameObject:
   - component: {fileID: 9117128348835321587}
   - component: {fileID: 5345602657961884565}
   - component: {fileID: 9043920546160527475}
-  - component: {fileID: 5918187487138439518}
   - component: {fileID: 7431689474658906066}
   - component: {fileID: 4741633104139320105}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: HeroKnight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -444,19 +443,6 @@ MonoBehaviour:
   jumpForce: 7.5
   noBlood: 0
   slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
---- !u!114 &5918187487138439518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6323719953710832613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9a2b79355ce494faa574040d22687f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!114 &7431689474658906066
 MonoBehaviour:
   m_ObjectHideFlags: 0
