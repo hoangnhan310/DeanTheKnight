@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6379073853068086556}
   - component: {fileID: 5517142152544806564}
   - component: {fileID: 7029312795401695358}
-  - component: {fileID: 5998808393615385081}
+  - component: {fileID: 4825927563301299647}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169, y: 135}
+  m_AnchoredPosition: {x: -205, y: 156}
   m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5517142152544806564
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5998808393615385081
+--- !u!114 &4825927563301299647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,12 +87,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1913710076014746893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1a8e4285057c694d8ff462c0151502c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bb9ed8306db6af4a905d6194ebd6c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fillImage: {fileID: 7005419832061813479}
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
 --- !u!1 &6964932260097234214
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169.5, y: 65.1}
+  m_AnchoredPosition: {x: -205.5, y: 86.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6373888151144615821
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6964932260097234214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63ffc9955ebc244f9b29f5c61c9678c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a13b96cc6da3a04eb0d8835fb093ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 5445849272964337486}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4290220929924959221, guid: e1c7310776d4c4743b6010109209b285, type: 3}
+  m_Sprite: {fileID: 4290220929924959221, guid: 2537946307db5864fadbcea1995a6811, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 3944246361395108161}
   - component: {fileID: 7866501524674503587}
   - component: {fileID: 1990573987471932765}
-  - component: {fileID: 617889393010049643}
+  - component: {fileID: 1338991333626760577}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -609,7 +609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -193.4, y: 107.49}
+  m_AnchoredPosition: {x: -229.4, y: 128.48999}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7866501524674503587
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &617889393010049643
+--- !u!114 &1338991333626760577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8809959708885937191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df5229a28cbb0047ad44aabcc8a2c13, type: 3}
+  m_Script: {fileID: 11500000, guid: a910b19a4de97d14299e8b3143388ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fillImage: {fileID: 3455337191525432639}
@@ -731,12 +731,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4290220929924959221, guid: e1c7310776d4c4743b6010109209b285, type: 3}
+  m_Sprite: {fileID: 4290220929924959221, guid: 2537946307db5864fadbcea1995a6811, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

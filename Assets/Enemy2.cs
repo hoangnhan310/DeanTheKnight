@@ -53,6 +53,7 @@ public class Enemy2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        walkDirectionVector = Vector2.right; // ⚠️ Quan trọng: đảm bảo hướng đi không bị (0,0)
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         WalkDirection = WalkableDirection.Right; // Khởi tạo hướng tuần tra
         patrolStartPosition = transform.position; // Lưu vị trí ban đầu
