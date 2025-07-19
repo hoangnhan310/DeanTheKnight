@@ -9,6 +9,7 @@
     - Default, TransparentFX, Ignore Raycast, Water, UI, Enemy, EnemyHitBox
 - Active game object:
   - Name: CorruptSlime
+  - Name: yellowNinja - idle_0
   - Tag: Untagged
   - Layer: Enemy
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

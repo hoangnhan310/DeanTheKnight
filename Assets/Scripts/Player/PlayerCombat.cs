@@ -88,6 +88,8 @@ public class PlayerCombat : MonoBehaviour
                         damageable.TakeDamage(currentAttackDamage);
                     }
                 }
+                //enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
+                enemy.GetComponentInParent<EnemyBehaviour4>().TakeDamage(currentAttackDamage);
             }
 
             // Reset timer

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+    
 public class PlayerCombat4 : MonoBehaviour
 {
     #region Serialized Fields
@@ -73,6 +73,7 @@ public class PlayerCombat4 : MonoBehaviour
             {
                 // TODO: Implement enemy damage handling
                 Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
+                //enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
                 enemy.GetComponentInParent<EnemyBehaviour4>().TakeDamage(currentAttackDamage);
             }
 

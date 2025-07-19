@@ -1,50 +1,49 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [Header("Health Settings")]
     public float maxHealth = 100f;
-    [HideInInspector] public float currentHealth;
+    [SerializeField]
+    private float currentHealth;
+    [SerializeField] private GameObject defeatedUI;
+    [SerializeField] private HealthBar healthBar; // Gán trong Inspector
 
-    [Header("Component References")]
     private Animator animator;
-    private PlayerState playerState;
-    private HeroKnight heroKnight; // To disable movement
-    private PlayerCombat playerCombat; // To disable combat
-
     private bool isDead = false;
 
-    void Start()
+    private void Start()
     {
-        currentHealth = maxHealth;
         animator = GetComponent<Animator>();
-        playerState = GetComponent<PlayerState>();
-        heroKnight = GetComponent<HeroKnight>();
-        playerCombat = GetComponent<PlayerCombat>();
+
+        // Reset máu về tối đa mỗi lần bắt đầu
+        currentHealth = maxHealth;
+
+        healthBar?.SetHealth(currentHealth, maxHealth);
     }
 
-    public void TakeDamage(float damage)
+
+    public void TakeDamage(float amount)
     {
         if (isDead) return;
 
-        // Player's "Roll" provides invincibility frames
-        if (playerState.IsRolling)
-        {
-            Debug.Log("Player dodged the attack!");
-            return;
-        }
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        currentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current Health: " + currentHealth);
+        Debug.Log($"Player took {amount} damage. Remaining health: {currentHealth}");
 
-        if (currentHealth > 0)
-        {
-            // Trigger the hurt animation
-            animator.SetTrigger("Hurt");
-        }
-        else
+        // Gọi animation trúng đòn
+        animator.SetTrigger("Hurt");
+
+        // Cập nhật UI thanh máu
+        healthBar?.SetHealth(currentHealth, maxHealth);
+
+        // Lưu máu vào PlayerPrefs
+        PlayerPrefs.SetFloat("PlayerCurrentHealth", currentHealth);
+        PlayerPrefs.Save();
+
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -52,18 +51,31 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (isDead) return;
         isDead = true;
-        currentHealth = 0;
-        Debug.Log("Player has been defeated.");
 
-        // Trigger death animation
-        animator.SetBool("noBlood", true); // Your animator uses this, let's trigger it.
+        Debug.Log("Player died!");
         animator.SetTrigger("Death");
 
-        // Disable player control scripts
-        if (heroKnight != null) heroKnight.enabled = false;
-        if (playerCombat != null) playerCombat.enabled = false;
+        GetComponent<PlayerInput>().enabled = false;
 
-        // You might want to show a 'Game Over' screen here
+        var combat = GetComponent<PlayerCombat>();
+        if (combat != null)
+            combat.enabled = false;
+
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+
+        gameObject.tag = "Untagged";
+        gameObject.layer = 0;
+        StartCoroutine(ShowDefeatAndPause());
+    }
+    private IEnumerator ShowDefeatAndPause()
+    {
+        yield return new WaitForSeconds(1f); // Đợi 1 giây
+
+        if (defeatedUI != null)
+            defeatedUI.SetActive(true);
+
+        Time.timeScale = 0f; // Tạm dừng toàn bộ game
     }
 }
