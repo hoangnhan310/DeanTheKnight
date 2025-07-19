@@ -20,15 +20,20 @@ public class EnemyBehaviour4 : MonoBehaviour
         Debug.Log("ok");
 
         currentHealth -= damage;
-        animator.SetBool("Hit", true); 
         if (currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+            animator.SetBool("Hit", true);
+            animator.SetTrigger("isHurt");
         }
     }
 
     private void Die()
     {
+        animator.SetTrigger("isDie");
         animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp
         if (rb != null)
         {

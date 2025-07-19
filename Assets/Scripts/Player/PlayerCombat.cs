@@ -71,24 +71,6 @@ public class PlayerCombat : MonoBehaviour
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                // TODO: Implement enemy damage handling
-                Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
-                // enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
-
-                // enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
-                // enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
-
-                foreach (Collider2D enemyCollider in hitEnemies)
-                {
-                    // Try to get any component that follows the IDamageable contract.
-                    IDamageable damageable = enemyCollider.GetComponentInParent<IDamageable>();
-                    if (damageable != null)
-                    {
-                        // If we found one, call its TakeDamage method.
-                        damageable.TakeDamage(currentAttackDamage);
-                    }
-                }
-                //enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
                 enemy.GetComponentInParent<EnemyBehaviour4>().TakeDamage(currentAttackDamage);
             }
 

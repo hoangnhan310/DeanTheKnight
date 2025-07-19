@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8731111603503506422}
   - component: {fileID: 1000402728746512096}
   - component: {fileID: 1031611825999036636}
+  - component: {fileID: 5522073711524502731}
   m_Layer: 8
   m_Name: Snapper
   m_TagString: Untagged
@@ -213,13 +214,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxHealth: 50
-  moveSpeed: 2.5
+  enemyBehaviour: {fileID: 0}
+  moveSpeed: 10
   detectionRange: 12
   attackPoint: {fileID: 1514343183966033486}
   attackRadius: 1.25
   attackDamage: 15
   attackInterval: 2.5
+--- !u!114 &5522073711524502731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820924250758239262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 40
 --- !u!1 &3907979658134871595
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 3907979658134871595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: -0.16, z: 0}
+  m_LocalPosition: {x: 0.53, y: -0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

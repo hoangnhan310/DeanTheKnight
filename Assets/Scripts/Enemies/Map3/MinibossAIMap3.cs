@@ -2,63 +2,82 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
+/// <summary>
+/// Controls the AI logic for the Miniboss Golem, handling chasing, combat sequences, and special attacks.
+/// This script requires an EnemyBehaviour4 component on the same GameObject to manage its health and death state.
+/// </summary>
+public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
 {
     [Header("References")]
+    [Tooltip("The player character the miniboss will target.")]
     public Transform player;
     private Animator anim;
     private Rigidbody2D rb;
+    [Tooltip("Reference to the component that manages this enemy's health and death.")]
+    [SerializeField] private EnemyBehaviour4 enemyBehaviour;
 
     [Header("Stats")]
-    public float maxHealth = 200f;
-    private float currentHealth;
+    [Tooltip("The horizontal movement speed.")]
     public float moveSpeed = 1.5f;
 
     [Header("AI Behavior")]
+    [Tooltip("The range at which the miniboss will start chasing the player.")]
     public float detectionRange = 10f;
 
     [Header("Unified Attack Zone")]
-    public Transform attackPoint; // This now holds the trigger collider
+    [Tooltip("An empty child object representing the attack hitbox's center.")]
+    public Transform attackPoint;
+    [Tooltip("The radius from the Attack Point used for attack decisions and dealing damage.")]
     public float attackRadius = 0.8f;
+    [Tooltip("Damage dealt by a normal attack.")]
     public float normalAttackDamage = 15f;
+    [Tooltip("The cooldown in seconds between attacks.")]
     public float attackInterval = 2f;
 
     [Header("Special Attack Combo")]
+    [Tooltip("Number of normal attacks to perform before a special attack.")]
     public int attacksUntilSpecial = 3;
-    public float specialAttackDamage = 10f;
+    [Tooltip("Damage dealt by the special attack.")]
+    public float specialAttackDamage = 25f;
+    [Tooltip("Time to wait after inactivity before resetting the attack combo.")]
     public float attackComboResetTime = 5.0f;
-
-    [Header("Door Control")]
-    public GameObject associatedDoor;
 
     // --- Private State Variables ---
     [System.NonSerialized] private int normalAttackCounter = 0;
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
     private bool isChasing = false;
-    private bool isDead = false;
     private Vector3 initialScale;
     private bool isSpecialAttack = false;
     private Coroutine resetAttackComboCoroutine;
-
+    private int originalLayer;
+    private int invulnerableLayer;
 
     /// <summary>
-    /// Called once when the script instance is being loaded to initialize components and values.
+    /// Initializes components and sets starting values.
     /// </summary>
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
         initialScale = transform.localScale;
+
+        enemyBehaviour = GetComponent<EnemyBehaviour4>();
+        if (enemyBehaviour == null)
+        {
+            Debug.LogError("MinibossAIMap3 requires an EnemyBehaviour4 component to function.", this);
+            this.enabled = false;
+            return;
+        }
 
         if (rb != null)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero; // Use .velocity
         }
 
-        attackPoint.GetComponent<Collider2D>().enabled = false;
+        if (attackPoint != null && attackPoint.GetComponent<Collider2D>() != null)
+            attackPoint.GetComponent<Collider2D>().enabled = false;
 
         if (player == null)
         {
@@ -66,24 +85,33 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
             if (playerObject != null) player = playerObject.transform;
             else { Debug.LogError("MinibossAI: Player not found!", this); this.enabled = false; }
         }
+
+        // Store the original layer and find a layer to switch to for invincibility
+        originalLayer = gameObject.layer;
+        invulnerableLayer = LayerMask.NameToLayer("Ignore Raycast");
+        if (invulnerableLayer == -1) // Fallback if the layer doesn't exist
+        {
+            invulnerableLayer = LayerMask.NameToLayer("Water");
+            if (invulnerableLayer == -1) Debug.LogWarning("Could not find 'Ignore Raycast' or 'Water' layer for invincibility frames.", this);
+        }
     }
 
     /// <summary>
-    /// Called every frame, contains the main AI logic to decide between attacking, chasing, or standing still.
+    /// The main AI logic loop, called every frame to decide between attacking, chasing, or standing still.
     /// </summary>
     void Update()
     {
-        if (isDead || player == null || isAttacking) return;
-        FacePlayer();
+        if (enemyBehaviour == null || !enemyBehaviour.enabled || player == null || isAttacking) return;
 
+        FacePlayer();
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
         if (distanceToPlayer <= detectionRange) { isChasing = true; }
         else if (distanceToPlayer > detectionRange * 1.5f) { isChasing = false; }
 
         if (isChasing)
         {
             float attackDistance = Vector2.Distance(attackPoint.position, player.position);
-
             if (attackDistance <= attackRadius && Time.time >= lastAttackTime + attackInterval)
             {
                 StopMovement();
@@ -101,7 +129,7 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Handles the physical movement towards the player and sets the walking animation.
+    /// Moves the Kinematic Rigidbody towards the player horizontally.
     /// </summary>
     void MoveTowardsPlayer()
     {
@@ -112,7 +140,7 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Stops the enemy's movement by setting the walking animation to false.
+    /// Stops the enemy's movement by setting the animation state.
     /// </summary>
     void StopMovement()
     {
@@ -120,7 +148,7 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// A public method called by an animation event to activate the attack hitbox.
+    /// An Animation Event function that activates the attack hitbox for a short duration.
     /// </summary>
     public void DealDamageEvent()
     {
@@ -128,23 +156,24 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// A coroutine that enables the attack collider for a short "active" window.
+    /// A coroutine that enables the attack trigger collider for a brief "active" window during an attack.
     /// </summary>
     IEnumerator DamageWindowRoutine()
     {
-        attackPoint.GetComponent<Collider2D>().enabled = true;
+        Collider2D attackCollider = attackPoint.GetComponent<Collider2D>();
+        if (attackCollider != null) attackCollider.enabled = true;
         yield return new WaitForSeconds(0.2f);
-        attackPoint.GetComponent<Collider2D>().enabled = false;
+        if (attackCollider != null) attackCollider.enabled = false;
     }
 
     /// <summary>
-    /// Called when the attack trigger collider hits another object, dealing damage to the player if appropriate.
+    /// Called when the AttackPoint's trigger collider hits another object. Deals damage to the player if appropriate.
     /// </summary>
     void OnTriggerEnter2D(Collider2D other)
     {
         if (isAttacking && other.CompareTag("Player"))
         {
-            IDamageable playerHealth = other.GetComponent<IDamageable>();
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 float damageToDeal = isSpecialAttack ? specialAttackDamage : normalAttackDamage;
@@ -154,90 +183,27 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Handles taking damage, reduces health, and triggers the hurt or death sequence.
-    /// </summary>
-    public void TakeDamage(float damage)
-    {
-        if (isDead || isAttacking) return;
-        currentHealth -= damage;
-        if (currentHealth <= 0) Die();
-        else anim.SetTrigger("isHurt");
-    }
-
-    /// <summary>
-    /// A coroutine that handles the visual fading of the associated door and its eventual destruction.
-    /// </summary>
-    private IEnumerator FadeOutAndDestroyDoor()
-    {
-        Tilemap doorTilemap = associatedDoor.GetComponent<Tilemap>();
-        Collider2D doorCollider = associatedDoor.GetComponent<Collider2D>();
-
-        if (doorTilemap == null)
-        {
-            Destroy(associatedDoor);
-            yield break;
-        }
-
-        if (doorCollider != null)
-        {
-            doorCollider.enabled = false;
-        }
-
-        float fadeDuration = 2f;
-        float elapsed = 0f;
-        Color initialColor = doorTilemap.color;
-
-        while (elapsed < fadeDuration)
-        {
-            float newAlpha = Mathf.Lerp(initialColor.a, 0f, elapsed / fadeDuration);
-            doorTilemap.color = new Color(initialColor.r, initialColor.g, initialColor.b, newAlpha);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        Destroy(associatedDoor);
-    }
-
-    /// <summary>
-    /// Initiates the death sequence, triggering an animation and opening the associated door.
-    /// </summary>
-    void Die()
-    {
-        if (isDead) return;
-        isDead = true;
-        anim.SetTrigger("isDie");
-
-        if (associatedDoor != null)
-        {
-            StartCoroutine(FadeOutAndDestroyDoor());
-        }
-
-        StartCoroutine(DieSequenceRoutine());
-    }
-
-    /// <summary>
-    /// A coroutine that cleans up the enemy GameObject after the death animation has played.
-    /// </summary>
-    IEnumerator DieSequenceRoutine()
-    {
-        if (resetAttackComboCoroutine != null) StopCoroutine(resetAttackComboCoroutine);
-        GetComponent<Collider2D>().enabled = false;
-        if (rb != null) rb.bodyType = RigidbodyType2D.Static;
-        yield return new WaitForSeconds(3.0f);
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// Allows setting the attacking state from outside (typically for Animation Events).
+    /// Allows setting the attacking state from an external script (like AttackStateBehaviour).
+    /// This also controls the layer switching to grant invincibility.
     /// </summary>
     public void SetAttackingState(bool state)
     {
         isAttacking = state;
+
+        if (state == true)
+        {
+            // When attacking, switch to the invulnerable layer.
+            gameObject.layer = invulnerableLayer;
+        }
+        else
+        {
+            // When finished attacking, switch back to the original layer.
+            gameObject.layer = originalLayer;
+        }
     }
 
     /// <summary>
-    /// Contains the logic for deciding which attack to use (normal or special).
+    /// Determines whether to use a normal or special attack and resets combo timers.
     /// </summary>
     void AttackDecision()
     {
@@ -247,16 +213,18 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
         resetAttackComboCoroutine = StartCoroutine(AttackComboResetRoutine());
         if (normalAttackCounter >= attacksUntilSpecial - 1)
         {
-            isSpecialAttack = true; normalAttackCounter = 0;
+            isSpecialAttack = true;
+            normalAttackCounter = 0;
         }
         else
         {
-            isSpecialAttack = false; normalAttackCounter++;
+            isSpecialAttack = false;
+            normalAttackCounter++;
         }
     }
 
     /// <summary>
-    /// A coroutine to reset the special attack combo counter after a period of time.
+    /// A coroutine that resets the special attack combo after a period of inactivity.
     /// </summary>
     IEnumerator AttackComboResetRoutine()
     {
@@ -266,7 +234,7 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Flips the enemy's sprite to face the player.
+    /// Flips the enemy's sprite to face the player's horizontal position.
     /// </summary>
     void FacePlayer()
     {
@@ -277,7 +245,7 @@ public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Draws Gizmos in the Editor to visualize the detection and attack ranges.
+    /// Draws visualization gizmos for ranges in the Unity Editor.
     /// </summary>
     void OnDrawGizmosSelected()
     {

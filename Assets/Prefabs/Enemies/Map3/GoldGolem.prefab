@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4279578515982710704}
   - component: {fileID: 8355781669743651157}
   - component: {fileID: 1058183833958664755}
+  - component: {fileID: 3678810346821530331}
   m_Layer: 8
   m_Name: GoldGolem
   m_TagString: Untagged
@@ -221,6 +222,20 @@ MonoBehaviour:
   attacksUntilSpecial: 3
   specialAttackDamage: 25
   attackComboResetTime: 5
+  associatedDoor: {fileID: 0}
+--- !u!114 &3678810346821530331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278258347862185098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 250
 --- !u!1 &6969790763275915239
 GameObject:
   m_ObjectHideFlags: 0

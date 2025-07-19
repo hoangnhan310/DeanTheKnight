@@ -1,16 +1,22 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
+/// <summary>
+/// Controls the AI logic for the Snapper enemy. It chases the player on the ground and performs a bite attack.
+/// This script requires an EnemyBehaviour4 component to handle health and death states.
+/// </summary>
+public class SnapperAI : MonoBehaviour, IStatefulEnemy
 {
     [Header("References")]
+    [Tooltip("The player target.")]
     public Transform player;
     private Animator anim;
     private Rigidbody2D rb;
+    [Tooltip("The component that manages health and dying for this enemy.")]
+    [SerializeField] private EnemyBehaviour4 enemyBehaviour;
 
     [Header("Stats")]
-    public float maxHealth = 50f;
-    private float currentHealth;
+    [Tooltip("The horizontal movement speed.")]
     public float moveSpeed = 2.5f;
 
     [Header("AI Behavior")]
@@ -18,29 +24,41 @@ public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
     public float detectionRange = 12f;
 
     [Header("Attack")]
+    [Tooltip("An empty child object representing the center of the attack hitbox.")]
     public Transform attackPoint;
+    [Tooltip("The radius from the Attack Point to check for the player.")]
     public float attackRadius = 1.0f;
+    [Tooltip("The amount of damage the attack deals.")]
     public float attackDamage = 15f;
+    [Tooltip("The cooldown in seconds between attacks.")]
     public float attackInterval = 2.5f;
 
     // --- Private State Variables ---
     private float lastAttackTime = -99f;
     private bool isAttacking = false;
-    private bool isDead = false;
+    // 'isDead' is now managed by the EnemyBehaviour4 script via its IsDead property.
 
     /// <summary>
-    /// Called once when the script instance is being loaded to initialize components and values.
+    /// Initializes components and starting values.
     /// </summary>
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+
+        // Get the required 'body' component for this 'brain'
+        enemyBehaviour = GetComponent<EnemyBehaviour4>();
+        if (enemyBehaviour == null)
+        {
+            Debug.LogError("SnapperAI requires an EnemyBehaviour4 component to function.", this);
+            this.enabled = false;
+            return;
+        }
 
         if (rb != null)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero; // Use .velocity, the modern standard
         }
 
         if (player == null)
@@ -52,23 +70,24 @@ public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Called every frame, contains the main AI logic to decide between attacking, chasing, or being idle.
+    /// Contains the main AI logic to decide between attacking, chasing, or being idle each frame.
     /// </summary>
     void Update()
     {
-        if (isDead || isAttacking || player == null)
+        // Check the 'body' script's state to halt logic when dead, attacking, etc.
+        if (enemyBehaviour == null || !enemyBehaviour.enabled || isAttacking || player == null)
         {
             return;
         }
 
         FacePlayer();
-
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange)
         {
             float attackDistance = Vector2.Distance(attackPoint.position, player.position);
 
+            // Check if player is in range and attack is off cooldown
             if (attackDistance <= attackRadius && Time.time >= lastAttackTime + attackInterval)
             {
                 StopMovement();
@@ -86,7 +105,7 @@ public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Allows setting the attacking state from outside (typically for Animation Events or StateMachineBehaviours).
+    /// Sets the 'isAttacking' flag, controlled by the AttackStateBehaviour on the Animator.
     /// </summary>
     public void SetAttackingState(bool state)
     {
@@ -94,16 +113,33 @@ public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Initiates the attack sequence by setting state flags and triggering the attack animation.
+    /// Initiates the attack by setting a cooldown and triggering the animation.
     /// </summary>
     void AttackDecision()
     {
         lastAttackTime = Time.time;
-        anim.SetTrigger("isAttacking");
+        StartCoroutine(AttackSequence());
     }
 
     /// <summary>
-    /// An animation event function that detects and deals damage to the player within the attack range.
+    /// Coroutine xử lý toàn bộ chuỗi tấn công.
+    /// </summary>
+    IEnumerator AttackSequence()
+    {
+        isAttacking = true;
+        anim.SetTrigger("isAttacking");
+
+        yield return new WaitForSeconds(0.5f);
+
+        DealDamageEvent();
+
+        yield return new WaitForSeconds(0.5f);
+
+        isAttacking = false;
+    }
+
+    /// <summary>
+    /// Called by an Animation Event at the precise moment the attack should deal damage.
     /// </summary>
     public void DealDamageEvent()
     {
@@ -111,81 +147,46 @@ public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
 
         foreach (Collider2D playerCollider in hitPlayers)
         {
-            IDamageable damageable = playerCollider.GetComponent<IDamageable>();
-            if (damageable != null && playerCollider.CompareTag("Player"))
+            PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
+            if (playerHealth != null && playerCollider.CompareTag("Player"))
             {
-                damageable.TakeDamage(attackDamage);
+                playerHealth.TakeDamage(attackDamage);
             }
         }
     }
 
     /// <summary>
-    /// Handles the physical movement towards the player, stopping when within attack range.
+    /// Moves the Kinematic Rigidbody towards the player horizontally.
     /// </summary>
     void MoveTowardsPlayer()
     {
-        float distanceToPlayer = Vector2.Distance(attackPoint.position, player.position);
-
-        if (distanceToPlayer <= attackRadius)
+        // Stop moving if we are already inside the attack range to prevent jittering.
+        if (Vector2.Distance(attackPoint.position, player.position) <= attackRadius)
         {
             StopMovement();
             return;
         }
 
         anim.SetBool("isWalking", true);
-        Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        // Calculate the horizontal target position
+        Vector2 targetPosition = new Vector2(player.position.x, rb.position.y);
+        // Move towards the target using the correct method for kinematic bodies
+        Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.deltaTime);
         rb.MovePosition(newPosition);
     }
 
     /// <summary>
-    /// Halts the enemy's movement by setting the walking animation to false.
+    /// Halts horizontal movement and stops the walking animation.
     /// </summary>
     void StopMovement()
     {
         anim.SetBool("isWalking", false);
+        // For a Kinematic body, movement stops when we stop calling MovePosition.
     }
 
     /// <summary>
-    /// Handles taking damage, reduces health, and calls the Die() method if necessary.
-    /// </summary>
-    public void TakeDamage(float damage)
-    {
-        if (isDead) return;
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    /// <summary>
-    /// Initiates the death sequence by triggering the animation and starting a cleanup routine.
-    /// </summary>
-    void Die()
-    {
-        if (isDead) return;
-        isDead = true;
-        anim.SetTrigger("isDie");
-        StartCoroutine(DieSequenceRoutine());
-    }
-
-    /// <summary>
-    /// A coroutine that disables components and destroys the GameObject after the death animation.
-    /// </summary>
-    IEnumerator DieSequenceRoutine()
-    {
-        this.enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        if (rb != null) rb.bodyType = RigidbodyType2D.Static;
-
-        yield return new WaitForSeconds(2.0f);
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// Flips the enemy's sprite to face the player.
+    /// Flips the enemy's sprite to face the player's horizontal position.
     /// </summary>
     void FacePlayer()
     {
@@ -196,13 +197,15 @@ public class SnapperAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Draws Gizmos in the Editor to visualize the detection and attack ranges.
+    /// Draws visualization gizmos for ranges in the Unity Editor.
     /// </summary>
     void OnDrawGizmosSelected()
     {
+        // Draw the main detection range
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
+        // Draw the attack initiation range and hitbox
         if (attackPoint != null)
         {
             Gizmos.color = Color.magenta;

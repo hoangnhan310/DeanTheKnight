@@ -1,34 +1,49 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Controls all AI, combat, and health logic for the Slime enemy.
+/// This is a self-contained script that handles bouncing, aura attacks, and its own damageable state.
+/// </summary>
 public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
 {
     [Header("References")]
+    [Tooltip("The player character the slime will target.")]
     public Transform player;
+    [Tooltip("An optional particle effect to spawn during the aura attack.")]
     public GameObject auraVFX;
+    [Tooltip("An empty child object representing the center of the aura blast.")]
     public Transform attackPoint;
     private Animator anim;
     private Rigidbody2D rb;
 
     [Header("Stats")]
+    [Tooltip("The maximum health of the slime.")]
     public float maxHealth = 60f;
     private float currentHealth;
 
     [Header("AI Behavior")]
+    [Tooltip("The range at which the slime starts to detect and bounce towards the player.")]
     public float detectionRange = 12f;
+    [Tooltip("The range at which the slime stops moving and initiates its aura attack.")]
     public float attackRange = 3f;
 
     [Header("Kinematic Bounce Movement")]
+    [Tooltip("The maximum height the slime reaches during its bounce arc.")]
     public float bounceHeight = 1.2f;
+    [Tooltip("How long, in seconds, a single bounce takes to complete.")]
     public float bounceDuration = 0.7f;
+    [Tooltip("The horizontal distance covered in a single bounce.")]
     public float bounceDistance = 2.0f;
-    [Tooltip("Time between bounces after landing.")]
+    [Tooltip("The cooldown time in seconds between bounces after landing.")]
     public float bounceInterval = 0.5f;
 
     [Header("Aura Blast Attack")]
-    [Tooltip("Time between aura blast attacks.")]
+    [Tooltip("The cooldown in seconds between aura blast attacks.")]
     public float attackInterval = 4f;
+    [Tooltip("The radius of the damage-dealing aura, measured from the Attack Point.")]
     public float explosionRadius = 3f;
+    [Tooltip("The amount of damage dealt by the aura blast.")]
     public float explosionDamage = 10f;
 
     // --- Private State Variables ---
@@ -39,7 +54,7 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     private bool isDead = false;
 
     /// <summary>
-    /// Called once when the script instance is being loaded to initialize components and values.
+    /// Initializes components and sets the starting state.
     /// </summary>
     void Start()
     {
@@ -50,19 +65,19 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
         if (rb != null)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero; // Use .velocity instead of the obsolete .linearVelocity
         }
 
         if (player == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null) player = playerObject.transform;
-            else { Debug.LogError("SlimeAI: Player not found!", this); this.enabled = false; }
+            else { Debug.LogError("SlimeAI: Player not found! Ensure the player has the 'Player' tag.", this); this.enabled = false; }
         }
     }
 
     /// <summary>
-    /// Called every frame, contains the main AI logic to decide between attacking or bouncing.
+    /// The main AI logic loop, called every frame to decide between attacking, bouncing, or idling.
     /// </summary>
     void Update()
     {
@@ -92,15 +107,17 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Checks if the slime is on the ground using a short raycast.
+    /// Checks if the slime is on a surface by casting a short ray downwards.
     /// </summary>
+    /// <returns>True if ground is detected, otherwise false.</returns>
     private bool IsGrounded()
     {
+        // For production, it's recommended to add a LayerMask to this Raycast.
         return Physics2D.Raycast(transform.position, Vector2.down, 0.2f);
     }
 
     /// <summary>
-    /// A coroutine that performs a single arced bounce movement towards the player.
+    /// Executes a single, arced bounce movement towards the player over a set duration.
     /// </summary>
     IEnumerator BounceRoutine()
     {
@@ -116,30 +133,34 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
         {
             float t = elapsedTime / bounceDuration;
             Vector3 currentPos = Vector3.Lerp(startPos, endPos, t);
-            currentPos.y += bounceHeight * Mathf.Sin(Mathf.PI * t);
+            currentPos.y += bounceHeight * Mathf.Sin(Mathf.PI * t); // Creates the parabolic arc
             rb.MovePosition(currentPos);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        RaycastHit2D hit = Physics2D.Raycast(endPos, Vector2.down, 1.0f);
+
+        // Raycast down to snap to the ground, accounting for slopes.
+        RaycastHit2D hit = Physics2D.Raycast(endPos, Vector2.down, bounceHeight + 1.0f);
         if (hit.collider != null) { endPos.y = hit.point.y; }
+
         rb.MovePosition(endPos);
         isBouncing = false;
         anim.SetBool("isBouncing", false);
     }
 
     /// <summary>
-    /// Initiates the attack sequence by setting state flags and triggering the attack animation.
+    /// Initiates the attack sequence by setting state flags and triggering the animation.
     /// </summary>
     void AttackDecision()
     {
         isAttacking = true;
         lastAttackTime = Time.time;
-        anim.SetTrigger("isAttacking");
+        anim.SetTrigger("isAttacking"); // Must match the trigger name in the Animator
     }
 
     /// <summary>
-    /// An animation event function that creates the visual effect and deals damage for the aura blast.
+    /// This function is called by an Animation Event on the 'attack' animation clip.
+    /// It creates the visual effect and deals damage within the aura's radius.
     /// </summary>
     public void AuraBlastEvent()
     {
@@ -149,46 +170,48 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
         }
 
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, explosionRadius);
-        foreach (Collider2D hit in hitObjects)
+        foreach (Collider2D hitCollider in hitObjects)
         {
-            if (hit.CompareTag("Player"))
+            PlayerHealth playerHealth = hitCollider.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null && hitCollider.CompareTag("Player"))
             {
-                IDamageable damageable = hit.GetComponent<IDamageable>();
-                if (damageable != null)
-                {
-                    damageable.TakeDamage(explosionDamage);
-                }
+                playerHealth.TakeDamage(explosionDamage);
             }
         }
     }
 
     /// <summary>
-    /// Handles taking damage, reduces health, and calls the Die() method if necessary.
+    /// This method is part of the IDamageable interface. It's called when the player's attack hits this enemy.
     /// </summary>
+    /// <param name="damage">The amount of damage to take.</param>
     public void TakeDamage(float damage)
     {
         if (isDead) return;
         currentHealth -= damage;
+        Debug.Log($"Slime took {damage} damage. Current Health: {currentHealth}/{maxHealth}");
+        // A hurt animation trigger would be called here if it existed.
         if (currentHealth <= 0) Die();
     }
 
     /// <summary>
-    /// Initiates the death sequence, playing an animation and destroying the GameObject.
+    /// Initiates the death sequence, disabling components and playing the death animation.
     /// </summary>
     void Die()
     {
         if (isDead) return;
         isDead = true;
         StopAllCoroutines();
-        anim.SetTrigger("isDie");
+        anim.SetTrigger("isDie"); // Must match the trigger name in the Animator
         GetComponent<Collider2D>().enabled = false;
-        rb.bodyType = RigidbodyType2D.Static;
+        if (rb != null) rb.bodyType = RigidbodyType2D.Static;
         this.enabled = false;
         Destroy(gameObject, 2.0f);
     }
 
     /// <summary>
-    /// Allows setting the attacking state from outside (typically for Animation Events or StateMachineBehaviours).
+    /// Allows an external script (like AttackStateBehaviour) to control the 'isAttacking' state.
+    /// This is part of the IStatefulEnemy interface.
     /// </summary>
     public void SetAttackingState(bool state)
     {
@@ -196,7 +219,7 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Flips the enemy's sprite to face the player.
+    /// Flips the enemy's sprite to face the player's horizontal position.
     /// </summary>
     void FacePlayer()
     {
@@ -207,7 +230,7 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Draws Gizmos in the Editor to visualize the detection, attack, and explosion ranges.
+    /// Draws visualization gizmos for the AI's ranges in the Unity Editor.
     /// </summary>
     void OnDrawGizmosSelected()
     {

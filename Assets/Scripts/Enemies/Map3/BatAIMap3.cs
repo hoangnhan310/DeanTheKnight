@@ -1,16 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
+/// <summary>
+/// Controls the AI logic for the Bat enemy. Handles patrolling, chasing, and initiating attacks.
+/// This script works in tandem with an EnemyBehaviour4 component, which handles health and death states.
+/// </summary>
+public class BatAIMap3 : MonoBehaviour, IStatefulEnemy // No longer needs IDamageable
 {
     [Header("References")]
+    [Tooltip("The player the bat will target.")]
     public Transform player;
     private Animator anim;
     private Rigidbody2D rb;
+    [Tooltip("Reference to the component that manages this enemy's health and death state.")]
+    [SerializeField] private EnemyBehaviour4 enemyBehaviour;
 
     [Header("Stats")]
-    public float maxHealth = 30f;
-    private float currentHealth;
+    [Tooltip("General movement speed for patrolling and chasing.")]
     public float moveSpeed = 2f;
 
     [Header("AI Behavior")]
@@ -20,34 +26,49 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     public float attackRange = 4f;
 
     [Header("Lunge Attack")]
+    [Tooltip("How fast the bat lunges towards the player.")]
     public float lungeSpeed = 8f;
+    [Tooltip("Time in seconds between attacks.")]
     public float attackInterval = 3f;
-    public float attackDamage = 10f;
+    [Tooltip("The amount of damage this bat's attack deals.")]
+    public float attackDamage = 10f; // Damage is now managed here
 
     [Header("Patrol Behavior")]
     [Tooltip("How far the bat will patrol left and right from its start position.")]
     public float patrolDistance = 3f;
 
+    // --- Private State Variables ---
     private Vector3 startingPoint;
     private Vector3 patrolTarget;
     private float lastAttackTime = -99f;
     private bool isAttacking = false;
-    private bool isDead = false;
+    // 'isDead' is now handled by the EnemyBehaviour4 script.
 
     /// <summary>
-    /// Called once when the script instance is being loaded to initialize components and values.
+    /// Initializes components and starting values.
     /// </summary>
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+
+        // Get the 'body' component for this 'brain'
+        enemyBehaviour = GetComponent<EnemyBehaviour4>();
+        if (enemyBehaviour == null)
+        {
+            Debug.LogError("BatAIMap3 requires an EnemyBehaviour4 component to function.", this);
+            this.enabled = false; // Disable self if the 'body' is missing
+            return;
+        }
 
         if (rb != null)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero; // Use velocity, not linearVelocity
         }
+
+        // Ensure the main collider is a trigger for damage detection
+        GetComponent<Collider2D>().isTrigger = true;
 
         startingPoint = transform.position;
         SetNewPatrolTarget();
@@ -61,28 +82,28 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Called every frame, contains the main AI logic to decide between attacking, chasing, or patrolling.
+    /// Contains the main AI logic for deciding between attacking, chasing, or patrolling.
     /// </summary>
     void Update()
     {
-        if (isDead || isAttacking || player == null)
+        if (!enemyBehaviour.enabled || isAttacking || player == null)
         {
             return;
         }
-
-        FaceTarget(player.position);
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange)
         {
+            FaceTarget(player.position);
+
             if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackInterval)
             {
                 StartCoroutine(AttackRoutine());
             }
             else
             {
-                transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+                ChasePlayer();
             }
         }
         else
@@ -92,13 +113,13 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Handles the patrol movement logic when the player is out of detection range.
+    /// Handles the patrol movement when the player is out of range.
     /// </summary>
     void Patrol()
     {
         FaceTarget(patrolTarget);
-
-        transform.position = Vector2.MoveTowards(transform.position, patrolTarget, moveSpeed * Time.deltaTime);
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, patrolTarget, moveSpeed * Time.deltaTime);
+        rb.MovePosition(newPosition);
 
         if (Vector2.Distance(transform.position, patrolTarget) < 0.1f)
         {
@@ -107,7 +128,16 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Sets a new random patrol target within a certain distance from the starting point.
+    /// Handles the logic for chasing the player.
+    /// </summary>
+    void ChasePlayer()
+    {
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        rb.MovePosition(newPosition);
+    }
+
+    /// <summary>
+    /// Sets a new random target for patrolling.
     /// </summary>
     void SetNewPatrolTarget()
     {
@@ -116,15 +146,15 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Executes the attack action by lunging towards the player's position.
+    /// Executes the lunge attack coroutine.
     /// </summary>
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
         lastAttackTime = Time.time;
-        Vector3 lungeTargetPosition = player.position;
-        anim.SetTrigger("isAttackin");
+        anim.SetTrigger("isAttacking");
 
+        Vector3 lungeTargetPosition = player.position;
         float lungeDuration = Vector2.Distance(transform.position, lungeTargetPosition) / lungeSpeed;
         float elapsedTime = 0f;
         Vector3 startPosition = transform.position;
@@ -141,53 +171,36 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Detects collision with the player while attacking in order to deal damage.
+    /// Detects trigger collisions to deal damage to the player during an attack.
     /// </summary>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isAttacking)
+        if (!isAttacking || !other.CompareTag("Player"))
         {
             return;
         }
 
-        if (!other.CompareTag("Player"))
-        {
-            return;
-        }
-
-        IDamageable playerHealth = other.GetComponent<IDamageable>();
+        // Directly find the PlayerHealth component and deal damage
+        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(attackDamage);
         }
     }
 
+    // --- DELEGATED METHODS ---
+    // TakeDamage and Die are now removed, as EnemyBehaviour4 handles them.
+
     /// <summary>
-    /// Handles taking damage, reduces health, and calls the Die() method if necessary.
+    /// Allows the AttackStateBehaviour to set the attacking flag.
     /// </summary>
-    public void TakeDamage(float damage)
+    public void SetAttackingState(bool state)
     {
-        if (isDead) return;
-        currentHealth -= damage;
-        if (currentHealth <= 0) Die();
+        isAttacking = state;
     }
 
     /// <summary>
-    /// Initiates the death sequence, playing an animation and destroying the GameObject.
-    /// </summary>
-    void Die()
-    {
-        if (isDead) return;
-        isDead = true;
-        anim.SetTrigger("isDie");
-        rb.bodyType = RigidbodyType2D.Static;
-        this.enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 2f);
-    }
-
-    /// <summary>
-    /// Flips the sprite to face the target's position (left or right).
+    /// Flips the sprite to face the specified target.
     /// </summary>
     void FaceTarget(Vector3 target)
     {
@@ -198,21 +211,12 @@ public class BatAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Allows setting the attacking state from outside (typically for Animation Events).
-    /// </summary>
-    public void SetAttackingState(bool state)
-    {
-        isAttacking = state;
-    }
-
-    /// <summary>
-    /// Draws Gizmos in the Editor to visualize the detection and attack ranges.
+    /// Draws visualization gizmos in the Unity Editor.
     /// </summary>
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
