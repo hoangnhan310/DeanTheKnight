@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Header("Health Settings")]

@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class MinibossAIMap3 : MonoBehaviour
+public class MinibossAIMap3 : MonoBehaviour, IDamageable, IStatefulEnemy
 {
     [Header("References")]
     public Transform player;
-    public LayerMask playerLayer;
     private Animator anim;
     private Rigidbody2D rb;
 
@@ -13,17 +13,12 @@ public class MinibossAIMap3 : MonoBehaviour
     public float maxHealth = 200f;
     private float currentHealth;
     public float moveSpeed = 1.5f;
-    [Tooltip("How long the enemy is immune to damage after being hit.")]
-    public float invincibilityDuration = 0.5f;
 
     [Header("AI Behavior")]
     public float detectionRange = 10f;
-    [Tooltip("How long it takes for the boss to react and turn around.")]
-    public float turnDelay = 0.5f;
-    // --- The old 'attackRange' variable is now completely REMOVED ---
 
     [Header("Unified Attack Zone")]
-    public Transform attackPoint;
+    public Transform attackPoint; // This now holds the trigger collider
     public float attackRadius = 0.8f;
     public float normalAttackDamage = 15f;
     public float attackInterval = 2f;
@@ -33,8 +28,11 @@ public class MinibossAIMap3 : MonoBehaviour
     public float specialAttackDamage = 10f;
     public float attackComboResetTime = 5.0f;
 
-    [System.NonSerialized]
-    private int normalAttackCounter = 0;
+    [Header("Door Control")]
+    public GameObject associatedDoor;
+
+    // --- Private State Variables ---
+    [System.NonSerialized] private int normalAttackCounter = 0;
     private float lastAttackTime = 0f;
     private bool isAttacking = false;
     private bool isChasing = false;
@@ -42,10 +40,11 @@ public class MinibossAIMap3 : MonoBehaviour
     private Vector3 initialScale;
     private bool isSpecialAttack = false;
     private Coroutine resetAttackComboCoroutine;
-    private bool isInvincible = false;
-    private bool isTurning = false;
 
 
+    /// <summary>
+    /// Called once when the script instance is being loaded to initialize components and values.
+    /// </summary>
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -53,64 +52,45 @@ public class MinibossAIMap3 : MonoBehaviour
         currentHealth = maxHealth;
         initialScale = transform.localScale;
 
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        attackPoint.GetComponent<Collider2D>().enabled = false;
+
         if (player == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-            {
-                player = playerObject.transform;
-            }
-            else
-            {
-                Debug.LogError("MinibossAI: Player not found!", this);
-                this.enabled = false;
-            }
+            if (playerObject != null) player = playerObject.transform;
+            else { Debug.LogError("MinibossAI: Player not found!", this); this.enabled = false; }
         }
     }
 
+    /// <summary>
+    /// Called every frame, contains the main AI logic to decide between attacking, chasing, or standing still.
+    /// </summary>
     void Update()
     {
-        // --- Gatekeeper Section ---
-        if (isDead || player == null || isAttacking || isTurning)
-        {
-            return;
-        }
-
-        // --- Decision-Making Section ---
+        if (isDead || player == null || isAttacking) return;
         FacePlayer();
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distanceToPlayer <= detectionRange) { isChasing = true; }
+        else if (distanceToPlayer > detectionRange * 1.5f) { isChasing = false; }
 
-        // --- CHASE STATE LOGIC ---
-        // Condition to START chasing
-        if (distanceToPlayer <= detectionRange)
-        {
-            isChasing = true;
-        }
-        // Condition to STOP chasing
-        else if (distanceToPlayer > detectionRange * 1.5f)
-        {
-            isChasing = false;
-        }
-
-
-        // --- ACTION LOGIC ---
         if (isChasing)
         {
-            // Player is a target. Decide to ATTACK or CHASE.
             float attackDistance = Vector2.Distance(attackPoint.position, player.position);
 
-            // A1. Can we attack? (In range AND ready)
             if (attackDistance <= attackRadius && Time.time >= lastAttackTime + attackInterval)
             {
-                // ---- STATE: ATTACK ----
                 StopMovement();
                 AttackDecision();
             }
-            // A2. Not ready to attack, so keep chasing.
             else
             {
-                // ---- STATE: CHASE ----
                 MoveTowardsPlayer();
             }
         }
@@ -120,196 +100,189 @@ public class MinibossAIMap3 : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the physical movement towards the player and sets the walking animation.
+    /// </summary>
+    void MoveTowardsPlayer()
+    {
+        anim.SetBool("isWalking", true);
+        Vector2 targetPosition = new Vector2(player.position.x, rb.position.y);
+        Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.deltaTime);
+        rb.MovePosition(newPosition);
+    }
+
+    /// <summary>
+    /// Stops the enemy's movement by setting the walking animation to false.
+    /// </summary>
+    void StopMovement()
+    {
+        anim.SetBool("isWalking", false);
+    }
+
+    /// <summary>
+    /// A public method called by an animation event to activate the attack hitbox.
+    /// </summary>
+    public void DealDamageEvent()
+    {
+        StartCoroutine(DamageWindowRoutine());
+    }
+
+    /// <summary>
+    /// A coroutine that enables the attack collider for a short "active" window.
+    /// </summary>
+    IEnumerator DamageWindowRoutine()
+    {
+        attackPoint.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        attackPoint.GetComponent<Collider2D>().enabled = false;
+    }
+
+    /// <summary>
+    /// Called when the attack trigger collider hits another object, dealing damage to the player if appropriate.
+    /// </summary>
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (isAttacking && other.CompareTag("Player"))
+        {
+            IDamageable playerHealth = other.GetComponent<IDamageable>();
+            if (playerHealth != null)
+            {
+                float damageToDeal = isSpecialAttack ? specialAttackDamage : normalAttackDamage;
+                playerHealth.TakeDamage(damageToDeal);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Handles taking damage, reduces health, and triggers the hurt or death sequence.
+    /// </summary>
+    public void TakeDamage(float damage)
+    {
+        if (isDead || isAttacking) return;
+        currentHealth -= damage;
+        if (currentHealth <= 0) Die();
+        else anim.SetTrigger("isHurt");
+    }
+
+    /// <summary>
+    /// A coroutine that handles the visual fading of the associated door and its eventual destruction.
+    /// </summary>
+    private IEnumerator FadeOutAndDestroyDoor()
+    {
+        Tilemap doorTilemap = associatedDoor.GetComponent<Tilemap>();
+        Collider2D doorCollider = associatedDoor.GetComponent<Collider2D>();
+
+        if (doorTilemap == null)
+        {
+            Destroy(associatedDoor);
+            yield break;
+        }
+
+        if (doorCollider != null)
+        {
+            doorCollider.enabled = false;
+        }
+
+        float fadeDuration = 2f;
+        float elapsed = 0f;
+        Color initialColor = doorTilemap.color;
+
+        while (elapsed < fadeDuration)
+        {
+            float newAlpha = Mathf.Lerp(initialColor.a, 0f, elapsed / fadeDuration);
+            doorTilemap.color = new Color(initialColor.r, initialColor.g, initialColor.b, newAlpha);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(associatedDoor);
+    }
+
+    /// <summary>
+    /// Initiates the death sequence, triggering an animation and opening the associated door.
+    /// </summary>
+    void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        anim.SetTrigger("isDie");
+
+        if (associatedDoor != null)
+        {
+            StartCoroutine(FadeOutAndDestroyDoor());
+        }
+
+        StartCoroutine(DieSequenceRoutine());
+    }
+
+    /// <summary>
+    /// A coroutine that cleans up the enemy GameObject after the death animation has played.
+    /// </summary>
+    IEnumerator DieSequenceRoutine()
+    {
+        if (resetAttackComboCoroutine != null) StopCoroutine(resetAttackComboCoroutine);
+        GetComponent<Collider2D>().enabled = false;
+        if (rb != null) rb.bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(3.0f);
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Allows setting the attacking state from outside (typically for Animation Events).
+    /// </summary>
     public void SetAttackingState(bool state)
     {
         isAttacking = state;
     }
 
+    /// <summary>
+    /// Contains the logic for deciding which attack to use (normal or special).
+    /// </summary>
     void AttackDecision()
     {
         lastAttackTime = Time.time;
         anim.SetTrigger("isAttacking");
-
-        if (resetAttackComboCoroutine != null)
-        {
-            StopCoroutine(resetAttackComboCoroutine);
-        }
+        if (resetAttackComboCoroutine != null) StopCoroutine(resetAttackComboCoroutine);
         resetAttackComboCoroutine = StartCoroutine(AttackComboResetRoutine());
-
-
         if (normalAttackCounter >= attacksUntilSpecial - 1)
         {
-            isSpecialAttack = true;
-            normalAttackCounter = 0;
+            isSpecialAttack = true; normalAttackCounter = 0;
         }
         else
         {
-            isSpecialAttack = false;
-            normalAttackCounter++;
+            isSpecialAttack = false; normalAttackCounter++;
         }
     }
 
+    /// <summary>
+    /// A coroutine to reset the special attack combo counter after a period of time.
+    /// </summary>
     IEnumerator AttackComboResetRoutine()
     {
         yield return new WaitForSeconds(attackComboResetTime);
-
-        Debug.Log("Attack combo reset due to inactivity.");
         normalAttackCounter = 0;
-
         resetAttackComboCoroutine = null;
     }
 
-    public void DealDamageEvent()
-    {
-        float damageToDeal;
-        if (isSpecialAttack)
-        {
-            damageToDeal = specialAttackDamage;
-        }
-        else
-        {
-            damageToDeal = normalAttackDamage;
-        }
-
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, playerLayer);
-
-        foreach (Collider2D playerCollider in hitPlayers)
-        {
-            PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damageToDeal);
-            }
-        }
-
-        isSpecialAttack = false;
-    }
-
-
-    void MoveTowardsPlayer()
-    {
-        anim.SetBool("isWalking", true);
-        float moveDirection = (player.position.x > transform.position.x) ? 1 : -1;
-
-        rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
-
-    }
-
-    void StopMovement()
-    {
-        anim.SetBool("isWalking", false);
-
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-    }
-
-    public void TakeDamage(float damage)
-    {
-        // --- NEW "POWER ARMOR" LOGIC ---
-        // If the Golem is dead OR in the middle of an attack animation, ignore the hit.
-        if (isDead || isAttacking)
-        {
-            Debug.Log("Attack ignored! Golem is currently attacking.");
-            return;
-        }
-
-        // --- STANDARD HURT LOGIC ---
-        // If the Golem is NOT attacking, it is vulnerable.
-
-        currentHealth -= damage;
-        Debug.Log($"Golem took {damage} damage. Current Health: {currentHealth}/{maxHealth}");
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            // Still alive, so play the standard hurt animation.
-            anim.SetTrigger("isHurt");
-        }
-    }
-
-    // The master Die() function. Its only job is to set the flag and start the coroutine ONCE.
-    void Die()
-    {
-        if (isDead) return;
-        isDead = true;
-        anim.SetTrigger("isDie"); // The trigger is set here.
-        StartCoroutine(DieSequenceRoutine());
-    }
-
-
-    // --- THE FIX IS HERE ---
-    IEnumerator DieSequenceRoutine()
-    {
-        Debug.Log("DieSequence has started! This should only appear once.");
-
-        // REMOVE THIS LINE: The trigger is already set in the Die() function.
-        // anim.SetTrigger("isDie"); 
-
-        // The rest of the routine is for cleanup and destruction.
-        if (resetAttackComboCoroutine != null)
-        {
-            StopCoroutine(resetAttackComboCoroutine);
-        }
-
-        GetComponent<Collider2D>().enabled = false;
-        if (rb != null)
-        {
-            // This is a more stable way to freeze a Rigidbody on death
-            rb.bodyType = RigidbodyType2D.Static;
-        }
-
-        yield return new WaitForSeconds(3.0f);
-
-        Destroy(gameObject);
-    }
-
+    /// <summary>
+    /// Flips the enemy's sprite to face the player.
+    /// </summary>
     void FacePlayer()
     {
-        if (isTurning)
-        {
-            return;
-        }
-
-        // Determine which way the AI *should* be facing.
-        float playerDirection = Mathf.Sign(player.position.x - transform.position.x);
-
-        // Determine which way the AI *is* currently facing.
-        float currentFacingDirection = Mathf.Sign(transform.localScale.x);
-
-        // If the directions do not match, a turn is needed.
-        if (playerDirection != currentFacingDirection)
-        {
-            // Start the delayed turn coroutine instead of turning instantly.
-            StartCoroutine(DelayedTurnRoutine());
-        }
+        if (player.position.x > transform.position.x)
+            transform.localScale = new Vector3(Mathf.Abs(initialScale.x), initialScale.y, initialScale.z);
+        else
+            transform.localScale = new Vector3(-Mathf.Abs(initialScale.x), initialScale.y, initialScale.z);
     }
 
-    private IEnumerator DelayedTurnRoutine()
-    {
-        // 1. Set the flag to prevent this coroutine from running multiple times.
-        isTurning = true;
-
-        // 2. Wait for the specified "reaction time".
-        yield return new WaitForSeconds(turnDelay);
-
-        // 3. After the delay, execute the turn by flipping the local scale.
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
-        // 4. Reset the flag so the Golem can turn again later.
-        isTurning = false;
-    }
-
-    // --- UPDATED GIZMOS ---
-    // This now only draws the circles the AI actually uses.
+    /// <summary>
+    /// Draws Gizmos in the Editor to visualize the detection and attack ranges.
+    /// </summary>
     void OnDrawGizmosSelected()
     {
-        // Draw the Detection Range (Yellow)
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        // Draw the unified Attack Zone (Purple)
         if (attackPoint != null)
         {
             Gizmos.color = Color.magenta;

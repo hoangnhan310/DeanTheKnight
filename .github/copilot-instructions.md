@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, FlyingUnit, Ground, Background, Water, Water_Map3
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Water, UI, Enemy, EnemyHitBox
 - Active game object:
-  - Name: GoldGolem
+  - Name: CorruptSlime
   - Tag: Untagged
   - Layer: Enemy
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

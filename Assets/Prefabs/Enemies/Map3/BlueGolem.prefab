@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6068584477598352426}
-  m_Layer: 0
+  - component: {fileID: 9187643918693211717}
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,12 +26,48 @@ Transform:
   m_GameObject: {fileID: 5590027192535150412}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.99, y: -1.59, z: 0}
+  m_LocalPosition: {x: 2.23, y: -2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1785390147103008372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &9187643918693211717
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5590027192535150412}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.48063296}
+  m_Radius: 0.98063296
 --- !u!1 &5917139669191632335
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,9 +80,9 @@ GameObject:
   - component: {fileID: 2456447683345703927}
   - component: {fileID: 1736144255347310193}
   - component: {fileID: 7544620337947381635}
-  - component: {fileID: 3450108752051835796}
   - component: {fileID: 8483114084917797776}
-  m_Layer: 0
+  - component: {fileID: 8540788974115540341}
+  m_Layer: 8
   m_Name: BlueGolem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,9 +190,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5917139669191632335}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 150
   m_LinearDamping: 0
@@ -172,7 +209,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &3450108752051835796
+--- !u!114 &8483114084917797776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5917139669191632335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd70e2f9d39d829468d307f99e1d9389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  maxHealth: 200
+  moveSpeed: 3
+  detectionRange: 10
+  attackPoint: {fileID: 6068584477598352426}
+  attackRadius: 2
+  normalAttackDamage: 15
+  attackInterval: 2
+  attacksUntilSpecial: 3
+  specialAttackDamage: 30
+  attackComboResetTime: 5
+--- !u!60 &8540788974115540341
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +242,7 @@ PolygonCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6c9d02e8fc555c246adbda94a9379958, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -225,41 +285,7 @@ PolygonCollider2D:
       - {x: -1.5833334, y: 0.45833334}
       - {x: -1.6666667, y: 0.20833334}
       - {x: -1.6666667, y: -1.625}
-      - {x: 1.5925701, y: -1.6990991}
-      - {x: 1.6562042, y: -0.56485724}
-      - {x: 1.6560059, y: -0.5466347}
-      - {x: 1.6560009, y: -0.5466347}
-      - {x: 1.2590332, y: -0.54557633}
-      - {x: 1.199707, y: -0.15552497}
-      - {x: 1.1177673, y: 0.2241621}
-      - {x: 1.0954437, y: 0.6908016}
-      - {x: 1.1155701, y: 1.3218572}
+      - {x: 1.6666667, y: -1.625}
+      - {x: 1.6666667, y: 0.125}
+      - {x: 1.25, y: 1.375}
   m_UseDelaunayMesh: 0
---- !u!114 &8483114084917797776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5917139669191632335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd70e2f9d39d829468d307f99e1d9389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  maxHealth: 200
-  moveSpeed: 1.5
-  invincibilityDuration: 0.5
-  detectionRange: 10
-  turnDelay: 2
-  attackPoint: {fileID: 6068584477598352426}
-  attackRadius: 2
-  normalAttackDamage: 15
-  attackInterval: 2
-  attacksUntilSpecial: 3
-  specialAttackDamage: 30
-  attackComboResetTime: 5

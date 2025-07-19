@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8032206847669850179}
   - component: {fileID: 5422513255420984723}
   - component: {fileID: 2827061350215016661}
-  m_Layer: 0
+  - component: {fileID: 4902808393763190201}
+  m_Layer: 8
   m_Name: CorruptSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +33,8 @@ Transform:
   m_LocalPosition: {x: -136.32, y: -4.47, z: 0.06516376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3645535513825179406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &351367101900511737
@@ -120,9 +122,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7887998977179692133}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
@@ -190,8 +192,8 @@ PolygonCollider2D:
       - {x: -0.7533671, y: 0.371171}
       - {x: -0.7457072, y: -0.34053946}
       - {x: -0.5929718, y: -0.47628593}
-      - {x: -0.5416667, y: -0.5979738}
-      - {x: 0.5036011, y: -0.59099865}
+      - {x: -0.4191844, y: -0.5475402}
+      - {x: 0.47477722, y: -0.5513725}
       - {x: 0.5097351, y: -0.51160383}
       - {x: 0.58900964, y: -0.50498915}
       - {x: 0.59306335, y: -0.42560148}
@@ -202,3 +204,96 @@ PolygonCollider2D:
       - {x: 0.557312, y: 0.42764378}
       - {x: 0.41571558, y: 0.582881}
   m_UseDelaunayMesh: 0
+--- !u!114 &4902808393763190201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7887998977179692133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c280c3f27cf3349aa28cc73c626066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  auraVFX: {fileID: 0}
+  attackPoint: {fileID: 3645535513825179406}
+  maxHealth: 40
+  detectionRange: 10
+  attackRange: 2
+  bounceHeight: 0.5
+  bounceDuration: 1
+  bounceDistance: 2
+  bounceInterval: 5
+  attackInterval: 4
+  explosionRadius: 3
+  explosionDamage: 25
+--- !u!1 &7952041441521452564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3645535513825179406}
+  - component: {fileID: 3171406987701073090}
+  m_Layer: 8
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3645535513825179406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952041441521452564}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8799329629428950218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &3171406987701073090
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952041441521452564}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1.25

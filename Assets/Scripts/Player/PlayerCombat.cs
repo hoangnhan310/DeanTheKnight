@@ -75,13 +75,19 @@ public class PlayerCombat : MonoBehaviour
                 Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
                 // enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
 
-                MinibossAIMap3 enemyAI = enemy.GetComponentInParent<MinibossAIMap3>();
-                if (enemyAI != null)
+                // enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
+                // enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
+
+                foreach (Collider2D enemyCollider in hitEnemies)
                 {
-                    enemyAI.TakeDamage(currentAttackDamage);
+                    // Try to get any component that follows the IDamageable contract.
+                    IDamageable damageable = enemyCollider.GetComponentInParent<IDamageable>();
+                    if (damageable != null)
+                    {
+                        // If we found one, call its TakeDamage method.
+                        damageable.TakeDamage(currentAttackDamage);
+                    }
                 }
-                enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
-                enemy.GetComponentInParent<EnemyBehaviour>().TakeDamage(currentAttackDamage);
             }
 
             // Reset timer
