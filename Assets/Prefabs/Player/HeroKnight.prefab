@@ -221,14 +221,10 @@ GameObject:
   - component: {fileID: 5918187487138439518}
   - component: {fileID: 7431689474658906066}
   - component: {fileID: 4741633104139320105}
-<<<<<<< HEAD
   - component: {fileID: 872138244632776689}
   - component: {fileID: 5964215918936189743}
   - component: {fileID: 3436220637287069222}
-  m_Layer: 0
-=======
   m_Layer: 3
->>>>>>> 40fda773e604654dae2f8b5a44ebf75d2f152ac7
   m_Name: HeroKnight
   m_TagString: Player
   m_Icon: {fileID: 0}
