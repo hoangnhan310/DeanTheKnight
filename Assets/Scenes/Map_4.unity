@@ -1341,16 +1341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00a86ee287d773458f7989bd7b0c730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  chaseSpeed: 4
-  chaseRadius: 4
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  patrolDistance: 5
-  showDetectionRadius: 1
-  attackZone: {fileID: 1244294915}
-  _hasTarget: 0
 --- !u!1 &627255114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,17 +1543,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ad6cf1a9b83d1479525f05280d84d3, type: 3}
---- !u!114 &685686108 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6446642166878017773, guid: 98ff205a98f3ee447879a97d360fbdd1, type: 3}
-  m_PrefabInstance: {fileID: 4445605158273993528}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dff707ff7112414eb94694194fc6abd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &695774985
 GameObject:
   m_ObjectHideFlags: 0
@@ -8339,6 +8318,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3902740710293681628, guid: 1e95812d45e061a429566d1caafbb455, type: 3}
   m_PrefabInstance: {fileID: 222208451}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1242118787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1338991333626760577, guid: 1e95812d45e061a429566d1caafbb455, type: 3}
+  m_PrefabInstance: {fileID: 222208451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910b19a4de97d14299e8b3143388ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1244294912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8992,16 +8982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00a86ee287d773458f7989bd7b0c730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  chaseSpeed: 4
-  chaseRadius: 4
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  patrolDistance: 5
-  showDetectionRadius: 1
-  attackZone: {fileID: 1631233728}
-  _hasTarget: 0
 --- !u!1 &1291496426
 GameObject:
   m_ObjectHideFlags: 0
@@ -56433,6 +56413,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4741633104139320105, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
+      propertyPath: staminaBar
+      value: 
+      objectReference: {fileID: 1242118787}
+    - target: {fileID: 4741633104139320105, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: enemyLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
@@ -57064,16 +57048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00a86ee287d773458f7989bd7b0c730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  chaseSpeed: 4
-  chaseRadius: 4
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  patrolDistance: 5
-  showDetectionRadius: 1
-  attackZone: {fileID: 1291496428}
-  _hasTarget: 0
 --- !u!114 &1920706408 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4825927563301299647, guid: 1e95812d45e061a429566d1caafbb455, type: 3}
@@ -57786,6 +57760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00a86ee287d773458f7989bd7b0c730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   walkSpeed: 3
   chaseSpeed: 4
   chaseRadius: 4
@@ -57796,6 +57771,8 @@ MonoBehaviour:
   showDetectionRadius: 1
   attackZone: {fileID: 685686108}
   _hasTarget: 0
+=======
+>>>>>>> 416666c7ead81cbf10ee81596073ce0a8df4066f
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
