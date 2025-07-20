@@ -17,11 +17,18 @@ public class PlayerHealth : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
+        // Đọc cấp nâng cấp máu từ PlayerPrefs
+        int healthUpgrades = PlayerPrefs.GetInt("HealthUpgrades", 0);
+        int healthPerUpgrade = 20; // Giá trị giống bên UpgradeUI
+
+        maxHealth += healthUpgrades * healthPerUpgrade;
+
         // Reset máu về tối đa mỗi lần bắt đầu
         currentHealth = maxHealth;
 
         healthBar?.SetHealth(currentHealth, maxHealth);
     }
+
 
 
     public void TakeDamage(float amount)
