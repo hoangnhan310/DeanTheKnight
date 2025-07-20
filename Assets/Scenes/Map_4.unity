@@ -1644,7 +1644,7 @@ Transform:
   m_GameObject: {fileID: 695774985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.99, y: -0.75, z: -10}
+  m_LocalPosition: {x: 99.32, y: 4.62, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1737,7 +1737,7 @@ Transform:
   m_GameObject: {fileID: 709422203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.99, y: -0.75, z: -10}
+  m_LocalPosition: {x: 99.32, y: 4.62, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8448,7 +8448,7 @@ Transform:
   m_GameObject: {fileID: 1246731599}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.91, y: -0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8513,14 +8513,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.4768524, y: 2.6025481}
-      - {x: 0.28380585, y: 2.5667143}
-      - {x: 2.2367096, y: 1.0624558}
+    - - {x: 3.3678436, y: 1.6598319}
+      - {x: 1.8005905, y: 2.1978714}
+      - {x: 1.6192322, y: 2.1013365}
+      - {x: 1.7450104, y: 1.646116}
+      - {x: 2.9044266, y: 0.96128726}
       - {x: 2.66253, y: 0.3404396}
       - {x: 3.277182, y: -0.6204821}
-      - {x: 3.778534, y: -1.6890614}
-      - {x: 4.967392, y: -1.3073945}
-      - {x: 5.6468062, y: 0.10223627}
+      - {x: 3.4750214, y: -0.7178378}
+      - {x: 3.8545303, y: -1.2062263}
+      - {x: 4.635118, y: -0.18103838}
       - {x: 4.7217627, y: 1.2202692}
   m_UseDelaunayMesh: 0
 --- !u!1 &1250843539
@@ -8639,7 +8641,7 @@ GameObject:
   - component: {fileID: 1254666648}
   - component: {fileID: 1254666650}
   - component: {fileID: 1254666649}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: EnemyAttackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8720,14 +8722,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.954979, y: 0.6193531}
+    - - {x: 1.9413528, y: 0.2650681}
       - {x: 1.4620056, y: 0.39572275}
       - {x: 0.15299225, y: 0.30058354}
       - {x: -0.95105654, y: 0.30901697}
       - {x: -0.6752104, y: -0.00031656027}
       - {x: 0.5198761, y: 0.0145254135}
-      - {x: 1.987915, y: 0.09651226}
-      - {x: 2.2406073, y: 0.26530355}
+      - {x: 1.3474808, y: 0.06925964}
+      - {x: 1.545661, y: 0.060908437}
   m_UseDelaunayMesh: 0
 --- !u!1 &1254824803
 GameObject:
@@ -8881,17 +8883,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.17013979, y: 0.063334584}
+  m_Offset: {x: -0.17013979, y: -0.010460138}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.5, y: 3.5}
+    oldSize: {x: 2.8, y: 2.8}
     newSize: {x: 1.0625, y: 2.5625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.4027796, y: 3.3810527}
+  m_Size: {x: 1.4027796, y: 2.7192888}
   m_EdgeRadius: 0
 --- !u!114 &1254824808
 MonoBehaviour:
@@ -8910,7 +8912,7 @@ MonoBehaviour:
   chaseRadius: 4
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   patrolDistance: 5
   showDetectionRadius: 0
   attackZone: {fileID: 1631233728}
@@ -56448,11 +56450,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.99
+      value: 99.32
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.95
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57546,7 +57548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1067382337050077068, guid: 84fce15c8124cfa4781ce5d17640da45, type: 3}
       propertyPath: playerLayer.m_Bits
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067382337050077068, guid: 84fce15c8124cfa4781ce5d17640da45, type: 3}
       propertyPath: showDetectionRadius
@@ -57661,19 +57663,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3926962894196948422, guid: 98ff205a98f3ee447879a97d360fbdd1, type: 3}
       propertyPath: m_Size.x
-      value: 2.134781
+      value: 1.9596634
       objectReference: {fileID: 0}
     - target: {fileID: 3926962894196948422, guid: 98ff205a98f3ee447879a97d360fbdd1, type: 3}
       propertyPath: m_Offset.x
-      value: -0.22161102
+      value: -0.30916977
       objectReference: {fileID: 0}
     - target: {fileID: 4940992405985834187, guid: 98ff205a98f3ee447879a97d360fbdd1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 69.51
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 4940992405985834187, guid: 98ff205a98f3ee447879a97d360fbdd1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.44
+      value: -0.69
       objectReference: {fileID: 0}
     - target: {fileID: 4940992405985834187, guid: 98ff205a98f3ee447879a97d360fbdd1, type: 3}
       propertyPath: m_LocalPosition.z
