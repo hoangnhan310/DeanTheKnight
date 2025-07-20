@@ -71,9 +71,6 @@ public class PlayerCombat : MonoBehaviour
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                // TODO: Implement enemy damage handling
-                Debug.Log($"Hit {enemy.name} with attack {currentAttack} for {currentAttackDamage} damage.");
-                //enemy.GetComponentInParent<KnockBack>().PlayFeedBack(body2d.gameObject);
                 enemy.GetComponentInParent<EnemyBehaviour4>().TakeDamage(currentAttackDamage);
             }
 

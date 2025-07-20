@@ -8354,7 +8354,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1847065389}
-  - {fileID: 669258649}
   m_Father: {fileID: 587544817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &844723608
@@ -8511,10 +8510,10 @@ MonoBehaviour:
   chaseRadius: 4
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   patrolDistance: 5
   showDetectionRadius: 1
-  attackZone: {fileID: 669258650}
+  attackZone: {fileID: 0}
   _hasTarget: 0
 --- !u!1 &885417190
 GameObject:
