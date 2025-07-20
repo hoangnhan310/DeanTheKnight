@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI, Enemy, EnemyHitBox
 - Active game object:
-  - Name: HeroKnight
-  - Tag: Player
-  - Layer: 3
+  - Name: BlueGolem
+  - Tag: Untagged
+  - Layer: Enemy
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

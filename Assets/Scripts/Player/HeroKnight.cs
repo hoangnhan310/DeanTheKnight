@@ -21,7 +21,6 @@ public class HeroKnight : MonoBehaviour
     private Sensor_HeroKnight groundSensor;
     private Sensor_HeroKnight wallSensorR1;
     private Sensor_HeroKnight wallSensorR2;
-    private Sensor_HeroKnight enemySensor;
     private PlayerState playerState;
     #endregion
 
@@ -39,7 +38,6 @@ public class HeroKnight : MonoBehaviour
         groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
         wallSensorR1 = transform.Find("WallSensor_R1").GetComponent<Sensor_HeroKnight>();
         wallSensorR2 = transform.Find("WallSensor_R2").GetComponent<Sensor_HeroKnight>();
-        enemySensor = transform.Find("EnemySensor").GetComponent<Sensor_HeroKnight>();
         playerState = GetComponent<PlayerState>();
     }
 
@@ -57,11 +55,7 @@ public class HeroKnight : MonoBehaviour
     {
         if (!playerState.IsRolling)
         {
-            if (enemySensor.State() && (inputX * playerState.FacingDirection > 0))
-            {
-                body2d.linearVelocity = new Vector2(0f, body2d.linearVelocityY);
-            }
-            else
+            if (!playerState.IsRolling)
             {
                 body2d.linearVelocity = new Vector2(inputX * moveSpeed, body2d.linearVelocityY);
             }
