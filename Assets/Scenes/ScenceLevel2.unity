@@ -143,7 +143,7 @@ PrefabInstance:
       propertyPath: 'dialogue.sentences.Array.data[0]'
       value: 'Shift (Keyboard): Roll to dodge attacks or quickly reposition
 
-        
+
 
         Tip:
         Use roll to pass through traps or avoid projectiles
@@ -2845,6 +2845,8 @@ GameObject:
   - component: {fileID: 514274613}
   - component: {fileID: 514274612}
   - component: {fileID: 514274616}
+  - component: {fileID: 514274617}
+  - component: {fileID: 514274618}
   m_Layer: 0
   m_Name: Enemy Rat
   m_TagString: Untagged
@@ -2873,7 +2875,6 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 1478393293}
   triggerArea: {fileID: 100463578}
-  maxHealth: 100
 --- !u!95 &514274613
 Animator:
   serializedVersion: 7
@@ -2990,6 +2991,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &514274617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514274611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 60
+--- !u!114 &514274618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514274611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3122,7 +3149,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.381428, y: -2.9709625, z: -10}
+  m_LocalPosition: {x: -7.475881, y: -2.9869628, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7361,6 +7388,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1375556724835729429, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2380170104445066036, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.58
@@ -7391,12 +7422,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741633104139320105, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: enemyLayers.m_Bits
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5918187487138439518, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1928864378}
+    - target: {fileID: 5918187487138439518, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
+      propertyPath: maxHealth
+      value: 1e+9
+      objectReference: {fileID: 0}
     - target: {fileID: 5918187487138439518, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: defeatedUI
       value: 
@@ -7415,11 +7450,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.36
+      value: -7.459
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.06
+      value: -5.076
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7456,6 +7491,10 @@ PrefabInstance:
     - target: {fileID: 8631832243428726876, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7652,10 +7691,10 @@ PrefabInstance:
       propertyPath: 'dialogue.sentences.Array.data[0]'
       value: 'Left Mouse Button: Perform a basic attack
 
-        
 
-        Tip:
-        Use it to defeat enemies or break objects
+
+        Tip: Use it to
+        defeat enemies or break objects
 
         (Press F to continue)'
       objectReference: {fileID: 0}
@@ -7748,7 +7787,7 @@ GameObject:
   - component: {fileID: 942602268}
   - component: {fileID: 942602269}
   - component: {fileID: 942602270}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8119,7 +8158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1074065112}
   - component: {fileID: 1074065113}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8191,6 +8230,8 @@ GameObject:
   - component: {fileID: 1077233693}
   - component: {fileID: 1077233692}
   - component: {fileID: 1077233696}
+  - component: {fileID: 1077233697}
+  - component: {fileID: 1077233698}
   m_Layer: 0
   m_Name: 'Enemy Black Canines '
   m_TagString: Untagged
@@ -8219,7 +8260,6 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 234331200}
   triggerArea: {fileID: 1095747500}
-  maxHealth: 100
 --- !u!95 &1077233693
 Animator:
   serializedVersion: 7
@@ -8335,6 +8375,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1077233697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077233691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 60
+--- !u!114 &1077233698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077233691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &1079851529
 GameObject:
   m_ObjectHideFlags: 0
@@ -8467,7 +8533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1113268747}
   - component: {fileID: 1113268748}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8926,13 +8992,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1271459372}
   - component: {fileID: 1271459373}
+  - component: {fileID: 1271459374}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1271459372
 Transform:
   m_ObjectHideFlags: 0
@@ -8942,7 +9009,7 @@ Transform:
   m_GameObject: {fileID: 1271459371}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.009, y: 0.233, z: 0}
+  m_LocalPosition: {x: -0.05, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8983,8 +9050,21 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.42, y: 0.81}
+  m_Size: {x: 0.68, y: 1.35}
   m_Direction: 0
+--- !u!114 &1271459374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271459371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &1273462568
 GameObject:
   m_ObjectHideFlags: 0
@@ -8995,13 +9075,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1273462569}
   - component: {fileID: 1273462570}
+  - component: {fileID: 1273462571}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1273462569
 Transform:
   m_ObjectHideFlags: 0
@@ -9011,7 +9092,7 @@ Transform:
   m_GameObject: {fileID: 1273462568}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.009, y: 0.233, z: 0}
+  m_LocalPosition: {x: 0.06, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9054,6 +9135,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.42, y: 0.81}
   m_Direction: 0
+--- !u!114 &1273462571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273462568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &1299715071
 GameObject:
   m_ObjectHideFlags: 0
@@ -9816,6 +9910,8 @@ GameObject:
   - component: {fileID: 1360560692}
   - component: {fileID: 1360560691}
   - component: {fileID: 1360560695}
+  - component: {fileID: 1360560696}
+  - component: {fileID: 1360560697}
   m_Layer: 0
   m_Name: Enemy Slime
   m_TagString: Untagged
@@ -9844,7 +9940,6 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 637300598}
   triggerArea: {fileID: 631560106}
-  maxHealth: 100
 --- !u!95 &1360560692
 Animator:
   serializedVersion: 7
@@ -9961,6 +10056,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1360560696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360560689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 60
+--- !u!114 &1360560697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360560689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &1387337670
 GameObject:
   m_ObjectHideFlags: 0
@@ -9971,13 +10092,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1387337671}
   - component: {fileID: 1387337672}
+  - component: {fileID: 1387337673}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1387337671
 Transform:
   m_ObjectHideFlags: 0
@@ -10030,6 +10152,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.42, y: 0.81}
   m_Direction: 0
+--- !u!114 &1387337673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387337670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &1461364830
 GameObject:
   m_ObjectHideFlags: 0
@@ -10043,6 +10178,8 @@ GameObject:
   - component: {fileID: 1461364832}
   - component: {fileID: 1461364831}
   - component: {fileID: 1461364835}
+  - component: {fileID: 1461364836}
+  - component: {fileID: 1461364837}
   m_Layer: 0
   m_Name: 'Enemy Brown Canines '
   m_TagString: Untagged
@@ -10071,7 +10208,6 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 13510871}
   triggerArea: {fileID: 1821114143}
-  maxHealth: 100
 --- !u!95 &1461364832
 Animator:
   serializedVersion: 7
@@ -10186,6 +10322,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1461364836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461364830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 60
+--- !u!114 &1461364837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461364830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &1478393293
 GameObject:
   m_ObjectHideFlags: 0
@@ -10288,7 +10450,7 @@ GameObject:
   - component: {fileID: 1502006776}
   - component: {fileID: 1502006778}
   - component: {fileID: 1502006777}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10421,13 +10583,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1541195403}
   - component: {fileID: 1541195404}
+  - component: {fileID: 1541195405}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1541195403
 Transform:
   m_ObjectHideFlags: 0
@@ -10436,13 +10599,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541195402}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.009, y: 0.233, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.843113, w: 0.53773636}
+  m_LocalPosition: {x: -0.572, y: 0.241, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1461364834}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 114.941}
 --- !u!70 &1541195404
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -10480,6 +10643,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.42, y: 0.81}
   m_Direction: 0
+--- !u!114 &1541195405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541195402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1001 &1560677241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10692,7 +10868,7 @@ GameObject:
   - component: {fileID: 1582621802}
   - component: {fileID: 1582621804}
   - component: {fileID: 1582621803}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10908,13 +11084,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1702006075}
   - component: {fileID: 1702006076}
+  - component: {fileID: 1702006077}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1702006075
 Transform:
   m_ObjectHideFlags: 0
@@ -10924,7 +11101,7 @@ Transform:
   m_GameObject: {fileID: 1702006074}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.009, y: 0.233, z: 0}
+  m_LocalPosition: {x: -0.31, y: 0.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10965,8 +11142,21 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.42, y: 0.81}
+  m_Size: {x: 0.46, y: 0.81}
   m_Direction: 0
+--- !u!114 &1702006077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702006074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &1702853194
 GameObject:
   m_ObjectHideFlags: 0
@@ -14709,7 +14899,7 @@ Transform:
   m_GameObject: {fileID: 1752434724}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.381428, y: -2.9709625, z: -10}
+  m_LocalPosition: {x: -7.475881, y: -2.9869628, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14959,6 +15149,8 @@ GameObject:
   - component: {fileID: 1820894389}
   - component: {fileID: 1820894392}
   - component: {fileID: 1820894393}
+  - component: {fileID: 1820894394}
+  - component: {fileID: 1820894395}
   m_Layer: 0
   m_Name: Enemy MushRoom
   m_TagString: Untagged
@@ -15056,7 +15248,6 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 764409272}
   triggerArea: {fileID: 1956579714}
-  maxHealth: 100
 --- !u!114 &1820894393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15102,6 +15293,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1820894394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820894388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 60
+--- !u!114 &1820894395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820894388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &1821114143
 GameObject:
   m_ObjectHideFlags: 0
@@ -44825,6 +45042,8 @@ GameObject:
   - component: {fileID: 1882159334}
   - component: {fileID: 1882159333}
   - component: {fileID: 1882159337}
+  - component: {fileID: 1882159338}
+  - component: {fileID: 1882159339}
   m_Layer: 0
   m_Name: Enemy Crab
   m_TagString: Untagged
@@ -44853,7 +45072,6 @@ MonoBehaviour:
   inRange: 0
   hotZone: {fileID: 1162672564}
   triggerArea: {fileID: 1167127702}
-  maxHealth: 100
 --- !u!95 &1882159334
 Animator:
   serializedVersion: 7
@@ -44969,6 +45187,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1882159338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882159331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 60
+--- !u!114 &1882159339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882159331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &1898209414
 GameObject:
   m_ObjectHideFlags: 0
@@ -45096,7 +45340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8390638078187285632, guid: 1e95812d45e061a429566d1caafbb455, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45501,13 +45745,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2037675610}
   - component: {fileID: 2037675611}
+  - component: {fileID: 2037675612}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2037675610
 Transform:
   m_ObjectHideFlags: 0
@@ -45560,6 +45805,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.42, y: 0.81}
   m_Direction: 0
+--- !u!114 &2037675612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037675609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &2053823852
 GameObject:
   m_ObjectHideFlags: 0
@@ -45688,7 +45946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2135518268}
   - component: {fileID: 2135518269}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
