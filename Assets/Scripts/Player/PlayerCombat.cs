@@ -19,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
     private Animator animator;
     private Rigidbody2D body2d;
     private PlayerState playerState;
-
+    [SerializeField] private StaminaBar staminaBar;
     private int currentAttack = 0;
     private float timeSinceAttack = 0.0f;
 
@@ -31,7 +31,17 @@ public class PlayerCombat : MonoBehaviour
         animator = GetComponent<Animator>();
         body2d = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
+
+        // Get damage
+        int damageLevel = PlayerPrefs.GetInt("DamageUpgrades", 0);
+        float extraDamage = damageLevel * 5f; // mỗi cấp +5 sát thương
+
+        // Increase damage
+        attack1Damage += extraDamage;
+        attack2Damage += extraDamage;
+        attack3Damage += extraDamage;
     }
+
 
     void Update()
     {
@@ -44,6 +54,22 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed && timeSinceAttack > attackRate && !playerState.IsRolling)
         {
+            if (staminaBar == null)
+            {
+                Debug.LogWarning("StaminaBar chưa được gán trong PlayerCombat!");
+                return;
+            }
+
+            float staminaCost = 35f;
+
+            if (staminaBar.CurrentStamina < staminaCost)
+            {
+                Debug.Log("Không đủ stamina để tấn công!");
+                return;
+            }
+
+            staminaBar.UseStamina(staminaCost);
+
             currentAttack++;
 
             // Loop back to one after third attack
