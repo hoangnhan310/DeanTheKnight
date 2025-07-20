@@ -110,7 +110,8 @@ GameObject:
   - component: {fileID: 6245512587375295700}
   - component: {fileID: 1136056460418448146}
   - component: {fileID: 8734158960768008144}
-  m_Layer: 0
+  - component: {fileID: 1809953312147816907}
+  m_Layer: 8
   m_Name: FlyingEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,3 +228,16 @@ MonoBehaviour:
   yOffset: 1
   detectDistance: 7
   stopDistance: 1
+--- !u!114 &1809953312147816907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841297727198228052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}

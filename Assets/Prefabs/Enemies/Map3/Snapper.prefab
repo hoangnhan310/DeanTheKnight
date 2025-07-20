@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1000402728746512096}
   - component: {fileID: 1031611825999036636}
   - component: {fileID: 5522073711524502731}
+  - component: {fileID: 3681586031186467038}
   m_Layer: 8
   m_Name: Snapper
   m_TagString: Untagged
@@ -234,6 +235,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
+--- !u!114 &3681586031186467038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820924250758239262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &3907979658134871595
 GameObject:
   m_ObjectHideFlags: 0

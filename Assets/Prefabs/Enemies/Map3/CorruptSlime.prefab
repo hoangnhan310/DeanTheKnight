@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2827061350215016661}
   - component: {fileID: 4902808393763190201}
   - component: {fileID: 536724385064134318}
+  - component: {fileID: 1795383453099535050}
   m_Layer: 8
   m_Name: CorruptSlime
   m_TagString: Untagged
@@ -243,6 +244,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+--- !u!114 &1795383453099535050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7887998977179692133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &7952041441521452564
 GameObject:
   m_ObjectHideFlags: 0
