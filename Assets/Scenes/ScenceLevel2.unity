@@ -127,66 +127,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 165477430341317543, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_SortingLayer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 165477430341317543, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 697446365
-      objectReference: {fileID: 0}
-    - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: dialogue.sentences.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: 'dialogue.sentences.Array.data[0]'
-      value: 'Shift (Keyboard): Roll to dodge attacks or quickly reposition
-
-
-
-        Tip:
-        Use roll to pass through traps or avoid projectiles
-
-        (Press F to
-        continue)'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: 'dialogue.sentences.Array.data[1]'
-      value: "Right Mouse Button: Block enemy attacks\r\n\r\nTip: Timing matters
-        \u2013 block right before the hit to reduce damage\r\n(Press F to continue)"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: 'dialogue.sentences.Array.data[2]'
-      value: "Right Mouse Button: Block enemy attacks\r\n\r\nTip: Timing matters
-        \u2013 block right before the hit to reduce damage\r\n(Press F to continue)"
-      objectReference: {fileID: 0}
     - target: {fileID: 2396234575337153080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_Name
       value: UI Instruction (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
+    - target: {fileID: 3171268784767628190, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1852.1324
       objectReference: {fileID: 0}
-    - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
+    - target: {fileID: 3171268784767628190, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -1103.562
       objectReference: {fileID: 0}
-    - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
-      propertyPath: m_LocalRotation.z
+    - target: {fileID: 3685297202709071795, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8813426951882798490, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
@@ -3153,7 +3107,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.475881, y: -2.9869628, z: -10}
+  m_LocalPosition: {x: -7.4800415, y: -2.9869628, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7434,7 +7388,7 @@ PrefabInstance:
       objectReference: {fileID: 1928864378}
     - target: {fileID: 5918187487138439518, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: maxHealth
-      value: 1e+9
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5918187487138439518, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: defeatedUI
@@ -7695,21 +7649,35 @@ PrefabInstance:
       propertyPath: 'dialogue.sentences.Array.data[0]'
       value: 'Left Mouse Button: Perform a basic attack
 
-
-
-        Tip: Use it to
-        defeat enemies or break objects
+        Tip: Use it to defeat
+        enemies or break objects
 
         (Press F to continue)'
       objectReference: {fileID: 0}
     - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: 'dialogue.sentences.Array.data[1]'
-      value: "Right Mouse Button: Block enemy attacks\r\n\r\nTip: Timing matters
-        \u2013 block right before the hit to reduce damage\r\n(Press F to continue)"
+      value: 'Right Mouse Button: Block enemy attacks
+
+        Tip: Timing to block
+        right before the hit to reduce damage
+
+        (Press F to continue)'
       objectReference: {fileID: 0}
     - target: {fileID: 2396234575337153080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_Name
       value: UI Instruction (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171268784767628190, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1852.1324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171268784767628190, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -1103.562
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685297202709071795, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7734,6 +7702,23 @@ PrefabInstance:
     - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807489108508308944, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_text
+      value: 'Right Mouse Button: Block enemy attacks
+
+        Tip: Timing to block
+        right before the hit to reduce damage
+
+        (Press F to continue)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807489108508308944, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_fontSize
+      value: 75.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807489108508308944, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8813426951882798490, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10762,7 +10747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6663702555363532182, guid: 066f94ce795aae842854d038c02f4a01, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14903,7 +14888,7 @@ Transform:
   m_GameObject: {fileID: 1752434724}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.475881, y: -2.9869628, z: -10}
+  m_LocalPosition: {x: -7.4800415, y: -2.9869628, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15196,10 +15181,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 15
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -15243,8 +15228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71e2ca061aeb3c4384886d9589c4249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 1.3
-  moveSpeed: 2
+  attackDistance: 1.2
+  moveSpeed: 1.5
   timer: 0.5
   leftLimit: {fileID: 900926609}
   rightLimit: {fileID: 1872415822}
@@ -44921,17 +44906,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: 'dialogue.sentences.Array.data[1]'
-      value: "Move Left: Press A or \u2190 Left Arrow\r\n\r\nMove Right: Press D
-        or \u2192 Right Arrow\r\n(Press F to continue)"
+      value: "Move Left: Press A or \u2190 Left Arrow\r\n\rMove Right: Press D or
+        \u2192 Right Arrow\r\n(Press F to continue)"
       objectReference: {fileID: 0}
     - target: {fileID: 2146629884486316080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: 'dialogue.sentences.Array.data[2]'
-      value: "Press W, \u2191 Up Arrow, or Space to jump\r\n\r\nYou can jump twice
-        in mid-air (Double Jump)\r\n(Press F to continue)"
+      value: "Press W, \u2191 Up Arrow, or Space to jump\r\nYou can jump twice in
+        mid-air (Double Jump)\r\n(Press F to continue)"
       objectReference: {fileID: 0}
     - target: {fileID: 2396234575337153080, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_Name
       value: UI Instruction
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171268784767628190, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1852.1324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171268784767628190, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -1103.562
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685297202709071795, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6673069094125638218, guid: 9836b8eabf365154a84442422b1f6f97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45341,10 +45338,6 @@ PrefabInstance:
     - target: {fileID: 8390638078187285632, guid: 1e95812d45e061a429566d1caafbb455, type: 3}
       propertyPath: m_Name
       value: HUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 8390638078187285632, guid: 1e95812d45e061a429566d1caafbb455, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45807,7 +45800,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.42, y: 0.81}
+  m_Size: {x: 0.61, y: 1.7}
   m_Direction: 0
 --- !u!114 &2037675612
 MonoBehaviour:
@@ -45950,6 +45943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2135518268}
   - component: {fileID: 2135518269}
+  - component: {fileID: 2135518270}
   m_Layer: 8
   m_Name: Enemy_Collider
   m_TagString: Untagged
@@ -46006,9 +46000,55 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.004306853, y: -0.02233541}
-  m_Size: {x: 0.42, y: 1.0209467}
+  m_Offset: {x: -0.004306853, y: -0.0015691519}
+  m_Size: {x: 0.42, y: 0.9794142}
   m_Direction: 0
+--- !u!61 &2135518270
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135518267}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.020162582, y: -0.24751687}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.59531784, y: 0.50496626}
+  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
