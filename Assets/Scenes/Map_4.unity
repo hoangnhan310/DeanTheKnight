@@ -57760,19 +57760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00a86ee287d773458f7989bd7b0c730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  walkSpeed: 3
-  chaseSpeed: 4
-  chaseRadius: 4
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  patrolDistance: 5
-  showDetectionRadius: 1
-  attackZone: {fileID: 685686108}
-  _hasTarget: 0
-=======
->>>>>>> 416666c7ead81cbf10ee81596073ce0a8df4066f
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
