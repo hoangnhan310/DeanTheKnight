@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 2502076921996555495}
   - component: {fileID: -2396272017947141972}
   - component: {fileID: 649317865976302064}
+  - component: {fileID: 8460768999600550428}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Untagged
@@ -285,3 +286,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slashSound: {fileID: 8300000, guid: d380aeed69f7f2b4b9ac47c9826e208e, type: 3}
+--- !u!50 &8460768999600550428
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277466558163787476}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 166
+  m_LinearDamping: 1.21
+  m_AngularDamping: 0.05
+  m_GravityScale: 34
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

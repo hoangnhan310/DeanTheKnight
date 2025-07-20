@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5662387399786328273}
   - component: {fileID: 8412418520554835779}
   - component: {fileID: 8913986572827808747}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 166
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
