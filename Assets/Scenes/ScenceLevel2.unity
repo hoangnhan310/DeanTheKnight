@@ -15230,7 +15230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDistance: 1.2
   moveSpeed: 1.5
-  timer: 0.5
+  timer: 1
   leftLimit: {fileID: 900926609}
   rightLimit: {fileID: 1872415822}
   target: {fileID: 0}
@@ -45809,7 +45809,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037675609}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e806bbd13cf2834fbbeb6bd74ecc7e5, type: 3}
   m_Name: 
@@ -46037,7 +46037,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.020162582, y: -0.24751687}
+  m_Offset: {x: -0.011422157, y: -0.24751687}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -46047,7 +46047,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.59531784, y: 0.50496626}
+  m_Size: {x: 0.4088688, y: 0.50496626}
   m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
