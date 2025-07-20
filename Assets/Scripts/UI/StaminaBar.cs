@@ -5,7 +5,7 @@ public class StaminaBar : MonoBehaviour
 {
     [SerializeField] private Image fillImage;
     [SerializeField] private float maxStamina = 100f;
-    [SerializeField] private float regenRate = 20f; // lượng stamina hồi mỗi giây
+    [SerializeField] private float regenRate = 5f; // lượng stamina hồi mỗi giây
     [SerializeField] private float currentStamina = 100f;
 
     private void Start()
@@ -49,4 +49,7 @@ public class StaminaBar : MonoBehaviour
     {
         UpdateStaminaBar();
     }
+    public float CurrentStamina => currentStamina;
+
+
 }
