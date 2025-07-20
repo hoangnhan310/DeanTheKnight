@@ -518,6 +518,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6984684175351331348, guid: e4c9dcc02af1d3c4ba8aae8f879bb0bc, type: 3}
+      propertyPath: sceneToLoad
+      value: SceneLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6984684175351331348, guid: e4c9dcc02af1d3c4ba8aae8f879bb0bc, type: 3}
       propertyPath: upgradeCanvas
       value: 
       objectReference: {fileID: 1041413036}
