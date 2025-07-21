@@ -497,7 +497,7 @@ MonoBehaviour:
   wallSlideSpeed: 1
   jumpForce: 7.5
   noBlood: 0
-  slideDust: {fileID: 0}
+  slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
 --- !u!114 &5964215918936189743
 MonoBehaviour:
   m_ObjectHideFlags: 0

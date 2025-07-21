@@ -23,8 +23,9 @@ public class BossController : EnemyBehaviour4
     private int phase = 1;
     private bool hasSummoned = false;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -127,11 +128,31 @@ public class BossController : EnemyBehaviour4
         }
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        BossAudioManager.Instance.StopBossMusic();
+        var summoned = FindObjectsOfType<PatrolEnemy>();
+        foreach (var minion in summoned)
+        {
+            Destroy(minion.gameObject);
+        }
+
+        // Victory logic can be added here
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !isFighting)
         {
             isFighting = true;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (CrongratUI.Instance != null)
+        {
+            CrongratUI.Instance.TriggerWin();
         }
     }
 }
