@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEditor.Tilemaps;
 using UnityEngine;
@@ -15,6 +16,9 @@ public class EnemyBehaviour : MonoBehaviour
     [HideInInspector] public bool inRange; //Check if the player is in range
     public GameObject hotZone;
     public GameObject triggerArea;
+    Vector2 lastPosition;
+    float stuckTime = 0f;
+    public float stuckThreshold = 3f; // sau 2s không di chuyển thì coi là kẹt
     public bool IsDead => isDead; //Property to check if the enemy is dead
     #endregion
 
@@ -26,6 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float intTimer;
     private float currentHealth; //Current health of the enemy
     private bool isDead; //Check if the enemy is dead
+    private Vector2 spawnPoint; //Spawn point
     #endregion
 
     private void Awake()
@@ -34,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         SelectTarget(); //Select a target when the enemy is spawned
         intTimer = timer; //Store the initial timer value
         animator = GetComponent<Animator>();
+        spawnPoint = transform.position;
     }
 
     void Update()
@@ -47,6 +53,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (!insideOfLimits() && !inRange  && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) 
         { 
             SelectTarget(); //Select a target when the enemy is outside of limits
+            CheckingStuck();
         }
 
         if (inRange) 
@@ -156,6 +163,29 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         transform.eulerAngles = rotation;
+    }
+
+    public void CheckingStuck() 
+    {
+        if (Vector2.Distance(transform.position, lastPosition) < 0.1f)
+        {
+            stuckTime += Time.deltaTime;
+            if (stuckTime >= stuckThreshold)
+            {
+                TeleportToSpawn();
+            }
+        }
+        else
+        {
+            stuckTime = 0f;
+            lastPosition = transform.position;
+        }
+    }
+
+    public void TeleportToSpawn() 
+    {
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero; // reset vận tốc
+        transform.position = spawnPoint;
     }
 
     //public void TakeDamage(float damage) 
