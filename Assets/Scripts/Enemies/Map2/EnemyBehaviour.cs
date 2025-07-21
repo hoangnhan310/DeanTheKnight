@@ -177,7 +177,6 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else
         {
-            Debug.Log("Check");
             stuckTime = 0f;
             lastPosition = transform.position;
         }
