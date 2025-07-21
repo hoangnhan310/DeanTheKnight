@@ -3,7 +3,7 @@
 public class EnemyBehaviour4 : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 50f;
-    private float currentHealth;
+    public float currentHealth;
     private Rigidbody2D rb;
 
     private Animator animator;
