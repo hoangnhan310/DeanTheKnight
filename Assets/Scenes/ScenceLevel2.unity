@@ -3036,6 +3036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+  currentHealth: 0
 --- !u!114 &514274618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3181,7 +3182,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.37172, y: -2.9709625, z: -10}
+  m_LocalPosition: {x: -7.375004, y: -2.9709625, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9153,6 +9154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+  currentHealth: 0
 --- !u!114 &1077233698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11033,6 +11035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+  currentHealth: 0
 --- !u!114 &1360560697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11357,6 +11360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+  currentHealth: 0
 --- !u!114 &1461364837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12096,6 +12100,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   came: {fileID: 519420028}
   parallaxSpeed: 0.6
+--- !u!1001 &1686895417
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1353277394773449345, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_Name
+      value: GemKey
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 191.53194
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.456409
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.09199629
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411152432995439068, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b4e290f1edc9573418edfb1a8be997db, type: 3}
 --- !u!1001 &1695432777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16157,7 +16218,7 @@ Transform:
   m_GameObject: {fileID: 1752434724}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.37172, y: -2.9709625, z: -10}
+  m_LocalPosition: {x: -7.375004, y: -2.9709625, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16763,6 +16824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+  currentHealth: 0
 --- !u!114 &1820894395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45534,6 +45596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 60
+  currentHealth: 0
 --- !u!114 &1882159339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46670,3 +46733,4 @@ SceneRoots:
   - {fileID: 955599348}
   - {fileID: 1434370667}
   - {fileID: 587709428}
+  - {fileID: 1686895417}

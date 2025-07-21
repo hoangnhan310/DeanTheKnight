@@ -24,7 +24,7 @@ public class KnockBack : MonoBehaviour
     private IEnumerator Reset() 
     { 
         yield return new WaitForSeconds(delay); // Wait for the specified delay
-        rb.linearVelocity = Vector3.zero; // Reset the Rigidbody2D's velocity to zero
+        rb.linearVelocity = Vector2.zero; // Reset the Rigidbody2D's velocity to zero
         OnEnd.Invoke(); // Invoke the OnEnd event
     }
 }
