@@ -203,6 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1584778ca29204358b1968c675138639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
   moveSpeed: 3
   attackCooldown: 2
   summonPrefab: {fileID: 1665037207184048921, guid: 2c295d134d799554bb1e66765d695bc6, type: 3}

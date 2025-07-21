@@ -8,7 +8,7 @@ public class EnemyBehaviour4 : MonoBehaviour
 
     private Animator animator;
 
-    void Start()
+    protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -31,7 +31,7 @@ public class EnemyBehaviour4 : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         animator.SetTrigger("isDie");
         animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp

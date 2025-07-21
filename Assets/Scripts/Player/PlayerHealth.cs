@@ -72,6 +72,9 @@ public class PlayerHealth : MonoBehaviour
 
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 
+        if (BossAudioManager.Instance != null)
+            BossAudioManager.Instance.StopBossMusic();
+
         gameObject.tag = "Untagged";
         gameObject.layer = 0;
         StartCoroutine(ShowDefeatAndPause());
