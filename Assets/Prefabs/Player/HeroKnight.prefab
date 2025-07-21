@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 872138244632776689}
   - component: {fileID: 5964215918936189743}
   - component: {fileID: 846938816597500216}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: HeroKnight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9a2b79355ce494faa574040d22687f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   defeatedUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -497,7 +497,7 @@ MonoBehaviour:
   wallSlideSpeed: 1
   jumpForce: 7.5
   noBlood: 0
-  slideDust: {fileID: 0}
+  slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
 --- !u!114 &5964215918936189743
 MonoBehaviour:
   m_ObjectHideFlags: 0

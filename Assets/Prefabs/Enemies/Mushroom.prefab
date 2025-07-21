@@ -53,7 +53,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642128223942144516}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -114,7 +114,9 @@ GameObject:
   - component: {fileID: 2502076921996555495}
   - component: {fileID: -2396272017947141972}
   - component: {fileID: 649317865976302064}
-  - component: {fileID: 8460768999600550428}
+  - component: {fileID: 5573960570119016606}
+  - component: {fileID: 5121405312087024616}
+  - component: {fileID: 2414128634375794493}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Untagged
@@ -261,7 +263,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.031315327, y: -0.5979874}
+  m_Offset: {x: -0.013750076, y: -0.5979874}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -271,7 +273,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0499849, y: 1.667172}
+  m_Size: {x: 3.2942543, y: 1.667172}
   m_EdgeRadius: 0
 --- !u!114 &649317865976302064
 MonoBehaviour:
@@ -286,7 +288,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slashSound: {fileID: 8300000, guid: d380aeed69f7f2b4b9ac47c9826e208e, type: 3}
---- !u!50 &8460768999600550428
+--- !u!114 &5573960570119016606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277466558163787476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 0
+--- !u!50 &5121405312087024616
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -299,9 +315,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 166
-  m_LinearDamping: 1.21
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 34
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -313,3 +329,60 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!60 &2414128634375794493
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277466558163787476}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.5, y: 7.5}
+    newSize: {x: 1.5, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4, y: 0.65000004}
+      - {x: -0.5214123, y: 0.5642752}
+      - {x: -0.5214119, y: 0.032147408}
+      - {x: -0.4139042, y: -0.8191204}
+      - {x: -0.65000004, y: -1.25}
+      - {x: -0.43570518, y: -1.0999626}
+      - {x: 0.5, y: -1.4}
+      - {x: 0.5285503, y: -0.9428634}
+      - {x: 0.47135353, y: -0.05751896}
+      - {x: 0.7, y: 0.45000002}
+  m_UseDelaunayMesh: 0

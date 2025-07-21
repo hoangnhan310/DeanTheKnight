@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public float maxHealth = 200f;
     [SerializeField]
     private float currentHealth;
     [SerializeField] private GameObject defeatedUI;
@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Đọc cấp nâng cấp máu từ PlayerPrefs
         int healthUpgrades = PlayerPrefs.GetInt("HealthUpgrades", 0);
-        int healthPerUpgrade = 20; // Giá trị giống bên UpgradeUI
+        int healthPerUpgrade = 30; // Giá trị giống bên UpgradeUI
 
         maxHealth += healthUpgrades * healthPerUpgrade;
 
@@ -71,6 +71,9 @@ public class PlayerHealth : MonoBehaviour
             combat.enabled = false;
 
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+
+        if (BossAudioManager.Instance != null)
+            BossAudioManager.Instance.StopBossMusic();
 
         gameObject.tag = "Untagged";
         gameObject.layer = 0;
