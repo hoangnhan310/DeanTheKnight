@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7376244784860502154}
   - component: {fileID: 5615664433179847793}
   - component: {fileID: 1067382337050077068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Idle_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   chaseRadius: 4
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   patrolDistance: 5
   showDetectionRadius: 1
   attackZone: {fileID: 7226005768157595502}
