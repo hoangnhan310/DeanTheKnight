@@ -148,4 +148,11 @@ public class BossController : EnemyBehaviour4
             isFighting = true;
         }
     }
+    private void OnDestroy()
+    {
+        if (CrongratUI.Instance != null)
+        {
+            CrongratUI.Instance.TriggerWin();
+        }
+    }
 }
