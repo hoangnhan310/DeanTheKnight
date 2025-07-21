@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PatrolEnemy : MonoBehaviour
+public class PatrolEnemy : EnemyBehaviour4
 {
     public float speed = 2f;
     public Transform checkPoint;

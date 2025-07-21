@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8141670683950860839}
   - component: {fileID: 8033054995027217678}
   - component: {fileID: 4672497728544283548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skeleton_01_White_Walk_0
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -178,6 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b287f6689a149245814323d8e1b4c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 0
   speed: 2
   checkPoint: {fileID: 4621168683669142360}
   distance: 0.65
