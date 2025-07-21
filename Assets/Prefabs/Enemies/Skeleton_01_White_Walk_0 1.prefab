@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8033054995027217678}
   - component: {fileID: 4672497728544283548}
   m_Layer: 8
-  m_Name: Skeleton_01_White_Walk_0
+  m_Name: Skeleton_01_White_Walk_0 1
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -154,11 +154,11 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.37127495, y: 0}
+  m_Offset: {x: 0.16, y: -0.59}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9375, y: 2.8125}
+    oldSize: {x: 6, y: 4}
     newSize: {x: 1.9375, y: 2.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
     m_Bits: 1
   inRange: 0
   player: {fileID: 0}
-  attackRange: 10
+  attackRange: 20
   retrieveDistance: 2.5
   chaseSpeed: 3
   animator: {fileID: 4672497728544283548}
@@ -244,7 +244,7 @@ Transform:
   m_GameObject: {fileID: 6960128155866594863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.54, y: 0.38, z: 0}
+  m_LocalPosition: {x: -0.8, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 7426808940719732438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4, y: -1.1, z: 0}
+  m_LocalPosition: {x: -1.5, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

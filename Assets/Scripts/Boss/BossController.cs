@@ -6,7 +6,7 @@ public class BossController : EnemyBehaviour4
     public float moveSpeed = 3f;
     public float attackCooldown = 2f;
     public GameObject summonPrefab;
-    public Transform summonPoint;
+    public Transform[] summonPoint;
     public int phase2HealthThreshold = 50;
 
     [Header("Attack Settings")]
@@ -14,6 +14,8 @@ public class BossController : EnemyBehaviour4
     public float attackRadius = 1.2f;
     public LayerMask playerLayer;
     public float attackDamage = 10f;
+
+    public BossHealthBar healthBar;
 
     private Transform player;
     private Animator animator;
@@ -29,6 +31,7 @@ public class BossController : EnemyBehaviour4
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        healthBar.SetHealth(currentHealth, maxHealth);
     }
 
     void Update()
@@ -47,14 +50,18 @@ public class BossController : EnemyBehaviour4
         {
             if (!hasSummoned)
             {
-                // Summon 3 minions
-                for (int i = 0; i < 3; i++)
+                // Summon minions
+                foreach (var point in summonPoint)
                 {
-                    SummonMinion();
+                    if (point != null)
+                    {
+                        SummonMinion(point);
+                    }
                 }
                 hasSummoned = true;
             }
         }
+        healthBar.SetHealth(currentHealth, maxHealth);
     }
 
     private void ChasePlayer()
@@ -89,7 +96,7 @@ public class BossController : EnemyBehaviour4
                     ChasePlayer();
                 }
             }
-            
+
         }
     }
     // Vẽ gizmo cho attack point trong editor
@@ -102,7 +109,7 @@ public class BossController : EnemyBehaviour4
         }
     }
 
-    private void SummonMinion()
+    private void SummonMinion(Transform summonPoint)
     {
         if (summonPrefab != null && summonPoint != null)
         {
@@ -132,13 +139,11 @@ public class BossController : EnemyBehaviour4
     {
         base.Die();
         BossAudioManager.Instance.StopBossMusic();
-        var summoned = FindObjectsOfType<PatrolEnemy>();
+        var summoned = FindObjectsByType<PatrolEnemy>(FindObjectsSortMode.None);
         foreach (var minion in summoned)
         {
             Destroy(minion.gameObject);
         }
-
-        // Victory logic can be added here
     }
 
     private void OnTriggerEnter2D(Collider2D other)
