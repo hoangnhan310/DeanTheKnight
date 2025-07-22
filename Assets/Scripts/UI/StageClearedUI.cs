@@ -11,12 +11,13 @@ public class StageClearedUI : MonoBehaviour
 
     public void ToNextMap()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
         SceneManager.LoadScene(sceneToLoad);
     }
 
     public void OpenUpgradeCanvas()
     {
+        Time.timeScale = 0f;
         if (stageClearedCanvas != null)
             stageClearedCanvas.SetActive(false);
 
