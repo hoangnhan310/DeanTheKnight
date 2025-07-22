@@ -16,8 +16,9 @@ public class PatrolEnemy : EnemyBehaviour4
     public Transform attackPoint;
     public float attackRadius = 1f;
     public LayerMask attackLayer;
+    public float attackDamage = 15f;
 
-    void Update()
+	void Update()
     {
         if (Vector2.Distance(transform.position, player.position) <= attackRange)
         {
@@ -75,7 +76,8 @@ public class PatrolEnemy : EnemyBehaviour4
 
         foreach (Collider2D collider in colliders)
         {
-            Debug.Log("Hit: " + collider.name);
+			collider.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+			Debug.Log("Hit: " + collider.name);
         }
     }
     private void OnDrawGizmosSelected()

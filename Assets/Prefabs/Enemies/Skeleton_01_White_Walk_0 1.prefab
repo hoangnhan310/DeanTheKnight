@@ -133,7 +133,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -192,11 +192,12 @@ MonoBehaviour:
   retrieveDistance: 2.5
   chaseSpeed: 3
   animator: {fileID: 4672497728544283548}
-  attackPoint: {fileID: 0}
-  attackRadius: 1
+  attackPoint: {fileID: 1417650577892410784}
+  attackRadius: 1.2
   attackLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  attackDamage: 15
 --- !u!95 &4672497728544283548
 Animator:
   serializedVersion: 7
