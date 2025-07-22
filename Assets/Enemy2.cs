@@ -3,24 +3,24 @@
 public class Enemy2 : MonoBehaviour
 {
     public float walkSpeed = 3f;
-    [SerializeField] private float chaseSpeed = 4f; // Tốc độ đuổi theo
-    [SerializeField] private float chaseRadius = 8f; // Bán kính phát hiện player
-    [SerializeField] private LayerMask playerLayer; // Layer của player
-    [SerializeField] private float patrolDistance = 5f; // Khoảng cách di chuyển tuần tra
-    [SerializeField] private bool showDetectionRadius = true; // Bật/tắt hiển thị vòng tròn
-    Animator animator; // Animator để điều khiển hoạt ảnh
+    [SerializeField] private float chaseSpeed = 4f; 
+    [SerializeField] private float chaseRadius = 4f;
+    [SerializeField] private LayerMask playerLayer; 
+    [SerializeField] private float patrolDistance = 5f;
+    [SerializeField] private bool showDetectionRadius = true; 
+    Animator animator; 
 
     private Rigidbody2D rb;
-    private Transform playerTransform; // Vị trí của player
+    private Transform playerTransform; 
     private Vector2 walkDirectionVector;
     public DetectionZone attackZone;
-    public enum WalkableDirection { Right, Left } // Hướng tuần tra
+    public enum WalkableDirection { Right, Left }
     private WalkableDirection _walkDirection;
 
-    private enum State { Patrol, Chase, Attack } // Thêm trạng thái Attack
+    private enum State { Patrol, Chase, Attack }
     private State currentState = State.Patrol;
-    private Vector2 patrolStartPosition; // Vị trí bắt đầu của đoạn di chuyển tuần tra
-    private float timeSinceLastSwitch; // Theo dõi thời gian chuyển hướng tuần tra
+    private Vector2 patrolStartPosition; 
+    private float timeSinceLastSwitch; 
 
     public WalkableDirection WalkDirection
     {
@@ -31,13 +31,13 @@ public class Enemy2 : MonoBehaviour
             {
                 gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
                 walkDirectionVector = value == WalkableDirection.Right ? Vector2.right : Vector2.left;
-                patrolStartPosition = transform.position; // Cập nhật vị trí bắt đầu khi đổi hướng
+                patrolStartPosition = transform.position;
             }
             _walkDirection = value;
         }
     }
 
-    public bool _hasTarget = false; // Biến riêng để theo dõi trạng thái có mục tiêu
+    public bool _hasTarget = false; 
 
     public bool HasTarget
     {
@@ -45,7 +45,7 @@ public class Enemy2 : MonoBehaviour
         set
         {
             _hasTarget = value;
-            animator.SetBool("hasTarget", value); // Cập nhật animator
+            animator.SetBool("hasTarget", value);
         }
     }
 
@@ -53,16 +53,16 @@ public class Enemy2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        walkDirectionVector = Vector2.right; // ⚠️ Quan trọng: đảm bảo hướng đi không bị (0,0)
+        walkDirectionVector = Vector2.right; 
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        WalkDirection = WalkableDirection.Right; // Khởi tạo hướng tuần tra
-        patrolStartPosition = transform.position; // Lưu vị trí ban đầu
+        WalkDirection = WalkableDirection.Right; 
+        patrolStartPosition = transform.position;
         timeSinceLastSwitch = 0f;
     }
 
     private void Update()
     {
-        HasTarget = attackZone.detectedColliders.Count > 0; // Cập nhật trạng thái có mục tiêu từ DetectionZone
+        HasTarget = attackZone.detectedColliders.Count > 0; 
     }
 
     public bool CanMove
@@ -75,15 +75,14 @@ public class Enemy2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Kiểm tra trạng thái tấn công trước
+        
         if (HasTarget)
         {
             currentState = State.Attack;
-            playerTransform = attackZone.detectedColliders[0].transform; // Lấy transform của player trong vùng tấn công
+            playerTransform = attackZone.detectedColliders[0].transform; 
         }
         else
         {
-            // Phát hiện player trong chaseRadius
             Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, chaseRadius, playerLayer);
             if (playerCollider != null)
             {
@@ -114,10 +113,8 @@ public class Enemy2 : MonoBehaviour
 
     private void HandlePatrol()
     {
-        // Tính khoảng cách di chuyển từ patrolStartPosition
         float distanceTraveled = Vector2.Distance(transform.position, patrolStartPosition);
 
-        // Chuyển hướng khi đạt patrolDistance
         if (distanceTraveled >= patrolDistance)
         {
             FlipDirection();
@@ -133,7 +130,6 @@ public class Enemy2 : MonoBehaviour
     {
         if (playerTransform == null) return;
 
-        // Tính hướng đến player
         Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
         WalkDirection = directionToPlayer.x > 0 ? WalkableDirection.Right : WalkableDirection.Left;
 
@@ -151,14 +147,11 @@ public class Enemy2 : MonoBehaviour
     {
         if (playerTransform == null) return;
 
-        // Dừng hoàn toàn di chuyển
         rb.linearVelocity = Vector2.zero;
 
-        // Xác định hướng để quay mặt về phía player
         Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
         WalkDirection = directionToPlayer.x > 0 ? WalkableDirection.Right : WalkableDirection.Left;
 
-        // Animation tấn công được điều khiển bởi hasTarget = true (không dùng trigger)
     }
 
     private void FlipDirection()
@@ -168,7 +161,6 @@ public class Enemy2 : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Vẽ bán kính phát hiện player chỉ khi showDetectionRadius được bật
         if (showDetectionRadius)
         {
             Gizmos.color = Color.red;

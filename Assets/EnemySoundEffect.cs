@@ -2,12 +2,11 @@
 
 public class EnemySoundEffect : MonoBehaviour
 {
-    private AudioSource audioSource; // AudioSource để phát âm thanh
-    public AudioClip slashSound; // Âm thanh chém của enemy
+    private AudioSource audioSource; 
+    public AudioClip slashSound; 
 
     void Start()
     {
-        // Thêm và lấy AudioSource nếu chưa có
         audioSource = gameObject.GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -15,7 +14,6 @@ public class EnemySoundEffect : MonoBehaviour
         }
     }
 
-    // Hàm phát âm thanh chém
     public void PlaySlashSound()
     {
         if (audioSource != null && slashSound != null)
