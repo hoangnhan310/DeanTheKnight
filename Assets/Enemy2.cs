@@ -76,7 +76,7 @@ public class Enemy2 : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (HasTarget)
+        if (HasTarget && attackZone.detectedColliders.Count > 0)
         {
             currentState = State.Attack;
             playerTransform = attackZone.detectedColliders[0].transform; 
