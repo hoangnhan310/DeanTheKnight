@@ -30,7 +30,31 @@ public class PlayerHealth : MonoBehaviour
         healthBar?.SetHealth(currentHealth, maxHealth);
     }
 
+    /// <summary>
+    /// Checks for cheat code input each frame.
+    /// </summary>
+    private void Update()
+    {
+        // Cheat Code: Press 'H' to fully heal the player.
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Heal(maxHealth);
+        }
+    }
 
+    /// <summary>
+    /// Restores a specified amount of health to the player.
+    /// </summary>
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        healthBar?.SetHealth(currentHealth, maxHealth);
+        Debug.Log($"Player healed for {amount}. Current health: {currentHealth}");
+    }
 
     public void TakeDamage(float amount)
     {

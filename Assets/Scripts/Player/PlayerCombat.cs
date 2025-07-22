@@ -26,6 +26,9 @@ public class PlayerCombat : MonoBehaviour
     private readonly float rollDuration = 8.0f / 14.0f;
     private float rollCurrentTime;
 
+    // Cheat code state variable
+    private bool superDamageMode = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,6 +50,20 @@ public class PlayerCombat : MonoBehaviour
     {
         ProcessAttack();
         ProcessRoll();
+
+        // Cheat Code: Press 'G' to toggle super damage mode.
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            superDamageMode = !superDamageMode;
+            if (superDamageMode)
+            {
+                Debug.Log("CHEAT ACTIVATED: Super Damage Mode ON (500 damage)");
+            }
+            else
+            {
+                Debug.Log("CHEAT DEACTIVATED: Super Damage Mode OFF");
+            }
+        }
     }
 
     #region Input Callbacks
@@ -87,13 +104,23 @@ public class PlayerCombat : MonoBehaviour
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
             // Deal damage to each enemy
-            var currentAttackDamage = currentAttack switch
+            float currentAttackDamage;
+            // Apply cheat damage if active
+            if (superDamageMode)
             {
-                1 => attack1Damage,
-                2 => attack2Damage,
-                3 => attack3Damage,
-                _ => 0.0f
-            };
+                currentAttackDamage = 500f;
+            }
+            else
+            {
+                // Otherwise, calculate normal combo damage
+                currentAttackDamage = currentAttack switch
+                {
+                    1 => attack1Damage,
+                    2 => attack2Damage,
+                    3 => attack3Damage,
+                    _ => 0.0f
+                };
+            }
 
             foreach (Collider2D enemy in hitEnemies)
             {
