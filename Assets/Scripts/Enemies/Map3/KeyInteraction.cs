@@ -1,10 +1,15 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class KeyInteraction : MonoBehaviour
 {
     [Header("Configuration")]
     public FadingDoor targetDoor; // Reference to the door that this key opens
     public KeyCode interactionKey = KeyCode.E; // The key to press for interaction
+    public float delayOpen = 2f;
+    public CameraSwitcher cameraSwitcher;
+
 
     [Header("UI Prompt")]
     public GameObject interactionPromptUI; // The UI element to show when interaction is possible
@@ -40,18 +45,23 @@ public class KeyInteraction : MonoBehaviour
     {
         Debug.Log("Key collected! Opening the door.");
 
-        if (targetDoor != null)
-        {
-            targetDoor.Open();
-        }
-
         if (interactionPromptUI != null)
         {
             interactionPromptUI.SetActive(false);
         }
 
-        // The key is consumed, so destroy this GameObject
-        Destroy(gameObject);
+        if (targetDoor != null && cameraSwitcher != null)
+        {
+            cameraSwitcher.SummonFocusChest();
+            StartCoroutine(DelayForOpenDoor());
+        }
+        else 
+        {
+            targetDoor.Open();
+            // The key is consumed, so destroy this GameObject
+            Destroy(gameObject);
+        }
+      
     }
 
     /// <summary>
@@ -82,5 +92,13 @@ public class KeyInteraction : MonoBehaviour
                 interactionPromptUI.SetActive(false);
             }
         }
+    }
+
+    private IEnumerator DelayForOpenDoor()
+    {
+        yield return new WaitForSeconds(delayOpen);
+        targetDoor.Open();
+        // The key is consumed, so destroy this GameObject
+        Destroy(gameObject);
     }
 }

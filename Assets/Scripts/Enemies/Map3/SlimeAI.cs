@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Controls all AI, combat, and health logic for the Slime enemy.
-/// This is a self-contained script that handles bouncing, aura attacks, and its own damageable state.
+/// Controls the AI logic for the Slime enemy using a Dynamic Rigidbody for physics-based bouncing.
+/// This script requires an EnemyBehaviour4 component to handle health and death states.
 /// </summary>
-public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
+public class SlimeAI : MonoBehaviour, IStatefulEnemy
 {
     [Header("References")]
     [Tooltip("The player character the slime will target.")]
@@ -16,11 +16,8 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     public Transform attackPoint;
     private Animator anim;
     private Rigidbody2D rb;
-
-    [Header("Stats")]
-    [Tooltip("The maximum health of the slime.")]
-    public float maxHealth = 60f;
-    private float currentHealth;
+    [Tooltip("Reference to the component that manages health and death states.")]
+    [SerializeField] private EnemyBehaviour4 enemyBehaviour;
 
     [Header("AI Behavior")]
     [Tooltip("The range at which the slime starts to detect and bounce towards the player.")]
@@ -28,20 +25,18 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     [Tooltip("The range at which the slime stops moving and initiates its aura attack.")]
     public float attackRange = 3f;
 
-    [Header("Kinematic Bounce Movement")]
-    [Tooltip("The maximum height the slime reaches during its bounce arc.")]
-    public float bounceHeight = 1.2f;
-    [Tooltip("How long, in seconds, a single bounce takes to complete.")]
-    public float bounceDuration = 0.7f;
-    [Tooltip("The horizontal distance covered in a single bounce.")]
-    public float bounceDistance = 2.0f;
-    [Tooltip("The cooldown time in seconds between bounces after landing.")]
-    public float bounceInterval = 0.5f;
+    [Header("Dynamic Bounce Movement")]
+    [Tooltip("The vertical force applied for each bounce.")]
+    public float bounceForce = 8f;
+    [Tooltip("The horizontal speed when bouncing towards the player.")]
+    public float bounceForwardSpeed = 4f;
+    [Tooltip("The cooldown time in seconds between bounces.")]
+    public float bounceInterval = 1f;
 
     [Header("Aura Blast Attack")]
     [Tooltip("The cooldown in seconds between aura blast attacks.")]
     public float attackInterval = 4f;
-    [Tooltip("The radius of the damage-dealing aura, measured from the Attack Point.")]
+    [Tooltip("The radius of the damage-dealing aura.")]
     public float explosionRadius = 3f;
     [Tooltip("The amount of damage dealt by the aura blast.")]
     public float explosionDamage = 10f;
@@ -49,9 +44,8 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     // --- Private State Variables ---
     private float lastBounceTime = -99f;
     private float lastAttackTime = -99f;
-    private bool isBouncing = false;
     private bool isAttacking = false;
-    private bool isDead = false;
+    // 'isDead' and 'currentHealth' are now managed by EnemyBehaviour4.
 
     /// <summary>
     /// Initializes components and sets the starting state.
@@ -60,19 +54,20 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
 
-        if (rb != null)
+        enemyBehaviour = GetComponent<EnemyBehaviour4>();
+        if (enemyBehaviour == null)
         {
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero; // Use .velocity instead of the obsolete .linearVelocity
+            Debug.LogError("SlimeAI requires an EnemyBehaviour4 component to function.", this);
+            this.enabled = false;
+            return;
         }
 
         if (player == null)
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null) player = playerObject.transform;
-            else { Debug.LogError("SlimeAI: Player not found! Ensure the player has the 'Player' tag.", this); this.enabled = false; }
+            else { Debug.LogError("SlimeAI: Player not found!", this); this.enabled = false; }
         }
     }
 
@@ -81,8 +76,11 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     /// </summary>
     void Update()
     {
-        if (isDead || isAttacking || isBouncing || player == null)
+        // Check the 'body' script's state to stop all actions when dead.
+        if (enemyBehaviour == null || !enemyBehaviour.enabled || isAttacking || player == null)
         {
+            // If unable to act, stop animating and halt horizontal movement.
+            StopBouncing();
             return;
         }
 
@@ -95,71 +93,66 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
         }
         else if (distanceToPlayer <= detectionRange)
         {
-            if (IsGrounded() && Time.time >= lastBounceTime + bounceInterval)
-            {
-                StartCoroutine(BounceRoutine());
-            }
+            BounceTowardsPlayer();
         }
         else
         {
-            anim.SetBool("isBouncing", false);
+            StopBouncing();
         }
+
+        // The bouncing animation is now driven by the Rigidbody's vertical velocity.
+        anim.SetBool("isBouncing", Mathf.Abs(rb.linearVelocity.y) > 0.1f);
     }
 
     /// <summary>
-    /// Checks if the slime is on a surface by casting a short ray downwards.
+    /// Checks if the slime is on the ground. Required for the dynamic bounce.
     /// </summary>
-    /// <returns>True if ground is detected, otherwise false.</returns>
     private bool IsGrounded()
     {
-        // For production, it's recommended to add a LayerMask to this Raycast.
-        return Physics2D.Raycast(transform.position, Vector2.down, 0.2f);
+        // For production, adding a LayerMask here is highly recommended.
+        return Physics2D.Raycast(transform.position, Vector2.down, GetComponent<Collider2D>().bounds.extents.y + 0.1f);
     }
 
     /// <summary>
-    /// Executes a single, arced bounce movement towards the player over a set duration.
+    /// Initiates a physics-based bounce towards the player by applying forces to the Rigidbody.
     /// </summary>
-    IEnumerator BounceRoutine()
+    void BounceTowardsPlayer()
     {
-        isBouncing = true;
-        lastBounceTime = Time.time;
-        anim.SetBool("isBouncing", true);
-        float elapsedTime = 0f;
-        Vector3 startPos = transform.position;
-        Vector2 directionToPlayer = new Vector2(player.position.x - startPos.x, 0).normalized;
-        Vector3 endPos = startPos + (Vector3)directionToPlayer * bounceDistance;
-
-        while (elapsedTime < bounceDuration)
+        // Only allow bouncing if on the ground and the cooldown has passed.
+        if (IsGrounded() && Time.time >= lastBounceTime + bounceInterval)
         {
-            float t = elapsedTime / bounceDuration;
-            Vector3 currentPos = Vector3.Lerp(startPos, endPos, t);
-            currentPos.y += bounceHeight * Mathf.Sin(Mathf.PI * t); // Creates the parabolic arc
-            rb.MovePosition(currentPos);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            lastBounceTime = Time.time;
+            float direction = (player.position.x > transform.position.x) ? 1f : -1f;
+
+            // Apply an upward and forward velocity to the Dynamic Rigidbody.
+            rb.linearVelocity = new Vector2(direction * bounceForwardSpeed, bounceForce);
         }
-
-        // Raycast down to snap to the ground, accounting for slopes.
-        RaycastHit2D hit = Physics2D.Raycast(endPos, Vector2.down, bounceHeight + 1.0f);
-        if (hit.collider != null) { endPos.y = hit.point.y; }
-
-        rb.MovePosition(endPos);
-        isBouncing = false;
-        anim.SetBool("isBouncing", false);
     }
 
     /// <summary>
-    /// Initiates the attack sequence by setting state flags and triggering the animation.
+    /// Halts the slime's horizontal movement, typically when idling.
+    /// </summary>
+    void StopBouncing()
+    {
+        // Only reduce horizontal velocity if on the ground, allowing for arcs in the air.
+        if (IsGrounded())
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+    }
+
+    /// <summary>
+    /// Initiates the attack sequence.
     /// </summary>
     void AttackDecision()
     {
-        isAttacking = true;
         lastAttackTime = Time.time;
-        anim.SetTrigger("isAttacking"); // Must match the trigger name in the Animator
+        rb.linearVelocity = Vector2.zero; // Halt all movement before attacking.
+        anim.SetTrigger("isAttacking");
     }
 
     /// <summary>
-    /// This function is called by an Animation Event on the 'attack' animation clip.
+    // This function is called by an Animation Event on the 'attack' animation clip.
     /// It creates the visual effect and deals damage within the aura's radius.
     /// </summary>
     public void AuraBlastEvent()
@@ -181,37 +174,10 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
         }
     }
 
-    /// <summary>
-    /// This method is part of the IDamageable interface. It's called when the player's attack hits this enemy.
-    /// </summary>
-    /// <param name="damage">The amount of damage to take.</param>
-    public void TakeDamage(float damage)
-    {
-        if (isDead) return;
-        currentHealth -= damage;
-        Debug.Log($"Slime took {damage} damage. Current Health: {currentHealth}/{maxHealth}");
-        // A hurt animation trigger would be called here if it existed.
-        if (currentHealth <= 0) Die();
-    }
-
-    /// <summary>
-    /// Initiates the death sequence, disabling components and playing the death animation.
-    /// </summary>
-    void Die()
-    {
-        if (isDead) return;
-        isDead = true;
-        StopAllCoroutines();
-        anim.SetTrigger("isDie"); // Must match the trigger name in the Animator
-        GetComponent<Collider2D>().enabled = false;
-        if (rb != null) rb.bodyType = RigidbodyType2D.Static;
-        this.enabled = false;
-        Destroy(gameObject, 2.0f);
-    }
+    // TakeDamage and Die methods are no longer needed here.
 
     /// <summary>
     /// Allows an external script (like AttackStateBehaviour) to control the 'isAttacking' state.
-    /// This is part of the IStatefulEnemy interface.
     /// </summary>
     public void SetAttackingState(bool state)
     {
@@ -219,10 +185,12 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     }
 
     /// <summary>
-    /// Flips the enemy's sprite to face the player's horizontal position.
+    /// Flips the enemy's sprite to face the player.
     /// </summary>
     void FacePlayer()
     {
+        if (isAttacking) return;
+
         if (player.position.x > transform.position.x)
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         else
@@ -236,8 +204,10 @@ public class SlimeAI : MonoBehaviour, IDamageable, IStatefulEnemy
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
         if (attackPoint != null)
         {
             Gizmos.color = Color.magenta;

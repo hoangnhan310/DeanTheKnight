@@ -9,6 +9,8 @@ public class CameraSwitcher : MonoBehaviour
     public CinemachineCamera summonCamChest;
     [SerializeField]
     public float summonDuration = 4f;
+    [SerializeField]
+    public float summonDurationForChest = 4.5f;
 
     public void SummonFocus()
     {
@@ -39,7 +41,7 @@ public class CameraSwitcher : MonoBehaviour
 
     private IEnumerator ReturnToPlayerAfterDelayChest()
     {
-        yield return new WaitForSeconds(summonDuration);
+        yield return new WaitForSeconds(summonDurationForChest);
 
         //Turn back camera to player
         summonCamChest.Priority = 10;
