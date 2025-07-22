@@ -22,6 +22,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private StaminaBar staminaBar;
     private int currentAttack = 0;
     private float timeSinceAttack = 0.0f;
+    [SerializeField] private float rollStaminaCost = 10f;
 
     private readonly float rollDuration = 8.0f / 14.0f;
     private float rollCurrentTime;
@@ -149,6 +150,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed && !playerState.IsRolling && !playerState.IsWallSliding)
         {
+            staminaBar.UseStamina(rollStaminaCost);
             playerState.IsRolling = true;
             animator.SetTrigger("Roll");
             body2d.linearVelocity = new Vector2(playerState.FacingDirection * rollForce, body2d.linearVelocityY);
