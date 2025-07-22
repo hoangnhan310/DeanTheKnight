@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
     [SerializeField] private GameObject defeatedUI;
     [SerializeField] private HealthBar healthBar; // Gán trong Inspector
+    [SerializeField] private PlayerState playerState; // Gán trong Inspector
 
     private Animator animator;
     private bool isDead = false;
@@ -33,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        if (isDead) return;
+        if (isDead || playerState.IsRolling) return;
 
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);

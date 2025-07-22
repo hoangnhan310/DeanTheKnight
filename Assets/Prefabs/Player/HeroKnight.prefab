@@ -445,6 +445,7 @@ MonoBehaviour:
   currentHealth: 0
   defeatedUI: {fileID: 0}
   healthBar: {fileID: 0}
+  playerState: {fileID: 7431689474658906066}
 --- !u!114 &7431689474658906066
 MonoBehaviour:
   m_ObjectHideFlags: 0

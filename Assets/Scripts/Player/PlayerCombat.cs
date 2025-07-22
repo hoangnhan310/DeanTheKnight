@@ -105,18 +105,18 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void OnBlock(InputAction.CallbackContext context)
-    {
-        if (context.performed && !playerState.IsRolling)
-        {
-            animator.SetTrigger("Block");
-            animator.SetBool("IdleBlock", true);
-        }
-        else if (context.canceled)
-        {
-            animator.SetBool("IdleBlock", false);
-        }
-    }
+    // public void OnBlock(InputAction.CallbackContext context)
+    // {
+    //     if (context.performed && !playerState.IsRolling)
+    //     {
+    //         animator.SetTrigger("Block");
+    //         animator.SetBool("IdleBlock", true);
+    //     }
+    //     else if (context.canceled)
+    //     {
+    //         animator.SetBool("IdleBlock", false);
+    //     }
+    // }
 
     public void OnRoll(InputAction.CallbackContext context)
     {

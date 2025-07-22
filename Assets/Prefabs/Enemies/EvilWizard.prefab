@@ -161,7 +161,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -203,19 +203,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1584778ca29204358b1968c675138639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   moveSpeed: 3
-  attackCooldown: 2
-  summonPrefab: {fileID: 1665037207184048921, guid: 2c295d134d799554bb1e66765d695bc6, type: 3}
-  summonPoint: {fileID: 0}
-  phase2HealthThreshold: 50
+  attackCooldown: 3
+  summonPrefab: {fileID: 1665037207184048921, guid: 5a8fef57694924826877b24d4a556f68, type: 3}
+  summonPoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  phase2HealthThreshold: 120
   attackPoint: {fileID: 3611062308560111401}
   attackRadius: 1.7
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDamage: 10
+  attackDamage: 20
+  healthBar: {fileID: 0}
   isFighting: 0
 --- !u!50 &5477869156185084295
 Rigidbody2D:
