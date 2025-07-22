@@ -2,13 +2,13 @@
 
 public class EnemyBehaviour4 : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 50f;
-    private float currentHealth;
+    public float maxHealth = 50f;
+    public float currentHealth;
     private Rigidbody2D rb;
 
     private Animator animator;
 
-    void Start()
+    protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -31,7 +31,7 @@ public class EnemyBehaviour4 : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         animator.SetTrigger("isDie");
         animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp
@@ -43,10 +43,9 @@ public class EnemyBehaviour4 : MonoBehaviour
         }
 
         // Tắt collider để không va chạm nữa
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
+        if (TryGetComponent<Collider2D>(out var collider))
         {
-            collider.enabled = false;
+            collider.excludeLayers = LayerMask.GetMask("Player");
         }
 
         // Chờ animation kết thúc rồi destroy

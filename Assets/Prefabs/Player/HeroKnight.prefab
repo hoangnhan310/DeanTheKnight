@@ -141,7 +141,8 @@ GameObject:
   - component: {fileID: 4741633104139320105}
   - component: {fileID: 872138244632776689}
   - component: {fileID: 5964215918936189743}
-  m_Layer: 3
+  - component: {fileID: 846938816597500216}
+  m_Layer: 6
   m_Name: HeroKnight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -440,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9a2b79355ce494faa574040d22687f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   defeatedUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -496,7 +497,7 @@ MonoBehaviour:
   wallSlideSpeed: 1
   jumpForce: 7.5
   noBlood: 0
-  slideDust: {fileID: 0}
+  slideDust: {fileID: 1038168246061390451, guid: 8b8c8cc6774fb074cb9139cc631b108e, type: 3}
 --- !u!114 &5964215918936189743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +510,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52753f3b24fd0e84d8e6d8c3155daed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &846938816597500216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323719953710832613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
 --- !u!1 &6445332922987006369
 GameObject:
   m_ObjectHideFlags: 0

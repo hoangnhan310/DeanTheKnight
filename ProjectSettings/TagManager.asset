@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Background
   - Water
+  - Water_Map3
   layers:
   - Default
   - TransparentFX

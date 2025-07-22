@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEditor.Tilemaps;
 using UnityEngine;
@@ -15,7 +16,9 @@ public class EnemyBehaviour : MonoBehaviour
     [HideInInspector] public bool inRange; //Check if the player is in range
     public GameObject hotZone;
     public GameObject triggerArea;
-    public int maxHealth = 100; //Maximum health of the enemy
+    Vector2 lastPosition;
+    float stuckTime = 0f;
+    public float stuckThreshold = 3f; // sau 2s không di chuyển thì coi là kẹt
     public bool IsDead => isDead; //Property to check if the enemy is dead
     #endregion
 
@@ -27,6 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float intTimer;
     private float currentHealth; //Current health of the enemy
     private bool isDead; //Check if the enemy is dead
+    private Vector2 spawnPoint; //Spawn point
     #endregion
 
     private void Awake()
@@ -35,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         SelectTarget(); //Select a target when the enemy is spawned
         intTimer = timer; //Store the initial timer value
         animator = GetComponent<Animator>();
-        currentHealth = maxHealth; //Initialize current health to max health
+        spawnPoint = transform.position;
     }
 
     void Update()
@@ -49,6 +53,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (!insideOfLimits() && !inRange  && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) 
         { 
             SelectTarget(); //Select a target when the enemy is outside of limits
+            CheckingStuck();
         }
 
         if (inRange) 
@@ -94,7 +99,6 @@ public class EnemyBehaviour : MonoBehaviour
         attackMode = true; //To check if Enemy can still attack or not
 
         animator.SetBool("canRun", false); //Stop the run animation
-        Debug.Log("Enemy is attacking"); //Log the attack action
         animator.SetBool("Attack", true); //Set the attack animation
     }
 
@@ -161,31 +165,54 @@ public class EnemyBehaviour : MonoBehaviour
         transform.eulerAngles = rotation;
     }
 
-    public void TakeDamage(float damage) 
+    public void CheckingStuck() 
     {
-        currentHealth -= damage; //Reduce the current health by damage
-        animator.SetTrigger("Hit"); //Set the hit animation
-        if (currentHealth <= 0) 
+        if (Vector2.Distance(transform.position, lastPosition) < 0.1f)
         {
-            Die(); //Call the Die method if health is 0 or less
+            stuckTime += Time.deltaTime;
+            if (stuckTime >= stuckThreshold)
+            {
+                TeleportToSpawn();
+            }
+        }
+        else
+        {
+            stuckTime = 0f;
+            lastPosition = transform.position;
         }
     }
 
-    public void Die() 
-    {   Debug.Log("Enemy died"); //Log the death of the enemy
-        isDead = true; //Set the enemy as dead
-        animator.SetBool("IsDead", isDead); //Set the die animation              
-        StartCoroutine(DeathDelay());
+    public void TeleportToSpawn() 
+    {
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero; // reset vận tốc
+        transform.position = spawnPoint;
     }
 
-    private IEnumerator DeathDelay()
-    {
-        yield return new WaitForSeconds(1f); // Time for animation die
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
-        GetComponentsInChildren<Collider2D>().ToList().ForEach(c => c.enabled = false); //Disable all box colliders     
-        GetComponent<KnockBack>().enabled = false; //Disable the knockback script
-        this.hotZone.SetActive(false); //Disable the hot zone
-        this.triggerArea.SetActive(false); //Disable the trigger area
-        this.enabled = false;
-    }
+    //public void TakeDamage(float damage) 
+    //{
+    //    currentHealth -= damage; //Reduce the current health by damage
+    //    animator.SetTrigger("Hit"); //Set the hit animation
+    //    if (currentHealth <= 0) 
+    //    {
+    //        Die(); //Call the Die method if health is 0 or less
+    //    }
+    //}
+
+    //public void Die() 
+    //{   Debug.Log("Enemy died"); //Log the death of the enemy
+    //    isDead = true; //Set the enemy as dead
+    //    animator.SetBool("IsDead", isDead); //Set the die animation              
+    //    StartCoroutine(DeathDelay());
+    //}
+
+    //private IEnumerator DeathDelay()
+    //{
+    //    yield return new WaitForSeconds(1f); // Time for animation die
+    //    GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; //Set the rigidbody to static
+    //    GetComponentsInChildren<Collider2D>().ToList().ForEach(c => c.enabled = false); //Disable all box colliders     
+    //    GetComponent<KnockBack>().enabled = false; //Disable the knockback script
+    //    this.hotZone.SetActive(false); //Disable the hot zone
+    //    this.triggerArea.SetActive(false); //Disable the trigger area
+    //    this.enabled = false;
+    //}
 }

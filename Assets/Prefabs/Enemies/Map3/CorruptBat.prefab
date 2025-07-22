@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8983148230359330440}
   - component: {fileID: 3648885744680415787}
   - component: {fileID: 7233933903700991317}
+  - component: {fileID: 828138130194054338}
   m_Layer: 0
   m_Name: CorruptBat
   m_TagString: Untagged
@@ -234,3 +235,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
+--- !u!114 &828138130194054338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4360931539125460708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be754714fa62930478c4847e5d7e983c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSound: {fileID: 8300000, guid: aa94ba6f6eee14844940378c12a5faa1, type: 3}
