@@ -2,7 +2,7 @@
 
 public class EnemyBehaviour4 : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 50f;
+    public float maxHealth = 50f;
     public float currentHealth;
     private Rigidbody2D rb;
 
@@ -43,10 +43,9 @@ public class EnemyBehaviour4 : MonoBehaviour
         }
 
         // Tắt collider để không va chạm nữa
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
+        if (TryGetComponent<Collider2D>(out var collider))
         {
-            collider.enabled = false;
+            collider.excludeLayers = LayerMask.GetMask("Player");
         }
 
         // Chờ animation kết thúc rồi destroy

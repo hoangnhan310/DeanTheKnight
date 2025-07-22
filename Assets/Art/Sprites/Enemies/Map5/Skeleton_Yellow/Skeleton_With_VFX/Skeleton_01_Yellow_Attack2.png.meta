@@ -61,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -127,10 +127,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_0
       rect:
         serializedVersion: 2
-        x: 33
+        x: 34
         y: 0
-        width: 36
-        height: 47
+        width: 34
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,10 +149,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_1
       rect:
         serializedVersion: 2
-        x: 125
+        x: 126
         y: 0
-        width: 31
-        height: 46
+        width: 29
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_2
       rect:
         serializedVersion: 2
-        x: 219
+        x: 220
         y: 0
-        width: 38
-        height: 43
+        width: 36
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +193,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_3
       rect:
         serializedVersion: 2
-        x: 315
+        x: 316
         y: 0
-        width: 38
-        height: 42
+        width: 36
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +215,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_4
       rect:
         serializedVersion: 2
-        x: 417
+        x: 418
         y: 0
-        width: 63
-        height: 48
+        width: 61
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +237,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_5
       rect:
         serializedVersion: 2
-        x: 514
+        x: 515
         y: 0
-        width: 63
-        height: 48
+        width: 61
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,10 +259,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_6
       rect:
         serializedVersion: 2
-        x: 610
+        x: 611
         y: 0
-        width: 62
-        height: 47
+        width: 60
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_7
       rect:
         serializedVersion: 2
-        x: 707
+        x: 708
         y: 0
-        width: 47
-        height: 47
+        width: 45
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,10 +303,10 @@ TextureImporter:
       name: Skeleton_01_Yellow_Attack2_8
       rect:
         serializedVersion: 2
-        x: 801
+        x: 802
         y: 0
-        width: 36
-        height: 47
+        width: 34
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -325,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 75e9e681a1370994995a1dfe92168745
     internalID: 0
     vertices: []
     indices: 

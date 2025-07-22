@@ -3,7 +3,6 @@ using UnityEngine;
 public class BossAudioManager : MonoBehaviour
 {
     public static BossAudioManager Instance { get; private set; }
-    [SerializeField] private AudioClip bossMusic;
     [SerializeField] private AudioSource audioSource;
 
     private void Start()
@@ -26,9 +25,8 @@ public class BossAudioManager : MonoBehaviour
 
     public void PlayBossMusic()
     {
-        if (audioSource != null && bossMusic != null)
+        if (audioSource != null)
         {
-            audioSource.clip = bossMusic;
             audioSource.loop = true;
             audioSource.Play();
         }
