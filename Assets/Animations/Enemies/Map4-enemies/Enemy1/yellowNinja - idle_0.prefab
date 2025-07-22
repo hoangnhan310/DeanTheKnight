@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4757844589866375010}
   - component: {fileID: 6372544445969838364}
   - component: {fileID: 4695139638598122656}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: yellowNinja - idle_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -147165821
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3140991574564577587, guid: 2742fbe2b8b3f474198f4656d3b8a948, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -36,21 +36,19 @@ public class EnemyBehaviour4 : MonoBehaviour
     {
         isDead = true;
         animator.SetTrigger("isDie");
-        animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp  
+        animator.SetTrigger("Die");
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero; // Dừng chuyển động
-            rb.gravityScale = 0; // Tắt gravity
+            rb.linearVelocity = Vector2.zero; 
+            rb.gravityScale = 0; 
             rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation; // Khóa Y và xoay
         }
 
-        // Tắt collider để không va chạm nữa
         if (TryGetComponent<Collider2D>(out var collider))
         {
             collider.excludeLayers = LayerMask.GetMask("Player");
         }
 
-        // Chờ animation kết thúc rồi destroy
         float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
         Destroy(gameObject, animationLength > 0 ? animationLength : 7f);
         if (EnemyManager.Instance != null) 
