@@ -10079,7 +10079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6663702555363532182, guid: 066f94ce795aae842854d038c02f4a01, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10281,7 +10281,7 @@ PrefabInstance:
       objectReference: {fileID: 1587609888}
     - target: {fileID: 1690456301526754622, guid: 63fb13b844e934f3fa65b4849aa57856, type: 3}
       propertyPath: maxHealth
-      value: 200
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1690456301526754622, guid: 63fb13b844e934f3fa65b4849aa57856, type: 3}
       propertyPath: bossTrigger
@@ -10838,7 +10838,7 @@ AudioSource:
   m_GameObject: {fileID: 1847233911}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ce96f3bac1c0ff4459ead61edac989dd, type: 2}
   m_audioClip: {fileID: 8300000, guid: b4b4b3949fa0947148538f7bf8ed0b4d, type: 3}
   m_Resource: {fileID: 8300000, guid: b4b4b3949fa0947148538f7bf8ed0b4d, type: 3}
   m_PlayOnAwake: 0
