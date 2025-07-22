@@ -336,7 +336,6 @@ GameObject:
   - component: {fileID: 6140388838221507788}
   - component: {fileID: 946748872158462920}
   - component: {fileID: 2703081334180798294}
-  - component: {fileID: 8349664048505615622}
   - component: {fileID: 759744902994622110}
   - component: {fileID: 5368940783165390241}
   m_Layer: 0
@@ -439,51 +438,6 @@ MonoBehaviour:
   hotZone: {fileID: 733920805304379744}
   triggerArea: {fileID: 4893318876971800504}
   stuckThreshold: 2
---- !u!114 &8349664048505615622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3312078074736675939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21ac98e497f1b04eaf8b7d610d18b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6140388838221507788}
-  strength: 50
-  delay: 0.5
-  OnBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2703081334180798294}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2703081334180798294}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &759744902994622110
 MonoBehaviour:
   m_ObjectHideFlags: 0
