@@ -8424,11 +8424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -106.49
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.68
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 8413529789942519730, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8696,7 +8696,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.9375, y: 2.8125}
+  m_Size: {x: 6, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -8754,7 +8754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 75
   currentHealth: 0
 --- !u!61 &616336386
 BoxCollider2D:
@@ -8795,7 +8795,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 6, y: 4}
-    newSize: {x: 1.9375, y: 2.8125}
+    newSize: {x: 6, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -23595,36 +23595,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -45, y: 11, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 110
-      m_TileSpriteIndex: 55
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -44, y: 11, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 147
-      m_TileSpriteIndex: 147
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -43, y: 11, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 99
-      m_TileSpriteIndex: 54
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 27, y: 11, z: 0}
     second:
       serializedVersion: 2
@@ -23905,7 +23875,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 653e7342411d5a24c8cce2b8bfaab0d1, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 56f5dab6f1cdc824e850e1fb0e545758, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: be79f42c7745a6f4680e4f4f07af5232, type: 2}
   - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: 5c714a2e2690cec45b87df61dfd00adf, type: 2}
@@ -23927,7 +23897,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b2b86bef205ca1c46b115c6dfa069a0d, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 978830a4c82369741a639e12cbb9dab6, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 6e898afbc8bffc940aa86bc5c8233b0a, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 276051de19cda3645bfe1eb505ee2bd6, type: 2}
@@ -24001,7 +23971,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 4059f10d4f3790842a85c98530b5f3ea, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 377ff6d327bdb1443a2d5a0c45f59b92, type: 2}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 18841113bfaa1394ba1080651a7c9a2d, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 940e72adb786c9844b09da065eb60d6b, type: 2}
@@ -24154,9 +24124,9 @@ Tilemap:
     m_Data: {fileID: 402713314, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -5088739765837812855, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 3068277905654777829, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: -778642162071068864, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: 3264104559154692804, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
@@ -24340,7 +24310,7 @@ Tilemap:
     m_Data: {fileID: 435802251, guid: 6a3aa0ac39756a14f84b674e797c2672, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -2036716142, guid: 6a3aa0ac39756a14f84b674e797c2672, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: -6757766758911780738, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -439960232, guid: 6a3aa0ac39756a14f84b674e797c2672, type: 3}
@@ -24385,7 +24355,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 453228351, guid: 105bd360df29b3e4580db15052d7d329, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1221
+  - m_RefCount: 1218
     m_Data:
       e00: 1
       e01: 0
@@ -24476,7 +24446,7 @@ Tilemap:
       e32: 3.07e-43
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1256
+  - m_RefCount: 1253
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -25528,42 +25498,6 @@ CompositeCollider2D:
       - X: -221250000
         Y: 105625000
       - X: -223124992
-        Y: 110000000
-      - X: -420000000
-        Y: 110000000
-      - X: -420000000
-        Y: 111250000
-      - X: -421249984
-        Y: 112500000
-      - X: -422500000
-        Y: 113125000
-      - X: -426875008
-        Y: 113125000
-      - X: -429375008
-        Y: 111875000
-      - X: -429375008
-        Y: 110000000
-      - X: -430000000
-        Y: 110000000
-      - X: -430000000
-        Y: 111875000
-      - X: -430624992
-        Y: 112500000
-      - X: -438750016
-        Y: 112500000
-      - X: -440000000
-        Y: 110625000
-      - X: -440000000
-        Y: 111875000
-      - X: -441249984
-        Y: 114375000
-      - X: -445000000
-        Y: 114375000
-      - X: -448750016
-        Y: 113125000
-      - X: -450000000
-        Y: 110625000
-      - X: -450000000
         Y: 110000000
       - X: -453124992
         Y: 110000000
@@ -27079,24 +27013,6 @@ CompositeCollider2D:
       - {x: -22.125, y: 10.0625105}
       - {x: -22.125002, y: 10.562505}
       - {x: -22.312517, y: 11}
-      - {x: -42, y: 11.00003}
-      - {x: -42.000008, y: 11.125009}
-      - {x: -42.125004, y: 11.250002}
-      - {x: -42.250008, y: 11.3125}
-      - {x: -42.687508, y: 11.312498}
-      - {x: -42.9375, y: 11.187484}
-      - {x: -42.93753, y: 11}
-      - {x: -43, y: 11.00003}
-      - {x: -43.000008, y: 11.187508}
-      - {x: -43.062508, y: 11.25}
-      - {x: -43.875008, y: 11.249989}
-      - {x: -44, y: 11.062628}
-      - {x: -44.000004, y: 11.187506}
-      - {x: -44.125015, y: 11.4375}
-      - {x: -44.500004, y: 11.437498}
-      - {x: -44.875008, y: 11.31249}
-      - {x: -45, y: 11.062494}
-      - {x: -45.00003, y: 11}
       - {x: -45.312508, y: 10.999992}
       - {x: -45.875004, y: 10.437498}
       - {x: -46, y: 10.249992}
@@ -28452,7 +28368,7 @@ Transform:
   m_GameObject: {fileID: 1216475890}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.857, y: -1.1800001, z: 0}
+  m_LocalPosition: {x: 7.393, y: -1.229, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28517,7 +28433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
+  maxHealth: 90
   currentHealth: 0
 --- !u!61 &1216475896
 BoxCollider2D:
@@ -28892,7 +28808,7 @@ Transform:
   m_GameObject: {fileID: 1326526983}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.589, y: -1.103, z: 0}
+  m_LocalPosition: {x: 2.589, y: -1.182, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28984,7 +28900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 75
   currentHealth: 0
 --- !u!61 &1326526989
 BoxCollider2D:
@@ -29378,7 +29294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
+  maxHealth: 90
   currentHealth: 0
 --- !u!61 &1424345713
 BoxCollider2D:
@@ -29539,7 +29455,7 @@ Transform:
   m_GameObject: {fileID: 1424345710}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.707, y: -1.171, z: 0}
+  m_LocalPosition: {x: 5.711, y: -1.218, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36332,7 +36248,7 @@ Transform:
   m_GameObject: {fileID: 1498771928}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0.6294011, z: -10}
+  m_LocalPosition: {x: -106.49, y: -0.37059903, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36823,7 +36739,7 @@ Transform:
   m_GameObject: {fileID: 1649381857}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.714, y: -1.125, z: 0}
+  m_LocalPosition: {x: 6.716, y: -1.177, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 0.7766505}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36915,7 +36831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 75
   currentHealth: 0
 --- !u!61 &1649381863
 BoxCollider2D:
@@ -38478,7 +38394,7 @@ Transform:
   m_GameObject: {fileID: 1728203472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0.6294011, z: -10}
+  m_LocalPosition: {x: -106.49, y: -0.37059903, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39112,7 +39028,7 @@ Transform:
   m_GameObject: {fileID: 2067192813}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.433, y: 0.202, z: 0}
+  m_LocalPosition: {x: 7.24, y: 0.179, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39168,7 +39084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
+  maxHealth: 90
   currentHealth: 0
 --- !u!61 &2067192818
 BoxCollider2D:
