@@ -42,7 +42,7 @@ public class UpgradeUI : MonoBehaviour
             currentDamageLevel = PlayerPrefs.GetInt("DamageUpgrades", 0);
         }
 
-        CoinManager.instance.onCoinChanged.AddListener(UpdateUI); // 👈 Theo dõi coin thay đổi
+        CoinManager.instance.onCoinChanged.AddListener(UpdateUI); 
         UpdateUI();
     }
 
