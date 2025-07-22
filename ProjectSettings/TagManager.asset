@@ -9,6 +9,7 @@ TagManager:
   - Background
   - Water
   - Water_Map3
+  - Enemy
   layers:
   - Default
   - TransparentFX

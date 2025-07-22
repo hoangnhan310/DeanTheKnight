@@ -34,7 +34,7 @@ public class EnemyBehaviour4 : MonoBehaviour
     protected virtual void Die()
     {
         animator.SetTrigger("isDie");
-        animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp
+        animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp  
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero; // Dừng chuyển động
@@ -51,6 +51,10 @@ public class EnemyBehaviour4 : MonoBehaviour
         // Chờ animation kết thúc rồi destroy
         float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
         Destroy(gameObject, animationLength > 0 ? animationLength : 7f);
+        if (EnemyManager.Instance != null) 
+        {
+            EnemyManager.Instance.NotifyEnemyKilled();
+        }
     }
 
     void OnAnimationFinish()
