@@ -8262,6 +8262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!114 &537846425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8450,6 +8451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!61 &548501727
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8974,6 +8976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!61 &616336386
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9012,7 +9015,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9375, y: 2.8125}
+    oldSize: {x: 6, y: 4}
     newSize: {x: 1.9375, y: 2.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9186,21 +9189,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5734977090999275301, guid: 431ce964a8033ff4586efac814c4252e, type: 3}
   m_PrefabInstance: {fileID: 680319971}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &713969520
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 688554563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 844723607}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &713969521
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9666,6 +9654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!114 &768282464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10544,9 +10533,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 918573507}
-  - component: {fileID: 918573509}
-  - component: {fileID: 918573508}
+  - component: {fileID: 982677367}
+  - component: {fileID: 713969521}
   m_Layer: 9
   m_Name: EnemyAttackHitbox
   m_TagString: Untagged
@@ -10554,6 +10542,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &982677367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982677366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1001728582
 GameObject:
   m_ObjectHideFlags: 0
@@ -10910,7 +10913,7 @@ GameObject:
   - component: {fileID: 1059803841}
   - component: {fileID: 1059803845}
   - component: {fileID: 1059803844}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -27147,6 +27150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!61 &1216475896
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27613,6 +27617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!61 &1326526989
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27651,7 +27656,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9375, y: 2.8125}
+    oldSize: {x: 6, y: 4}
     newSize: {x: 1.9375, y: 2.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -27908,6 +27913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!61 &1424345713
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -35284,6 +35290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
 --- !u!61 &1649381863
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -35322,7 +35329,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9375, y: 2.8125}
+    oldSize: {x: 6, y: 4}
     newSize: {x: 1.9375, y: 2.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -38234,13 +38241,13 @@ PolygonCollider2D:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 982677367}
   - {fileID: 1498771931}
   - {fileID: 552195479}
   - {fileID: 1779048191}
   - {fileID: 32637523}
   - {fileID: 273444882}
   - {fileID: 306413673}
-  - {fileID: 713969520}
   - {fileID: 1449129539}
   - {fileID: 1728203475}
   - {fileID: 639372562}

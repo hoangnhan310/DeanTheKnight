@@ -6135,7 +6135,7 @@ GameObject:
   - component: {fileID: 1998689411}
   - component: {fileID: 1998689413}
   - component: {fileID: 1998689412}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontView
   m_TagString: Untagged
   m_Icon: {fileID: 0}

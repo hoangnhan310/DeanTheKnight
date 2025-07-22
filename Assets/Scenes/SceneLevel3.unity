@@ -1216,7 +1216,7 @@ GameObject:
   - component: {fileID: 221210720}
   - component: {fileID: 221210719}
   - component: {fileID: 221210718}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground_Collidable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
