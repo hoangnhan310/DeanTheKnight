@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class EnemyManager : MonoBehaviour
 
     public float timeSummonFPDelay = 2f;
 
-    public GameObject interactiveObject; 
+    public GameObject interactiveObject;
+
+    public CameraSwitcher cameraSwitcher;
 
     private void Awake()
     {
@@ -28,7 +31,7 @@ public class EnemyManager : MonoBehaviour
         //enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (enemyCount <= 0)
         {
-            FindObjectOfType<CameraSwitcher>()?.SummonFocus();
+            cameraSwitcher.SummonFocus();
             StartCoroutine(DelayForSummonFalling());
         }
     }

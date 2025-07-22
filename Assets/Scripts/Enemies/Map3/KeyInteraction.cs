@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class KeyInteraction : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class KeyInteraction : MonoBehaviour
     public FadingDoor targetDoor; // Reference to the door that this key opens
     public KeyCode interactionKey = KeyCode.E; // The key to press for interaction
     public float delayOpen = 2f;
+    public CameraSwitcher cameraSwitcher;
 
 
     [Header("UI Prompt")]
@@ -48,9 +50,9 @@ public class KeyInteraction : MonoBehaviour
             interactionPromptUI.SetActive(false);
         }
 
-        if (targetDoor != null && FindObjectOfType<CameraSwitcher>() != null)
+        if (targetDoor != null && cameraSwitcher != null)
         {
-            FindObjectOfType<CameraSwitcher>()?.SummonFocusChest();
+            cameraSwitcher.SummonFocusChest();
             StartCoroutine(DelayForOpenDoor());
         }
         else 
