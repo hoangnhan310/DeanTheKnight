@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
 
     public float timeSummonFPDelay = 2f;
 
-    public GameObject interactiveObject; // Gắn cửa hoặc trigger gì đó ở đây
+    public GameObject interactiveObject; 
 
     private void Awake()
     {
