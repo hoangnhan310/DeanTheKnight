@@ -29,7 +29,7 @@ public class EnemyManager : MonoBehaviour
     {
         enemyCount--;
         //enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if (enemyCount <= 0)
+        if (enemyCount == 1)
         {
             cameraSwitcher.SummonFocus();
             StartCoroutine(DelayForSummonFalling());
