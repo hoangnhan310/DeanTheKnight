@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// Controls the AI logic for the Miniboss Golem, handling chasing, combat sequences, and special attacks.
+/// Controls the AI logic for the Miniboss Golem using a Dynamic Rigidbody for physics-based movement.
 /// This script requires an EnemyBehaviour4 component on the same GameObject to manage its health and death state.
 /// </summary>
 public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
@@ -18,29 +18,32 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
 
     [Header("Stats")]
     [Tooltip("The horizontal movement speed.")]
-    public float moveSpeed = 1.5f;
+    public float moveSpeed = 3f; // Dynamic bodies might need different speed values
 
     [Header("AI Behavior")]
     [Tooltip("The range at which the miniboss will start chasing the player.")]
     public float detectionRange = 10f;
 
-    [Header("Unified Attack Zone")]
-    [Tooltip("An empty child object representing the attack hitbox's center.")]
-    public Transform attackPoint;
-    [Tooltip("The radius from the Attack Point used for attack decisions and dealing damage.")]
-    public float attackRadius = 0.8f;
-    [Tooltip("Damage dealt by a normal attack.")]
-    public float normalAttackDamage = 15f;
-    [Tooltip("The cooldown in seconds between attacks.")]
-    public float attackInterval = 2f;
+    [Header("Platform Edge Detection")]
+    [Tooltip("A child object placed at the enemy's feet to check for ledges.")]
+    [SerializeField] private Transform edgeCheckPoint;
+    [Tooltip("The LayerMask representing walkable ground.")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance = 0.5f;
 
+    // --- (Attack, Combo, and Door Headers are unchanged) ---
+    [Header("Unified Attack Zone")]
+    public Transform attackPoint;
+    public float attackRadius = 0.8f;
+    public float normalAttackDamage = 15f;
+    public float attackInterval = 2f;
     [Header("Special Attack Combo")]
-    [Tooltip("Number of normal attacks to perform before a special attack.")]
     public int attacksUntilSpecial = 3;
-    [Tooltip("Damage dealt by the special attack.")]
     public float specialAttackDamage = 25f;
-    [Tooltip("Time to wait after inactivity before resetting the attack combo.")]
     public float attackComboResetTime = 5.0f;
+    [Header("Door Control")]
+    public GameObject associatedDoor;
+
 
     // --- Private State Variables ---
     [System.NonSerialized] private int normalAttackCounter = 0;
@@ -70,11 +73,7 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
             return;
         }
 
-        if (rb != null)
-        {
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.linearVelocity = Vector2.zero; // Use .velocity
-        }
+        // The Rigidbody Type is now set to Dynamic in the Inspector.
 
         if (attackPoint != null && attackPoint.GetComponent<Collider2D>() != null)
             attackPoint.GetComponent<Collider2D>().enabled = false;
@@ -86,14 +85,9 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
             else { Debug.LogError("MinibossAI: Player not found!", this); this.enabled = false; }
         }
 
-        // Store the original layer and find a layer to switch to for invincibility
         originalLayer = gameObject.layer;
         invulnerableLayer = LayerMask.NameToLayer("Ignore Raycast");
-        if (invulnerableLayer == -1) // Fallback if the layer doesn't exist
-        {
-            invulnerableLayer = LayerMask.NameToLayer("Water");
-            if (invulnerableLayer == -1) Debug.LogWarning("Could not find 'Ignore Raycast' or 'Water' layer for invincibility frames.", this);
-        }
+        if (invulnerableLayer == -1) { invulnerableLayer = LayerMask.NameToLayer("Water"); }
     }
 
     /// <summary>
@@ -101,7 +95,7 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
     /// </summary>
     void Update()
     {
-        if (enemyBehaviour == null || !enemyBehaviour.enabled || player == null || isAttacking) return;
+        if (enemyBehaviour == null || !enemyBehaviour.enabled || isAttacking || player == null) return;
 
         FacePlayer();
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
@@ -129,22 +123,45 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
     }
 
     /// <summary>
-    /// Moves the Kinematic Rigidbody towards the player horizontally.
+    /// Checks if there is ground ahead of the miniboss to prevent it from walking off ledges.
     /// </summary>
-    void MoveTowardsPlayer()
+    private bool IsGroundAhead()
     {
-        anim.SetBool("isWalking", true);
-        Vector2 targetPosition = new Vector2(player.position.x, rb.position.y);
-        Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.deltaTime);
-        rb.MovePosition(newPosition);
+        if (edgeCheckPoint == null) return true; // Failsafe if not assigned
+
+        Debug.DrawRay(edgeCheckPoint.position, Vector2.down * groundCheckDistance, Color.cyan);
+        return Physics2D.Raycast(edgeCheckPoint.position, Vector2.down, groundCheckDistance, groundLayer);
     }
 
     /// <summary>
-    /// Stops the enemy's movement by setting the animation state.
+    /// Moves the Dynamic Rigidbody towards the player by setting its horizontal velocity.
+    /// </summary>
+    void MoveTowardsPlayer()
+    {
+        // Only move forward if ground is detected ahead.
+        if (IsGroundAhead())
+        {
+            anim.SetBool("isWalking", true);
+            float moveDirection = player.position.x > transform.position.x ? 1f : -1f;
+
+            // Set the horizontal velocity, but leave the vertical velocity for gravity to control.
+            rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
+        }
+        else
+        {
+            // If there's no ground ahead, stop at the edge.
+            StopMovement();
+        }
+    }
+
+    /// <summary>
+    /// Stops the enemy's horizontal movement by setting its x-velocity to zero.
     /// </summary>
     void StopMovement()
     {
         anim.SetBool("isWalking", false);
+        // Retains vertical velocity (like falling) while stopping horizontal movement.
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
 
     /// <summary>
@@ -192,12 +209,11 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
 
         if (state == true)
         {
-            // When attacking, switch to the invulnerable layer.
             gameObject.layer = invulnerableLayer;
+            StopMovement(); // Ensure movement stops when an attack begins.
         }
         else
         {
-            // When finished attacking, switch back to the original layer.
             gameObject.layer = originalLayer;
         }
     }
@@ -213,13 +229,11 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
         resetAttackComboCoroutine = StartCoroutine(AttackComboResetRoutine());
         if (normalAttackCounter >= attacksUntilSpecial - 1)
         {
-            isSpecialAttack = true;
-            normalAttackCounter = 0;
+            isSpecialAttack = true; normalAttackCounter = 0;
         }
         else
         {
-            isSpecialAttack = false;
-            normalAttackCounter++;
+            isSpecialAttack = false; normalAttackCounter++;
         }
     }
 
@@ -238,6 +252,8 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
     /// </summary>
     void FacePlayer()
     {
+        if (isAttacking) return;
+
         if (player.position.x > transform.position.x)
             transform.localScale = new Vector3(Mathf.Abs(initialScale.x), initialScale.y, initialScale.z);
         else
@@ -255,6 +271,12 @@ public class MinibossAIMap3 : MonoBehaviour, IStatefulEnemy
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+        }
+        // Draw gizmo for edge check sensor
+        if (edgeCheckPoint != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(edgeCheckPoint.position, edgeCheckPoint.position + Vector3.down * groundCheckDistance);
         }
     }
 }
