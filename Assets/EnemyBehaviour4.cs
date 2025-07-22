@@ -5,6 +5,7 @@ public class EnemyBehaviour4 : MonoBehaviour
     public float maxHealth = 50f;
     public float currentHealth;
     private Rigidbody2D rb;
+    private bool isDead = false;
 
     private Animator animator;
 
@@ -20,7 +21,7 @@ public class EnemyBehaviour4 : MonoBehaviour
         Debug.Log("ok");
 
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && isDead == false)
         {
             Die();
         }
@@ -33,6 +34,7 @@ public class EnemyBehaviour4 : MonoBehaviour
 
     protected virtual void Die()
     {
+        isDead = true;
         animator.SetTrigger("isDie");
         animator.SetTrigger("Die"); // Kích hoạt animation "Die" trực tiếp  
         if (rb != null)

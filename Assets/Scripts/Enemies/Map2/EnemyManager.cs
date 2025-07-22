@@ -7,6 +7,8 @@ public class EnemyManager : MonoBehaviour
 
     public int enemyCount;
 
+    public float timeSummonFPDelay = 2f;
+
     public GameObject interactiveObject; // Gắn cửa hoặc trigger gì đó ở đây
 
     private void Awake()
@@ -27,7 +29,13 @@ public class EnemyManager : MonoBehaviour
         if (enemyCount <= 0)
         {
             FindObjectOfType<CameraSwitcher>()?.SummonFocus();
-            interactiveObject.SetActive(true);
+            StartCoroutine(DelayForSummonFalling());
         }
+    }
+
+    private IEnumerator DelayForSummonFalling()
+    {
+        yield return new WaitForSeconds(timeSummonFPDelay);
+        interactiveObject.SetActive(true);
     }
 }
