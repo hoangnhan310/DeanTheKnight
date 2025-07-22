@@ -6,7 +6,7 @@ public class Menu : MonoBehaviour
 {
     public GameObject mainMenuPanel;
     public Button continueButton;
-
+    public GameObject settingPanel;
     private void Start()
     {
         string lastScene = PlayerPrefs.GetString("LastScene", "");
@@ -15,9 +15,18 @@ public class Menu : MonoBehaviour
 
     public void NewGame()
     {
+        // Save setting
+        float savedVolume = PlayerPrefs.GetFloat("Volume", 0.5f);
+        int savedQuality = PlayerPrefs.GetInt("QualitySetting", 1);
+
         PlayerPrefs.DeleteAll();
+
+        // Load setting
+        PlayerPrefs.SetFloat("Volume", savedVolume);
+        PlayerPrefs.SetInt("QualitySetting", savedQuality);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("ScenceLevel2"); // ← Đặt lại nếu map đầu có tên khác
+
+        SceneManager.LoadScene("ScenceLevel2");
     }
 
     public void ContinueGame()
@@ -28,7 +37,16 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(lastScene);
         }
     }
-
+    public void openSetting()
+    {
+        mainMenuPanel.SetActive(false);
+        settingPanel.SetActive(true);
+    }
+    public void backToMenu()
+    {
+        settingPanel.SetActive(false);
+        mainMenuPanel.SetActive(true );
+    }
     public void QuitGame()
     {
         Application.Quit();

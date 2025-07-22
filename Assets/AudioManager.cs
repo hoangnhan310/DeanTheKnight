@@ -1,14 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     private AudioSource audioSource; 
     public AudioClip slashSound; 
+    public AudioMixer audioMixer;
     void Start()
     {
        audioSource = GetComponent<AudioSource>();
-
-    if (audioSource != null && audioSource.clip != null)
+        if (PlayerPrefs.HasKey("volume"))
+        {
+            float volume = PlayerPrefs.GetFloat("volume");
+            audioMixer.SetFloat("volume", volume);
+        }
+        if (audioSource != null && audioSource.clip != null)
     {
         audioSource.loop = true; 
         audioSource.Play();
