@@ -215,11 +215,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemyBehaviour: {fileID: 0}
-  moveSpeed: 12
-  detectionRange: 8
-  attackRange: 4
-  lungeSpeed: 8
-  attackInterval: 3
+  moveSpeed: 10
+  detectionRange: 5
+  attackRange: 3
+  lungeSpeed: 5
+  attackInterval: 5
   attackDamage: 5
   patrolDistance: 3
 --- !u!114 &7233933903700991317
@@ -234,7 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 12
+  currentHealth: 0
 --- !u!114 &828138130194054338
 MonoBehaviour:
   m_ObjectHideFlags: 0
