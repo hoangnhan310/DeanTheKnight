@@ -89,7 +89,6 @@ public class BossController : EnemyBehaviour4
                     StopMoving();
                     animator.SetTrigger("Attack");
                     lastAttackTime = Time.time;
-                    hit.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
                 }
                 else
                 {
@@ -99,6 +98,16 @@ public class BossController : EnemyBehaviour4
 
         }
     }
+
+    public void AttackPlayerEvent()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
+        if (hit != null && hit.transform == player)
+        {
+            hit.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+        }
+    }
+
     // Vẽ gizmo cho attack point trong editor
     private void OnDrawGizmosSelected()
     {

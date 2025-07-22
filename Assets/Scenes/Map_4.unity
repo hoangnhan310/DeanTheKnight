@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0613f18b2bd82d346bf3e37b30697630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 55
   currentHealth: 0
 --- !u!114 &221272000
 MonoBehaviour:
@@ -8620,7 +8620,7 @@ PolygonCollider2D:
       - {x: 1.6192322, y: 2.1013365}
       - {x: 1.7450104, y: 1.646116}
       - {x: 2.9044266, y: 0.96128726}
-      - {x: 2.66253, y: 0.3404396}
+      - {x: 1.1940928, y: -0.838176}
       - {x: 3.277182, y: -0.6204821}
       - {x: 3.4750214, y: -0.7178378}
       - {x: 3.8545303, y: -1.2062263}
@@ -72314,7 +72314,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 227933029720117493, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 241624079440625096, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72509,7 +72509,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 227933029720117493, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 241624079440625096, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73120,7 +73120,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 227933029720117493, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 241624079440625096, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74086,7 +74086,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 227933029720117493, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 241624079440625096, guid: d52b831ecb3b8cc4b88da4fc1b6df44a, type: 3}
       propertyPath: m_LocalPosition.x

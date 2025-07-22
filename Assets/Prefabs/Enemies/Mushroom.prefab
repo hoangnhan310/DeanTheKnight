@@ -98,7 +98,7 @@ PolygonCollider2D:
       - {x: 0.15375191, y: -0.54052866}
       - {x: 0.67728007, y: -0.60445523}
       - {x: 1.1101189, y: -0.89557695}
-      - {x: 1.3919363, y: -0.43106705}
+      - {x: 2.1430502, y: -0.35486728}
   m_UseDelaunayMesh: 0
 --- !u!1 &2277466558163787476
 GameObject:
@@ -263,7 +263,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.013750076, y: -0.5979874}
+  m_Offset: {x: 0.02431488, y: -0.5979874}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -273,7 +273,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.2942543, y: 1.667172}
+  m_Size: {x: 4.1825256, y: 1.667172}
   m_EdgeRadius: 0
 --- !u!114 &649317865976302064
 MonoBehaviour:
