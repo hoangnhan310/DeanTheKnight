@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-    
+
 public class PlayerCombat4 : MonoBehaviour
 {
     #region Serialized Fields
